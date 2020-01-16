@@ -1,4 +1,8 @@
 
+import { BLOCKS } from "./constants"
+
+let last = Date.now();
+
 const tetris = {
 	init() {
 		// fast references
@@ -9,6 +13,25 @@ const tetris = {
 			case "window.open":
 				break;
 		}
+	},
+	loop: {
+		frame() {
+			let now = Date.now();
+			let delta = Math.min(1, (now - last) / 1000.0);
+			
+			this.update(delta);
+			last = now;
+
+			requestAnimationFrame(this.frame);
+		},
+		update(idt) {
+			if (playing) {
+				
+			}
+		}
+	},
+	render: {
+
 	}
 };
 
