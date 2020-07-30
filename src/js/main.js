@@ -1,9 +1,5 @@
 
-import { BLOCKS } from "./constants"
-
-let last = Date.now();
-
-const tetris = {
+const chat = {
 	init() {
 		// fast references
 		this.content = window.find("content");
@@ -13,26 +9,7 @@ const tetris = {
 			case "window.open":
 				break;
 		}
-	},
-	loop: {
-		frame() {
-			let now = Date.now();
-			let delta = Math.min(1, (now - last) / 1000.0);
-			
-			this.update(delta);
-			last = now;
-
-			requestAnimationFrame(this.frame);
-		},
-		update(idt) {
-			if (playing) {
-				
-			}
-		}
-	},
-	render: {
-
 	}
 };
 
-window.exports = tetris;
+window.exports = chat;
