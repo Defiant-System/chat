@@ -22,6 +22,43 @@ content {
 		&.icon-search { background-image: url(~/icons/icon-search.png); }
 	}
 
+	.anim-typing {
+		position: relative;
+		display: inline-block;
+		width: 27px;
+		height: 11px;
+
+		&.tiny {
+			top: 2px;
+			transform: scale(.65);
+		}
+
+		b {
+			background: #999;
+			display: inline-block;
+			position: absolute;
+			top: 8px;
+			width: 4px;
+			height: 4px;
+			border-radius: 50%;
+			animation: wave 1600ms infinite ease-in-out;
+
+			&:nth-child(1) {
+				left: 3px;
+			}
+
+			&:nth-child(2) {
+				left: 11px;
+				animation-delay: 140ms;
+			}
+
+			&:nth-child(3) {
+				left: 19px;
+				animation-delay: 280ms;
+			}
+		}
+	}
+
 	.teams {
 		background: darken(@base, 7%);
 		color: #fff;
@@ -84,6 +121,7 @@ content {
 
 				&::-webkit-input-placeholder {
 					color: #999;
+					font-size: 12px;
 				}
 			}
 		}
@@ -197,28 +235,28 @@ content {
 				}
 
 				&.sent {
-					background: #ddd;
-					color: #222;
+					background: #9c52b9;
+					color: #fff;
 					float: right;
 					//filter: drop-shadow(0 1px 0 #ddd);
 
 					&:after {
 					    right: -9px;
-					    background: radial-gradient(circle at top right, transparent 49%, #ddd 56%);
+					    background: radial-gradient(circle at top right, transparent 49%, #9c52b9 56%);
 					    border-radius: 0 0 0 11px;
 					}
 				}
 
 				&.received {
-					background: #9c52b9;
-					color: #fff;
+					background: #ccc;
+					color: #222;
 					float: left;
 					margin-top: 13px;
 					//filter: drop-shadow(0 1px 0 rgba(#9c52b9, .2));
 
 					&:after {
 					    left: -9px;
-					    background: radial-gradient(circle at top left, transparent 49%, #9c52b9 56%);
+					    background: radial-gradient(circle at top left, transparent 49%, #ccc 56%);
 					    border-radius: 0 0 11px 0;
 					}
 
@@ -238,6 +276,32 @@ content {
 						&:before {
 							display: none;
 						}
+					}
+				}
+
+				&.typing {
+					position: relative;
+					background: #ccc;
+					color: #222;
+					float: left;
+
+					&:before,
+					&:after {
+						content: "";
+						background: inherit;
+					    position: absolute;
+					    bottom: -2px;
+					    left: 0;
+						width: 11px;
+						height: 11px;
+						border-radius: 50%;
+					}
+
+					&:after {
+						width: 4px;
+						height: 4px;
+						bottom: -3px;
+						left: -4px;
 					}
 				}
 			}
@@ -284,7 +348,7 @@ content {
 
 		.field {
 			display: flex;
-			padding: 5px 11px;
+			padding: 5px 13px;
 
 			span {
 				&:nth-child(1) {
@@ -299,5 +363,9 @@ content {
 			}
 		}
 	}
+}
 
+@keyframes wave {
+	0%, 40% { top: 8px; }
+	20%     { top: 1px; }
 }
