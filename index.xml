@@ -4,17 +4,19 @@
 		<meta name="title" value="Chat" version="1.0"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0"/>
-		<meta name="width" value="400"/>
-		<meta name="height" value="600"/>
-		<meta name="top" value="120"/>
-		<meta name="left" value="120"/>
+		<meta name="width" value="950"/>
+		<meta name="height" value="540"/>
+		<meta name="top" value="200"/>
+		<meta name="left" value="250"/>
 		<meta name="minimize"/>
 		<meta name="maximize"/>
 		<meta name="resize"/>
 		<meta name="script" value="src/js/main.js"/>
 		<meta name="style" value="src/css/main.less"/>
 		<meta name="content" value="src/partials/content.htm"/>
+		<meta name="icons" value="src/svg/icons.svg"/>
 
 		@import "src/partials/menubar.xml"
+		@import "src/partials/caption-toolbar.xml"
 	</Head>
 </Application>
