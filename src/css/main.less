@@ -62,13 +62,15 @@ content {
 		.contact-search {
 			position: relative;
 			height: 50px;
-			padding: 12px 10px;
+			padding: 12px 9px;
 			border-bottom: 1px solid lighten(@base, 5%);
 
 			.icon-search {
 				position: absolute;
-				top: 16px;
+				top: 17px;
 				left: 17px;
+				width: 15px;
+				height: 15px;
 				filter: invert(100%) brightness(100%) opacity(50%);
 			}
 
@@ -88,6 +90,75 @@ content {
 
 		.contact-list {
 			flex: 1;
+			padding: 7px 9px;
+
+			.contact {
+				display: flex;
+				padding: 3px 0;
+				color: lighten(@base, 53%);
+
+				&:hover {
+					color: lighten(@base, 67%);
+				}
+
+				.avatar {
+					background-color: lighten(@base, 11%);
+					position: relative;
+					display: inline-block;
+					margin: 0 7px 5px 0;
+					width: 34px;
+					border-radius: 50%;
+
+					&:before {
+						content: attr(data-name);
+						position: absolute;
+						top: 50%;
+						left: 0;
+						width: 100%;
+						z-index: 1;
+						transform: translateY(-50%);
+						font-size: 17px;
+						font-weight: 700;
+						text-align: center;
+						color: lighten(@base, 31%);
+					}
+
+					&:after {
+						content: "";
+						position: relative;
+						z-index: 2;
+						display: block;
+						padding-top: 100%;
+						border-radius: inherit;
+						background-image: inherit;
+						background-position: 50% 50%;
+						background-size: 100% auto;
+						background-repeat: no-repeat;
+					}
+				}
+
+				.info {
+					flex: 1;
+
+					.name {
+						padding: 3px 0 3px;
+						font-size: 13px;
+						font-weight: 500;
+					}
+
+					.last-message {
+						opacity: 0.7;
+						width: 124px;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+					}
+				}
+
+				.details {
+					width: 37px;
+				}
+			}
 		}
 	}
 
@@ -192,10 +263,10 @@ content {
 			.avatar {
 				background-color: #eee;
 				background-position: 50% 50%;
-				background-size: contain;
+				background-size: 100% auto;
 				background-repeat: no-repeat;
 				display: inline-block;
-				margin-bottom: 7px;
+				margin-bottom: 5px;
 				width: 67%;
 				border-radius: 50%;
 
