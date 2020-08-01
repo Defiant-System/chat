@@ -1,5 +1,5 @@
 
-@base: #334;
+@base: #445;
 
 content {
 	position: absolute;
@@ -71,8 +71,8 @@ content {
 			color: lighten(@base, 17%);
 			position: relative;
 			display: inline-block;
-			width: 46px;
-			height: 46px;
+			width: 42px;
+			height: 42px;
 			border-radius: 50%;
 			margin-bottom: 7px;
 
@@ -96,15 +96,15 @@ content {
 		flex-direction: column;
 		width: 220px;
 
-		.contact-search {
+		.contacts-head {
 			position: relative;
-			height: 50px;
-			padding: 12px 9px;
+			height: 42px;
+			padding: 8px 9px 0;
 			border-bottom: 1px solid lighten(@base, 5%);
 
 			.icon-search {
 				position: absolute;
-				top: 17px;
+				top: 13px;
 				left: 17px;
 				width: 15px;
 				height: 15px;
@@ -120,13 +120,13 @@ content {
 				border-radius: 30px;
 
 				&::-webkit-input-placeholder {
-					color: #999;
+					color: lighten(@base, 23%);
 					font-size: 12px;
 				}
 			}
 		}
 
-		.contact-list {
+		.contacts-list {
 			flex: 1;
 			padding: 7px 9px;
 
@@ -206,7 +206,13 @@ content {
 		display: flex;
 		flex-direction: column;
 
-		.output {
+		.output-head {
+			position: relative;
+			height: 42px;
+			border-bottom: 1px solid #ddd;
+		}
+
+		.output-body {
 			flex: 1;
 			padding: 3px 3px;
 			overflow-x: hidden;
@@ -301,7 +307,7 @@ content {
 						width: 4px;
 						height: 4px;
 						bottom: -3px;
-						left: -4px;
+						left: -3px;
 					}
 				}
 			}
@@ -315,50 +321,59 @@ content {
 
 	.sidebar {
 		background: #fff;
+		display: flex;
+		flex-direction: column;
 		width: 200px;
 
-		.profile {
-			position: relative;
-			padding: 13px 0;
-			margin-bottom: 7px;
-			text-align: center;
+		.sidebar-head {
+			height: 42px;
 			border-bottom: 1px solid #eee;
-
-			.avatar {
-				background-color: #eee;
-				background-position: 50% 50%;
-				background-size: 100% auto;
-				background-repeat: no-repeat;
-				display: inline-block;
-				margin-bottom: 5px;
-				width: 67%;
-				border-radius: 50%;
-
-				&:before {
-					content: "";
-					display: block;
-					padding-top: 100%;
-				}
-			}
-
-			h2 {
-				font-size: 16px;
-			}
 		}
 
-		.field {
-			display: flex;
-			padding: 5px 13px;
+		.sidebar-body {
+			.profile {
+				position: relative;
+				padding: 13px 0;
+				margin-bottom: 7px;
+				text-align: center;
+				border-bottom: 1px solid #eee;
 
-			span {
-				&:nth-child(1) {
-					width: 40%;
-					color: #888;
+				.avatar {
+					background-color: #eee;
+					background-position: 50% 50%;
+					background-size: 100% auto;
+					background-repeat: no-repeat;
+					display: inline-block;
+					margin-bottom: 5px;
+					width: 67%;
+					border-radius: 50%;
+
+					&:before {
+						content: "";
+						display: block;
+						padding-top: 100%;
+					}
 				}
-				&:nth-child(2) {
-					width: 60%;
-					color: #222;
-					text-align: right;
+
+				h2 {
+					font-size: 16px;
+				}
+			}
+
+			.field {
+				display: flex;
+				padding: 5px 13px;
+
+				span {
+					&:nth-child(1) {
+						width: 40%;
+						color: #888;
+					}
+					&:nth-child(2) {
+						width: 60%;
+						color: #222;
+						text-align: right;
+					}
 				}
 			}
 		}
