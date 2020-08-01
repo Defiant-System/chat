@@ -20,6 +20,8 @@ content {
 		filter: invert() brightness(85%);
 
 		&.icon-search { background-image: url(~/icons/icon-search.png); }
+		&.icon-clock  { background-image: url(~/icons/icon-clock.png); }
+		&.icon-date   { background-image: url(~/icons/icon-date.png); }
 	}
 
 	.anim-typing {
@@ -182,6 +184,34 @@ content {
 						padding: 3px 0 3px;
 						font-size: 13px;
 						font-weight: 500;
+
+						.details {
+							float: right;
+							opacity: .5;
+
+							.last-online {
+								white-space: nowrap;
+								font-size: 10px;
+								text-align: right;
+
+								i[class^="icon-"] {
+									width: 12px;
+									height: 12px;
+									vertical-align: text-bottom;
+									margin-right: 2px;
+								}
+							}
+
+							.icon-online {
+								background: #0f0;
+								display: inline-block;
+								width: 9px;
+								height: 9px;
+								border-radius: 50%;
+								filter: none;
+								box-shadow: 0 1px 2px rgba(0,0,0,.5);
+							}
+						}
 					}
 
 					.last-message {
@@ -191,10 +221,6 @@ content {
 						overflow: hidden;
 						text-overflow: ellipsis;
 					}
-				}
-
-				.details {
-					width: 37px;
 				}
 			}
 		}
