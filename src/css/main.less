@@ -1,5 +1,15 @@
 
-@base: #445;
+//@base: #262;
+@base: #248;
+//@base: #3a133e;
+
+//@msgSent: #9c52b9;
+@msgSent: lighten(spin(@base, 50), 27%);
+@msgReceived: #ddd;
+
+
+background: #fff;
+color: #333;
 
 content {
 	position: absolute;
@@ -8,7 +18,6 @@ content {
 	right: 0;
 	bottom: 0;
 	display: flex;
-	color: #333;
 
 	i[class^="icon-"] {
 		display: inline-block;
@@ -62,20 +71,20 @@ content {
 	}
 
 	.teams {
-		background: darken(@base, 7%);
+		background: darken(@base, 5%);
 		color: #fff;
 		width: 60px;
 		padding-top: 7px;
 		text-align: center;
 
 		.team {
-			background: darken(@base, 2%);
-			color: lighten(@base, 17%);
+			background: lighten(@base, 2%);
+			color: desaturate(lighten(@base, 37%), 23%);
 			position: relative;
 			display: inline-block;
 			width: 42px;
 			height: 42px;
-			border-radius: 50%;
+			border-radius: 7px;
 			margin-bottom: 7px;
 
 			&:before {
@@ -114,7 +123,7 @@ content {
 			}
 
 			input {
-				background: lighten(@base, 7%);
+				background: lighten(@base, 5%);
 				color: inherit;
 				height: auto;
 				padding: 5px 11px 5px 29px;
@@ -135,14 +144,14 @@ content {
 			.contact {
 				display: flex;
 				padding: 3px 0;
-				color: lighten(@base, 53%);
+				color: desaturate(lighten(@base, 53%), 21%);
 
 				&:hover {
 					color: lighten(@base, 67%);
 				}
 
 				.avatar {
-					background-color: lighten(@base, 11%);
+					background-color: lighten(@base, 5%);
 					position: relative;
 					display: inline-block;
 					margin: 0 7px 5px 0;
@@ -187,7 +196,7 @@ content {
 
 						.details {
 							float: right;
-							opacity: .25;
+							opacity: .5;
 
 							.last-online {
 								white-space: nowrap;
@@ -227,7 +236,7 @@ content {
 	}
 
 	.transcript {
-		background: #f2f2f2;
+		background: #f7f7f7;
 		flex: 1;
 		display: flex;
 		flex-direction: column;
@@ -251,7 +260,7 @@ content {
 				line-height: 1.35;
 				padding: 5px 11px;
 				max-width: 79%;
-				margin: 5px 5px;
+				margin: 5px 5px 1px;
 				clear: both;
 
 				&:after {
@@ -267,28 +276,27 @@ content {
 				}
 
 				&.sent {
-					background: #9c52b9;
+					background: @msgSent;
 					color: #fff;
 					float: right;
 					//filter: drop-shadow(0 1px 0 #ddd);
 
 					&:after {
 					    right: -9px;
-					    background: radial-gradient(circle at top right, transparent 49%, #9c52b9 56%);
+					    background: radial-gradient(circle at top right, transparent 49%, @msgSent 56%);
 					    border-radius: 0 0 0 11px;
 					}
 				}
 
 				&.received {
-					background: #ccc;
+					background: @msgReceived;
 					color: #222;
 					float: left;
 					margin-top: 13px;
-					//filter: drop-shadow(0 1px 0 rgba(#9c52b9, .2));
 
 					&:after {
 					    left: -9px;
-					    background: radial-gradient(circle at top left, transparent 49%, #ccc 56%);
+					    background: radial-gradient(circle at top left, transparent 49%, @msgReceived 56%);
 					    border-radius: 0 0 11px 0;
 					}
 
@@ -313,7 +321,7 @@ content {
 
 				&.typing {
 					position: relative;
-					background: #ccc;
+					background: @msgReceived;
 					color: #222;
 					float: left;
 
@@ -340,8 +348,33 @@ content {
 		}
 
 		.input {
-			height: 60px;
-			border-top: 1px solid #ddd;
+			padding: 9px;
+
+			> div {
+				position: relative;
+				background: #fff;
+				border-radius: 5px;
+				box-shadow: 0 0 0 1px #ddd;
+				font-size: 13px;
+				line-height: 1.35;
+				padding: 7px 9px;
+
+				&:empty:not(:focus):before {
+					content: attr(placeholder);
+					color: #666;
+				}
+
+				&:after {
+					content: "";
+					background: url(~/icons/icon-return.png) 50% 50% no-repeat;
+					position: absolute;
+					bottom: 7px;
+					right: 9px;
+					width: 16px;
+					height: 16px;
+					opacity: .35;
+				}
+			}
 		}
 	}
 
