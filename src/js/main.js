@@ -1,4 +1,6 @@
 
+let room = "room-1";
+
 const chat = {
 	init() {
 		// fast references
@@ -6,34 +8,39 @@ const chat = {
 		this.output = window.find(".output-body");
 		this.input = window.find(".input > div");
 
-		//defiant.shell("win -a");
+		//window.settings.get("test");
 	},
 	dispatch(event) {
 		let Self = chat,
+			message,
 			el;
 		switch (event.type) {
 			// system events
 			case "window.open":
 				// join chat room
-				defiant.net.join({ room: "test123" });
+				window.net.join({ room });
 				break;
 			case "window.keystroke":
 				if (event.keyCode === 13) {
-					to = "hbi99";
-					msg = $.emoticons(Self.input.text());
-					// test to see ui for received messages
-					name = event.shiftKey ? "received" : "sent";
-					Self.output.append(`<div class="${name}">${msg}</div>`);
+					message = $.emoticons(Self.input.text());
 
 					// send to chat room
-					defiant.net.send({
-						to,
-						msg
-					});
+					window.net.send({ room, message });
 
 					// clear input
 					Self.input.html("");
 				}
+				break;
+			case "net.greet":
+			case "net.join":
+			case "net.leave":
+				console.log(event);
+				break;
+			case "net.message":
+				// test to see ui for received messages
+				name = event.user === defiant.user.username ? "sent" : "received";
+				Self.output.append(`<div class="${name}">${event.message}</div>`);
+				//console.log(event);
 				break;
 		}
 	}
