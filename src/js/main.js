@@ -38,7 +38,7 @@ const chat = {
 				break;
 			case "net.message":
 				// test to see ui for received messages
-				name = event.user === defiant.user.username ? "sent" : "received";
+				name = event.from === defiant.user.username ? "sent" : "received";
 				Self.output.append(`<div class="${name}">${event.message}</div>`);
 				//console.log(event);
 				break;
