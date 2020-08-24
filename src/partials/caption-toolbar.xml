@@ -1,11 +1,11 @@
 <CaptionToolBar>
-	<Group width="37%" class="tools-left">
-		
+	<Group width="200px" class="tools-left">
+		<Search placeholder="Search"/>
 	</Group>
 	<Group>
 		
 	</Group>
-	<Group width="41%" class="tools-right">
-		
+	<Group width="30%" class="tools-right">
+		<Tool symbol="icon-info" click="toggle-sidebar" />
 	</Group>
 </CaptionToolBar>

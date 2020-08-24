@@ -4,8 +4,8 @@
 		<meta name="title" value="Chat" version="1.0"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0"/>
-		<meta name="width" value="950"/>
-		<meta name="height" value="540"/>
+		<meta name="width" value="950" min="700"/>
+		<meta name="height" value="540" min="300"/>
 		<meta name="top" value="200"/>
 		<meta name="left" value="250"/>
 		<meta name="minimize"/>
