@@ -10,12 +10,12 @@ const chat = {
 			contacts: window.find(".contacts"),
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
-			sidebar: window.find(".sidebar"),
+			info: window.find(".info"),
 		};
 
-		this.els.output.scrollTop(this.els.output[0].scrollHeight);
-
-		//window.settings.get("test");
+		Object.keys(this)
+			.filter(i => typeof this[i].init === "function")
+			.map(i => this[i].init());
 	},
 	dispatch(event) {
 		let Self = chat,
@@ -52,9 +52,9 @@ const chat = {
 				Self.els.output.scrollTop(Self.els.output[0].scrollHeight);
 				break;
 			// custom events
-			case "toggle-sidebar":
-				value = Self.els.sidebar.hasClass("hidden");
-				Self.els.sidebar.toggleClass("hidden", value);
+			case "toggle-info":
+				value = Self.els.info.hasClass("hidden");
+				Self.els.info.toggleClass("hidden", value);
 				break;
 			case "select-team":
 				Self.els.teams.find(".active").removeClass("active");
@@ -81,7 +81,11 @@ const chat = {
 				el.addClass("focused");
 				break;
 		}
-	}
+	},
+	teams: defiant.require("modules/teams.js"),
+	contacts: defiant.require("modules/contacts.js"),
+	transcript: defiant.require("modules/transcript.js"),
+	info: defiant.require("modules/info.js")
 };
 
 window.exports = chat;

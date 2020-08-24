@@ -1,0 +1,65 @@
+<Data>
+	<Contacts>
+		<i short="HB" id="hbi99" name="Hakan Bilgin" />
+		<i short="HB" id="hbi" name="Hakan Bilgin" me="true" />
+		<i short="LB" id="sarienn" name="Laura Bularca" />
+		<i short="TP" id="ted" name="Ted Persson" />
+		<i short="AU" id="urbanal" name="Alvaro Urbano" />
+		<i short="FL" id="fredrik" name="Fredrik Lagerträd" />
+		<i short="DC" id="david" name="David Clewette" />
+		<i short="DC" id="cala" name="Daniel Cala" />
+	</Contacts>
+	<Teams>
+		<Team id="team-id-1" short="TA" name="Tac Alumni">
+			<Channels>
+				<i id="chan-1" name="General" />
+				<i id="chan-2" name="Random" />
+			</Channels>
+			<Members>
+				<i id="hbi" />
+				<i id="urbanal" />
+				<i id="fredrik" />
+				<i id="david" />
+			</Members>
+		</Team>
+		<Team id="team-id-2" short="TUI" name="TUI">
+			<Channels>
+				<i id="chan-1" name="General" />
+				<i id="chan-2" name="Random" />
+			</Channels>
+			<Members>
+				<i id="hbi" />
+				<i id="cala" />
+			</Members>
+		</Team>
+		<Team id="team-id-3" short="T" name="Toubwanna">
+			<Channels>
+				<i id="chan-1" name="General" />
+				<i id="chan-2" name="Random" />
+			</Channels>
+			<Members>
+				<i id="hbi" />
+				<i id="sarienn" />
+			</Members>
+		</Team>
+		<Team id="team-id-4" short="DS" name="Defiant System">
+			<Channels>
+				<i id="chan-1" name="General" />
+				<i id="chan-2" name="Random" />
+			</Channels>
+			<Members>
+				<i id="hbi" />
+				<i id="ted" />
+			</Members>
+		</Team>
+	</Teams>
+	<Transcripts>
+		<i id="team-id-1::chan-1">
+			<i from="hbi" cstamp="1595006835076" timestamp="Tuesday, 21 Juli, 11:02"><![CDATA[Hello World]]></i>
+			<i from="ted" cstamp="1597140881021" timestamp="Tuesday, 21 Juli, 11:02"><![CDATA[How are you?]]></i>
+			<i from="fredrik" cstamp="1597247342375" timestamp="Tuesday, 21 Juli, 11:02"><![CDATA[Test output for the chat]]></i>
+			<i from="sarienn" cstamp="1595006816536" timestamp="Tuesday, 21 Juli, 11:02"><![CDATA[I'm fine thanks...]]></i>
+			<i from="urbanal" cstamp="1595006836924" timestamp="Tuesday, 21 Juli, 11:02"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
+		</i>
+	</Transcripts>
+</Data>

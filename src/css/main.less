@@ -1,9 +1,8 @@
 
-//@base: #262;
-@base: #258;
+@base: #259;
 //@base: #3a133e;
 
-//@msgSent: #9c52b9;
+@teams: desaturate(spin(@base, 10), 17%);
 @msgSent: lighten(spin(@base, 50), 27%);
 @msgReceived: #ddd;
 
@@ -71,21 +70,21 @@ content {
 	}
 
 	.teams {
-		background: darken(@base, 5%);
+		background: @teams;
 		color: #fff;
-		width: 69px;
-		padding-top: 11px;
+		width: 63px;
+		padding-top: 13px;
 		text-align: center;
 
 		.team {
-			background: lighten(@base, 2%);
-			color: desaturate(lighten(@base, 37%), 17%);
+			background: lighten(@teams, 5%);
+			color: lighten(@teams, 37%);
 			position: relative;
 			display: inline-block;
-			width: 43px;
-			height: 43px;
+			width: 37px;
+			height: 37px;
 			border-radius: 7px;
-			margin-bottom: 7px;
+			margin-bottom: 13px;
 
 			&:before {
 				content: attr(data-name);
@@ -115,12 +114,12 @@ content {
 				&:after {
 					content: "";
 					position: absolute;
-					top: -4px;
-					left: -4px;
-					right: -4px;
-					bottom: -4px;
-					border: 2px solid lighten(@base, 13%);
-					border-radius: 11px;
+					top: -6px;
+					left: -6px;
+					right: -6px;
+					bottom: -6px;
+					border: 3px solid lighten(@teams, 19%);
+					border-radius: 13px;
 				}
 			}
 		}
@@ -182,7 +181,7 @@ content {
 					}
 				}
 
-				.info {
+				.contact-info {
 					flex: 1;
 
 					.name {
@@ -439,7 +438,7 @@ content {
 		}
 	}
 
-	.sidebar {
+	.info {
 		background: #fff;
 		display: flex;
 		flex-direction: column;
@@ -450,7 +449,7 @@ content {
 			width: 0;
 		}
 
-		.sidebar-body {
+		.info-body {
 			width: 200px;
 
 			.profile {

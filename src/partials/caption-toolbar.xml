@@ -6,6 +6,6 @@
 		
 	</Group>
 	<Group width="30%" class="tools-right">
-		<Tool symbol="icon-info" click="toggle-sidebar" />
+		<Tool symbol="icon-info" click="toggle-info" />
 	</Group>
 </CaptionToolBar>
