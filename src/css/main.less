@@ -20,6 +20,7 @@ content {
 
 	i[class^="icon-"] {
 		display: inline-block;
+		vertical-align: middle;
 		width: 17px;
 		height: 17px;
 		background-size: cover;
@@ -39,6 +40,14 @@ content {
 		&.icon-user         { background-image: url(~/icons/icon-user.png); }
 		&.icon-add-user     { background-image: url(~/icons/icon-add-user.png); }
 		&.icon-remove-user  { background-image: url(~/icons/icon-remove-user.png); }
+
+		&.icon-chevron-left { background-image: url(~/icons/icon-chevron-left.png); }
+		&.icon-offline      { background-image: url(~/icons/icon-offline.png); }
+		&.icon-online       { background-image: url(~/icons/icon-online.png); }
+		&.icon-threads      { background-image: url(~/icons/icon-threads.png); }
+		&.icon-thread       { background-image: url(~/icons/icon-thread.png); }
+		&.icon-plus         { background-image: url(~/icons/icon-plus.png); }
+
 	}
 
 	.anim-typing {
@@ -155,6 +164,15 @@ content {
 			font-weight: 500;
 		}
 
+		i[class^="icon-"] {
+			width: 12px;
+			height: 12px;
+			margin-right: 5px;
+
+			&.icon-chevron-left { width: 10px; height: 10px; margin-top: -2px; }
+			&.icon-plus         { width: 10px; height: 10px; margin-top: -3px; }
+		}
+
 		.channels {
 			.channel {
 				//background: rgba(255,255,255,.25);
@@ -164,10 +182,19 @@ content {
 		.members {
 			.member {
 				//background: rgba(255,255,255,.25);
+				opacity: .5;
+
+				&.online {
+					opacity: 1;
+
+					.icon-offline { background-image: url(~/icons/icon-online.png); }
+				}
 			}
 		}
 
 		.name {
+			display: inline-block;
+			vertical-align: middle;
 		}
 	}
 
