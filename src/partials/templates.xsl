@@ -8,21 +8,37 @@
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template name="contacts">
-	<xsl:for-each select="./Members/*">
-		<div class="contact">
-			<div class="avatar" data-name="HB" style="background-image: url(~/img/hbi.jpg);"></div>
-			<div class="contact-info">
-				<div class="name">
-					Hakan Bilgin
-					<div class="details">
-						<i class="anim-typing tiny"><b></b><b></b><b></b></i>
-					</div>
-				</div>
-				<div class="last-message">Last message excerpt goes here with a long text</div>
+<xsl:template name="channels">
+	<h2>Channels</h2>
+	
+	<xsl:for-each select="./Channels/*">
+		<div class="channel">
+			<div class="name">
+				# <xsl:value-of select="@name"/>
 			</div>
 		</div>
 	</xsl:for-each>
+
+	<div class="add-channel">
+		+ Add a channel
+	</div>
+</xsl:template>
+
+<xsl:template name="members">
+	<h2>Members</h2>
+
+	<xsl:for-each select="./Members/*">
+		<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
+		<div class="member">
+			<div class="name">
+				<xsl:value-of select="$user/@name"/>
+			</div>
+		</div>
+	</xsl:for-each>
+
+	<div class="add-member">
+		+ Invite people
+	</div>
 </xsl:template>
 
 <xsl:template name="transcripts">

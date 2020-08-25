@@ -1,13 +1,13 @@
 <Data>
 	<Contacts>
-		<i short="HB" id="hbi99" name="Hakan Bilgin" />
+		<i short="HB" id="hbi99" name="Hakan Bilgin" online="1" />
 		<i short="HB" id="hbi" name="Hakan Bilgin" me="true" />
-		<i short="LB" id="sarienn" name="Laura Bularca" />
-		<i short="TP" id="ted" name="Ted Persson" />
-		<i short="AU" id="urbanal" name="Alvaro Urbano" />
-		<i short="FL" id="fredrik" name="Fredrik Lagerträd" />
-		<i short="DC" id="david" name="David Clewette" />
-		<i short="DC" id="cala" name="Daniel Cala" />
+		<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
+		<i short="TP" id="ted" name="Ted Persson" online="0" />
+		<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
+		<i short="FL" id="fredrik" name="Fredrik Lagerträd" online="1" />
+		<i short="DC" id="david" name="David Clewette" online="0" />
+		<i short="DC" id="cala" name="Daniel Cala" online="0" />
 	</Contacts>
 	<Teams>
 		<Team id="team-id-1" short="TA" name="Tac Alumni">

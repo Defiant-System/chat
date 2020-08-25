@@ -7,7 +7,7 @@ const chat = {
 		this.els = {
 			content: window.find("content"),
 			teams: window.find(".teams"),
-			contacts: window.find(".contacts"),
+			threads: window.find(".threads"),
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
 			info: window.find(".info"),
@@ -64,7 +64,7 @@ const chat = {
 				// make active
 				el.addClass("active");
 				break;
-			case "select-contact":
+			case "select-thread":
 				break;
 			case "focus-message":
 				// remove previous focus
@@ -83,7 +83,7 @@ const chat = {
 		}
 	},
 	teams: defiant.require("modules/teams.js"),
-	contacts: defiant.require("modules/contacts.js"),
+	threads: defiant.require("modules/threads.js"),
 	transcript: defiant.require("modules/transcript.js"),
 	info: defiant.require("modules/info.js")
 };
