@@ -2,7 +2,26 @@
 
 <xsl:template name="teams">
 	<xsl:for-each select="./Team">
-	
+		<div class="team">
+			<xsl:attribute name="data-name"><xsl:value-of select="@short"/></xsl:attribute>
+		</div>
+	</xsl:for-each>
+</xsl:template>
+
+<xsl:template name="contacts">
+	<xsl:for-each select="./Members/*">
+		<div class="contact">
+			<div class="avatar" data-name="HB" style="background-image: url(~/img/hbi.jpg);"></div>
+			<div class="contact-info">
+				<div class="name">
+					Hakan Bilgin
+					<div class="details">
+						<i class="anim-typing tiny"><b></b><b></b><b></b></i>
+					</div>
+				</div>
+				<div class="last-message">Last message excerpt goes here with a long text</div>
+			</div>
+		</div>
 	</xsl:for-each>
 </xsl:template>
 
@@ -22,4 +41,23 @@
 			<xsl:value-of select="." disable-output-escaping="yes"/>
 		</div>
 	</xsl:for-each>
+</xsl:template>
+
+<xsl:template name="info">
+	<div class="info-body">
+		<div class="profile">
+			<div class="avatar" style="background-image: url(~/img/hbi.jpg);"></div>
+			<h2>Hakan Bilgin</h2>
+		</div>
+
+		<div class="field">
+			<span>Nickname</span>
+			<span>hbi</span>
+		</div>
+
+		<div class="field">
+			<span>Phone</span>
+			<span>+46(8) 622 07 07</span>
+		</div>
+	</div>
 </xsl:template>
