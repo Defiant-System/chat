@@ -4,6 +4,8 @@
 		// fast references
 		this.els = {
 			root: window.find(".output-body"),
+			output: window.find(".output-body"),
+			input: window.find(".input > div"),
 		};
 
 		// render transcript
@@ -18,9 +20,26 @@
 	},
 	dispatch(event) {
 		let Self = chat.transcript,
+			room,
 			message,
 			el;
 		switch (event.type) {
+			// system events
+			case "send-message":
+				message = $.emoticons(Self.els.input.text());
+				// send to chat room
+				window.net.send({ room, message });
+				// clear input
+				Self.els.input.html("");
+				break;
+			case "receive-message":
+				// test to see ui for received messages
+				name = event.from === defiant.user.username ? "sent" : "received";
+				Self.els.output.append(`<div class="message ${name}">${event.message}</div>`);
+				// auto scroll down
+				Self.els.output.scrollTop(Self.els.output[0].scrollHeight);
+				break;
+			// custom events
 			case "focus-message":
 				// remove previous focus
 				message = Self.els.root.find(".focused").removeClass("focused");

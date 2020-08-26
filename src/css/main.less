@@ -273,6 +273,7 @@ content {
 					}
 
 					.avatar {
+						background: desaturate(spin(@msgSent, -15), 17%);
 						left: auto;
 						right: -37px;
 					}
@@ -340,14 +341,14 @@ content {
 				}
 
 				.avatar {
-					background-color: #ddd;
+					background-color: darken(@msgReceived, 13%);
 					position: absolute;
 					left: -37px;
 					bottom: 0;
 					display: inline-block;
 					width: 27px;
 					border-radius: 50%;
-					box-shadow: 0 0 0 1px #ddd;
+					//box-shadow: 0 0 0 1px #ddd;
 
 					&:before {
 						content: attr(data-name);

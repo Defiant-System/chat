@@ -6,8 +6,6 @@ const chat = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
-			output: window.find(".output-body"),
-			input: window.find(".input > div"),
 		};
 
 		Object.keys(this)
@@ -29,13 +27,7 @@ const chat = {
 				break;
 			case "window.keystroke":
 				if (event.keyCode === 13) {
-					message = $.emoticons(Self.els.input.text());
-
-					// send to chat room
-					window.net.send({ room, message });
-
-					// clear input
-					Self.els.input.html("");
+					Self.transcript.dispatch({ type: "send-message" });
 				}
 				break;
 			case "net.greet":
@@ -44,11 +36,7 @@ const chat = {
 				console.log(event);
 				break;
 			case "net.message":
-				// test to see ui for received messages
-				name = event.from === defiant.user.username ? "sent" : "received";
-				Self.els.output.append(`<div class="message ${name}">${event.message}</div>`);
-				// auto scroll down
-				Self.els.output.scrollTop(Self.els.output[0].scrollHeight);
+				Self.transcript.dispatch({ ...event, type: "receive-message" });
 				break;
 			// custom events
 			case "toggle-info":
