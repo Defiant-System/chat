@@ -10,7 +10,7 @@
 		<i short="DC" id="cala" name="Daniel Cala" online="0" />
 	</Contacts>
 	<Teams>
-		<Team id="team-id-1" short="TA" name="Tac Alumni">
+		<Team id="team-id-1" short="TA" name="Tac Alumni" img="~/icons/icon-defiant.png">
 			<Channels>
 				<i id="chan-1" name="General" />
 				<i id="chan-2" name="Random" />

@@ -3,7 +3,15 @@
 <xsl:template name="teams">
 	<xsl:for-each select="./Team">
 		<div class="team">
-			<xsl:attribute name="data-name"><xsl:value-of select="@short"/></xsl:attribute>
+			<xsl:if test="not(@img)">
+				<xsl:attribute name="data-name"><xsl:value-of select="@short"/></xsl:attribute>
+			</xsl:if>
+			<xsl:if test="@img">
+				<xsl:attribute name="style">
+					background-image: url(<xsl:value-of select="@img"/>);
+					background-color: transparent;
+				</xsl:attribute>
+			</xsl:if>
 		</div>
 	</xsl:for-each>
 </xsl:template>
