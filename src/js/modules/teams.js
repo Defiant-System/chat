@@ -3,7 +3,7 @@
 	init() {
 		// fast references
 		this.els = {
-			teams: window.find(".teams"),
+			teams: window.find(".teams > div"),
 		};
 
 		// render transcript
@@ -20,7 +20,13 @@
 		let Self = chat.teams,
 			el;
 		switch (event.type) {
-			case "some-event":
+			case "select-team":
+				Self.els.teams.find(".active").removeClass("active");
+				// get clicked team
+				el = $(event.target);
+				if (!el.hasClass("team")) return;
+				// make active
+				el.addClass("active");
 				break;
 		}
 	}

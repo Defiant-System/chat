@@ -6,11 +6,8 @@ const chat = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
-			teams: window.find(".teams"),
-			threads: window.find(".threads"),
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
-			info: window.find(".info"),
 		};
 
 		Object.keys(this)
@@ -19,8 +16,10 @@ const chat = {
 	},
 	dispatch(event) {
 		let Self = chat,
+			name,
 			value,
 			message,
+			pEl,
 			el;
 		switch (event.type) {
 			// system events
@@ -53,33 +52,17 @@ const chat = {
 				break;
 			// custom events
 			case "toggle-info":
-				value = Self.els.info.hasClass("hidden");
-				Self.els.info.toggleClass("hidden", value);
+				value = Self.info.els.root.hasClass("hidden");
+				Self.info.els.root.toggleClass("hidden", value);
 				break;
-			case "select-team":
-				Self.els.teams.find(".active").removeClass("active");
-				// get clicked team
-				el = $(event.target);
-				if (!el.hasClass("team")) return;
-				// make active
-				el.addClass("active");
-				break;
-			case "select-thread":
-				break;
-			case "focus-message":
-				// remove previous focus
-				message = Self.els.output.find(".focused").removeClass("focused");
-
-				// focus clicked message
-				el = $(event.target);
-				if (!el.hasClass("message")) {
-					el = el.parents(".message");
+			default:
+				if (event.el) {
+					pEl = event.el.parents("div[data-area]");
+					name = pEl.attr("data-area");
+					if (pEl.length && Self[name].dispatch) {
+						Self[name].dispatch(event);
+					}
 				}
-				// don't focus if it was focused
-				if (message[0] === el[0]) return;
-				// focus
-				el.addClass("focused");
-				break;
 		}
 	},
 	teams: defiant.require("modules/teams.js"),

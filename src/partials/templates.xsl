@@ -9,10 +9,10 @@
 </xsl:template>
 
 <xsl:template name="channels">
-	<h2><i class="icon-chevron-left"></i>Channels</h2>
+	<h2 data-click="toggle-channels"><i class="icon-chevron-left"></i>Channels</h2>
 	
 	<xsl:for-each select="./Channels/*">
-		<div class="channel">
+		<div class="channel" data-click="select-thread">
 			<xsl:if test="position() = 1">
 				<xsl:attribute name="class">channel active</xsl:attribute>
 			</xsl:if>
@@ -23,17 +23,17 @@
 		</div>
 	</xsl:for-each>
 
-	<div class="add-channel">
+	<div class="add-channel" data-click="add-channel">
 		<i class="icon-plus"></i>Add a channel
 	</div>
 </xsl:template>
 
 <xsl:template name="members">
-	<h2><i class="icon-chevron-left"></i>Members</h2>
+	<h2 data-click="toggle-members"><i class="icon-chevron-left"></i>Members</h2>
 
 	<xsl:for-each select="./Members/*">
 		<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
-		<div class="member">
+		<div class="member" data-click="select-thread">
 			<xsl:if test="$user/@online = 1">
 				<xsl:attribute name="class">member online</xsl:attribute>
 			</xsl:if>
@@ -44,7 +44,7 @@
 		</div>
 	</xsl:for-each>
 
-	<div class="add-member">
+	<div class="add-member" data-click="add-member">
 		<i class="icon-plus"></i>Invite people
 	</div>
 </xsl:template>

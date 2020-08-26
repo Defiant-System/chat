@@ -1,20 +1,22 @@
 <content>
-	<div class="teams" data-click="select-team">
-		<!-- Teams HTML -->
+	<div class="teams" data-area="teams">
+		<div class="teams-list" data-click="select-team">
+			<!-- Teams HTML -->
+		</div>
 	</div>
-	<div class="threads" data-click="select-thread">
+	<div class="threads" data-area="threads">
 		<div class="threads-list">
 			<div class="channels"><!-- Channels HTML --></div>
 			<div class="members"><!-- Members HTML --></div>
 		</div>
 	</div>
-	<div class="transcript">
+	<div class="transcript" data-area="transcript">
 		<div class="output-body" data-click="focus-message">
 			<!-- Transcript HTML -->
 		</div>
 		@import "sections/input.htm"
 	</div>
-	<div class="info hidden1">
+	<div class="info hidden1" data-area="info">
 		<!-- Info HTML -->
 	</div>
 </content>

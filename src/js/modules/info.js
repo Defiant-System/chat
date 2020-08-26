@@ -3,14 +3,14 @@
 	init() {
 		// fast references
 		this.els = {
-			info: window.find(".info"),
+			root: window.find(".info"),
 		};
 
 		// render transcript
 		window.render({
 			template: "info",
 			match: `//Teams`,
-			target: this.els.info
+			target: this.els.root
 		});
 	},
 	dispatch(event) {

@@ -3,8 +3,9 @@
 	init() {
 		// fast references
 		this.els = {
-			channels: window.find(".channels"),
-			members: window.find(".members"),
+			root: window.find(".threads"),
+			channels: window.find(".threads .channels"),
+			members: window.find(".threads .members"),
 		};
 
 		// render channels
@@ -25,7 +26,20 @@
 		let Self = chat.threads,
 			el;
 		switch (event.type) {
-			case "some-event":
+			case "toggle-channels":
+				console.log(event);
+				break;
+			case "add-channel":
+				console.log(event);
+				break;
+			case "toggle-members":
+				console.log(event);
+				break;
+			case "add-member":
+				console.log(event);
+				break;
+			case "select-thread":
+				console.log(event);
 				break;
 		}
 	}
