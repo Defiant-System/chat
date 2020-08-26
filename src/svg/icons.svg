@@ -70,16 +70,16 @@
 
 	<svg id="icon-offline" viewBox="0 0 500 500">
 		<style type="text/css">
-			.st0{fill:none;stroke:#fff;stroke-width:80;stroke-linecap:round;}
+			.st0{fill:none;stroke:#fff;stroke-width:70;stroke-linecap:round;}
 		</style>
-		<circle class="st0" cx="250" cy="250" r="180"/>
+		<circle class="st0" cx="250" cy="250" r="170"/>
 	</svg>
 
 	<svg id="icon-online" viewBox="0 0 500 500">
 		<style type="text/css">
-			.st0{fill:#fff;stroke:#fff;stroke-width:80;stroke-linecap:round;}
+			.st0{fill:#4a4;stroke:#4a4;stroke-width:70;stroke-linecap:round;}
 		</style>
-		<circle class="st0" cx="250" cy="250" r="180"/>
+		<circle class="st0" cx="250" cy="250" r="170"/>
 	</svg>
 
 	<svg id="icon-threads" viewBox="0 0 500 500">

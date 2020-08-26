@@ -1,5 +1,5 @@
 
-@base: #259;
+@base: #158;
 //@base: #3a133e;
 
 @teams: desaturate(darken(@base, 5%), 7%);
@@ -139,7 +139,7 @@ content {
 
 	.threads {
 		background: @base;
-		color: #fff;
+		color: #eef;
 		display: flex;
 		flex-direction: column;
 		width: 220px;
@@ -170,19 +170,27 @@ content {
 			margin-right: 5px;
 
 			&.icon-chevron-left { width: 10px; height: 10px; margin-top: -2px; }
-			&.icon-plus         { width: 10px; height: 10px; margin-top: -3px; }
+			&.icon-plus         { width: 9px; height: 9px; margin: -2px 6px 0 2px; }
 		}
 
 		.channels {
 			.channel {
-				//background: rgba(255,255,255,.25);
+				cursor: pointer;
+
+				&.active {
+					background: lighten(@base, 11%);
+				}
 			}
 		}
 
 		.members {
 			.member {
-				//background: rgba(255,255,255,.25);
 				opacity: .5;
+				cursor: pointer;
+
+				&.active {
+					background: lighten(@base, 11%);
+				}
 
 				&.online {
 					opacity: 1;
@@ -195,6 +203,16 @@ content {
 		.name {
 			display: inline-block;
 			vertical-align: middle;
+		}
+
+		.add-channel,
+		.add-member {
+			opacity: .5;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1;
+			}
 		}
 	}
 
@@ -343,7 +361,8 @@ content {
 						font-size: 12px;
 						font-weight: 400;
 						text-align: center;
-						color: #bbb;
+						color: #fff;
+						text-shadow: 0 1px 1px rgba(0,0,0,.25);
 					}
 
 					&:after {

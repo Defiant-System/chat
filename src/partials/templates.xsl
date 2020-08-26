@@ -13,6 +13,9 @@
 	
 	<xsl:for-each select="./Channels/*">
 		<div class="channel">
+			<xsl:if test="position() = 1">
+				<xsl:attribute name="class">channel active</xsl:attribute>
+			</xsl:if>
 			<i class="icon-thread"></i>
 			<div class="name">
 				<xsl:value-of select="@name"/>

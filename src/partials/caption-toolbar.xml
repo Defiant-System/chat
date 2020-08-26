@@ -1,5 +1,5 @@
 <CaptionToolBar>
-	<Group width="200px" class="tools-left">
+	<Group width="190px" class="tools-left">
 		<Search placeholder="Search"/>
 	</Group>
 	<Group>
