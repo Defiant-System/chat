@@ -40,8 +40,7 @@ const chat = {
 				break;
 			// custom events
 			case "toggle-info":
-				value = Self.info.els.root.hasClass("hidden");
-				Self.info.els.root.toggleClass("hidden", value);
+				Self.info.dispatch({ ...event, type: "toggle-view" });
 				break;
 			default:
 				if (event.el) {

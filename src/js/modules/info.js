@@ -15,9 +15,12 @@
 	},
 	dispatch(event) {
 		let Self = chat.info,
+			value,
 			el;
 		switch (event.type) {
-			case "some-event":
+			case "toggle-view":
+				value = Self.els.root.hasClass("hidden");
+				Self.els.root.toggleClass("hidden", value);
 				break;
 		}
 	}

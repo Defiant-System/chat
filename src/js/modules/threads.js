@@ -27,19 +27,20 @@
 			el;
 		switch (event.type) {
 			case "toggle-channels":
-				console.log(event);
+			case "toggle-members":
+				el = event.el.parent();
+				el.toggleClass("collapsed", el.hasClass("collapsed"));
 				break;
 			case "add-channel":
-				console.log(event);
-				break;
-			case "toggle-members":
 				console.log(event);
 				break;
 			case "add-member":
 				console.log(event);
 				break;
 			case "select-thread":
-				console.log(event);
+				Self.els.root.find(".active").removeClass("active");
+				
+				event.el.addClass("active");
 				break;
 		}
 	}
