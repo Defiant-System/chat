@@ -29,6 +29,7 @@ content {
 		background-position: 50% 50%;
 		//filter: invert() brightness(85%);
 
+		&.icon-info         { background-image: url(~/icons/icon-info.png); }
 		&.icon-return       { background-image: url(~/icons/icon-return.png); }
 		&.icon-search       { background-image: url(~/icons/icon-search.png); }
 		&.icon-clock        { background-image: url(~/icons/icon-clock.png); }
@@ -263,7 +264,6 @@ content {
 			width: 12px;
 			height: 12px;
 			margin: -2px 0 0 3px;
-			filter: invert();
 		}
 
 		.output-body {
@@ -275,10 +275,17 @@ content {
 
 			.initial-message {
 				background: #fff;
+				color: #777;
 				padding: 7px 11px;
 				margin: 5px 5px;
 				border-radius: 5px;
 				box-shadow: 0 0 0 1px #ddd;
+
+				i[class^="icon-"] {
+					filter: invert() opacity(.55);
+
+					&.icon-info { filter: opacity(.8); }
+				}
 			}
 
 			> .message{

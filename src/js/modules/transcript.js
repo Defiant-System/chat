@@ -7,12 +7,6 @@
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
 		};
-
-		// auto render first transcript
-		this.dispatch({
-			type: "render-thread",
-			id: "team-id-1::random",
-		});
 	},
 	dispatch(event) {
 		let Self = chat.transcript,

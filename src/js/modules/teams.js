@@ -12,14 +12,16 @@
 			match: `//Teams`,
 			target: this.els.teams
 		});
-
-		// auto-select first team
-		this.els.teams.find(".team:first").trigger("click");
 	},
 	dispatch(event) {
-		let Self = chat.teams,
+		let APP = chat,
+			Self = APP.teams,
 			el;
 		switch (event.type) {
+			case "select-first-team":
+				// auto-select first team
+				event.target = Self.els.teams.find(".team:first");
+				/* falls through */
 			case "select-team":
 				Self.els.teams.find(".active").removeClass("active");
 				// get clicked team
@@ -27,6 +29,9 @@
 				if (!el.hasClass("team")) return;
 				// make active
 				el.addClass("active");
+
+				// forward event to threads column
+				APP.threads.dispatch({ type: "render-team", id: el.data("id") });
 				break;
 		}
 	}

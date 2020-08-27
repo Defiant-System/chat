@@ -7,23 +7,6 @@
 			channels: window.find(".threads .channels"),
 			members: window.find(".threads .members"),
 		};
-
-		// fix timestamps
-		this.dispatch({ type: "fix-timestamps" });
-
-		// render channels
-		window.render({
-			template: "channels",
-			match: `//Teams/Team[@id="team-id-1"]`,
-			target: this.els.channels
-		});
-
-		// render transcript
-		window.render({
-			template: "members",
-			match: `//Teams/Team[@id="team-id-1"]`,
-			target: this.els.members
-		});
 	},
 	dispatch(event) {
 		let APP = chat,
@@ -48,10 +31,32 @@
 				id = event.el.data("id");
 				APP.transcript.dispatch({ type: "render-thread", id });
 				break;
-			case "fix-timestamps":
-				window.bluePrint.selectNodes("//*[@cstamp and not(@timestamp)]").map(i => {
+			case "render-team":
+				// fix timestamps
+				let xpath = `//Transcripts/*[@id="${event.id}"]//*[@cstamp and not(@timestamp)]`;
+				window.bluePrint.selectNodes(xpath).map(i => {
 					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
+				});
+
+				// render channels
+				window.render({
+					template: "channels",
+					match: `//Teams/Team[@id="${event.id}"]`,
+					target: Self.els.channels
+				});
+
+				// render transcript
+				window.render({
+					template: "members",
+					match: `//Teams/Team[@id="${event.id}"]`,
+					target: Self.els.members
+				});
+
+				// auto render first transcript
+				APP.transcript.dispatch({
+					type: "render-thread",
+					id: `${event.id}::general`,
 				});
 				break;
 		}

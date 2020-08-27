@@ -22,6 +22,9 @@ const chat = {
 		switch (event.type) {
 			// system events
 			case "window.open":
+				// auto-select first team
+				Self.teams.dispatch({ type: "select-first-team" });
+
 				// join chat room
 				window.net.join({ room });
 				break;
@@ -40,8 +43,7 @@ const chat = {
 				break;
 			// custom events
 			case "toggle-info":
-				Self.info.dispatch({ ...event, type: "toggle-view" });
-				break;
+				return Self.info.dispatch({ ...event, type: "toggle-view" });
 			default:
 				if (event.el) {
 					pEl = event.el.parents("div[data-area]");

@@ -21,7 +21,7 @@
 			case "toggle-view":
 				value = Self.els.root.hasClass("hidden");
 				Self.els.root.toggleClass("hidden", value);
-				break;
+				return value;
 		}
 	}
 }

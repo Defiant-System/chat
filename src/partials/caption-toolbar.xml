@@ -1,11 +1,19 @@
 <CaptionToolBar>
-	<Group width="190px" class="tools-left">
-		<Search placeholder="Search"/>
+	<Group width="270px" class="tools-left">
+		<Options>
+			<Tool symbol="icon-previous" state="disabled" />
+			<Tool symbol="icon-next" state="disabled" />
+		</Options>
+		<Tool symbol="icon-info" click="toggle-info" />
+		<Options>
+			<Tool symbol="icon-camera" state="disabled" />
+			<Tool symbol="icon-phone" state="disabled" />
+		</Options>
 	</Group>
 	<Group>
 		
 	</Group>
 	<Group width="30%" class="tools-right">
-		<Tool symbol="icon-info" click="toggle-info" />
+		<Search width="190px" placeholder="Search"/>
 	</Group>
 </CaptionToolBar>

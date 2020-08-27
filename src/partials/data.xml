@@ -10,7 +10,7 @@
 		<i short="DC" id="cala" name="Daniel Cala" online="0" />
 	</Contacts>
 	<Teams>
-		<Team id="team-id-4" short="DS" name="Defiant System" img="~/icons/icon-defiant.png">
+		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" img="~/icons/icon-defiant.png">
 			<Channels>
 				<i id="general" name="General" />
 				<i id="random" name="Random" />
@@ -20,7 +20,7 @@
 				<i id="ted" />
 			</Members>
 		</Team>
-		<Team id="team-id-1" short="TA" name="Tac Alumni">
+		<Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni">
 			<Channels>
 				<i id="general" name="General" />
 				<i id="random" name="Random" />
@@ -32,7 +32,7 @@
 				<i id="david" />
 			</Members>
 		</Team>
-		<Team id="team-id-2" short="TUI" name="TUI">
+		<Team id="8b4f2168-ef7b-4f05-87e8-a4490990dc1e" short="TUI" name="TUI">
 			<Channels>
 				<i id="general" name="General" />
 				<i id="random" name="Random" />
@@ -42,7 +42,7 @@
 				<i id="cala" />
 			</Members>
 		</Team>
-		<Team id="team-id-3" short="T" name="Toubwanna">
+		<Team id="324e7118-79b6-488b-b662-fe22f01415b3" short="T" name="Toubwanna">
 			<Channels>
 				<i id="general" name="General" />
 				<i id="random" name="Random" />
@@ -54,7 +54,11 @@
 		</Team>
 	</Teams>
 	<Transcripts>
-		<i id="team-id-1::general">
+		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796::general">
+			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
+			<i from="ted" cstamp="1597140881021"><![CDATA[Hej!]]></i>
+		</i>
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::general">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
 			<i from="ted" cstamp="1597140881021"><![CDATA[How are you?]]></i>
 			<i from="fredrik" cstamp="1597247342375"><![CDATA[Test output for the chat]]></i>
@@ -66,8 +70,8 @@
 			<i from="sarienn" cstamp="1597424631937"><![CDATA[I'm fine thanks...]]></i>
 			<i from="urbanal" cstamp="1595006846929"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
 		</i>
-		<i id="team-id-1::random" cstamp="1595006835076" />
-		<i id="team-id-1::fredrik">
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::random" cstamp="1595006835076" />
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::fredrik">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
 			<i from="fredrik" cstamp="1597140881021"><![CDATA[Hej!]]></i>
 		</i>

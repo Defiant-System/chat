@@ -69,7 +69,7 @@
 	<xsl:variable name="me" select="//Contacts/i[@me = 'true']"/>
 	<xsl:if test="count(./*) = 0">
 		<div class="initial-message">
-			This channel was created <xsl:value-of select="@timestamp"/>. 
+			<i class="icon-info"></i> This channel was created <xsl:value-of select="@timestamp"/>. 
 			This is the very beginning of the channel 
 			<b><i class="icon-thread"></i>Random</b>.
 		</div>
