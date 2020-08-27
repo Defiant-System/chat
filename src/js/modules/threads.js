@@ -8,6 +8,9 @@
 			members: window.find(".threads .members"),
 		};
 
+		// fix timestamps
+		this.dispatch({ type: "fix-timestamps" });
+
 		// render channels
 		window.render({
 			template: "channels",
@@ -23,7 +26,9 @@
 		});
 	},
 	dispatch(event) {
-		let Self = chat.threads,
+		let APP = chat,
+			Self = APP.threads,
+			id,
 			el;
 		switch (event.type) {
 			case "toggle-channels":
@@ -32,15 +37,22 @@
 				el.toggleClass("collapsed", el.hasClass("collapsed"));
 				break;
 			case "add-channel":
-				console.log(event);
-				break;
 			case "add-member":
 				console.log(event);
 				break;
 			case "select-thread":
 				Self.els.root.find(".active").removeClass("active");
-				
+				// make clicked item active
 				event.el.addClass("active");
+
+				id = event.el.data("id");
+				APP.transcript.dispatch({ type: "render-thread", id });
+				break;
+			case "fix-timestamps":
+				window.bluePrint.selectNodes("//*[@cstamp and not(@timestamp)]").map(i => {
+					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
+					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
+				});
 				break;
 		}
 	}

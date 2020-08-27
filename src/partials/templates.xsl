@@ -3,6 +3,8 @@
 <xsl:template name="teams">
 	<xsl:for-each select="./Team">
 		<div class="team">
+			<xsl:attribute name="title"><xsl:value-of select="@name"/></xsl:attribute>
+			<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 			<xsl:if test="not(@img)">
 				<xsl:attribute name="data-name"><xsl:value-of select="@short"/></xsl:attribute>
 			</xsl:if>
@@ -18,10 +20,12 @@
 
 <xsl:template name="channels">
 	<h2 data-click="toggle-channels"><i class="icon-chevron-left"></i>Channels</h2>
+	<xsl:variable name="teadId" select="@id"/>
 	
 	<div class="channels-list"><ul>
 		<xsl:for-each select="./Channels/*">
 			<li class="channel" data-click="select-thread">
+				<xsl:attribute name="data-id"><xsl:value-of select="$teadId"/>::<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="position() = 1">
 					<xsl:attribute name="class">channel active</xsl:attribute>
 				</xsl:if>
@@ -39,11 +43,13 @@
 
 <xsl:template name="members">
 	<h2 data-click="toggle-members"><i class="icon-chevron-left"></i>Members</h2>
+	<xsl:variable name="teadId" select="@id"/>
 
 	<div class="members-list"><ul>
 		<xsl:for-each select="./Members/*">
 			<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
 			<li class="member" data-click="select-thread">
+				<xsl:attribute name="data-id"><xsl:value-of select="$teadId"/>::<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>
 				</xsl:if>
@@ -61,6 +67,13 @@
 
 <xsl:template name="transcripts">
 	<xsl:variable name="me" select="//Contacts/i[@me = 'true']"/>
+	<xsl:if test="count(./*) = 0">
+		<div class="initial-message">
+			This channel was created <xsl:value-of select="@timestamp"/>. 
+			This is the very beginning of the channel 
+			<b><i class="icon-thread"></i>Random</b>.
+		</div>
+	</xsl:if>
 	<xsl:for-each select="./*">
 		<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
 		<div>

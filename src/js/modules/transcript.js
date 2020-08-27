@@ -8,15 +8,11 @@
 			input: window.find(".input > div"),
 		};
 
-		// render transcript
-		window.render({
-			template: "transcripts",
-			match: `//Transcripts/i[@id="team-id-1::chan-1"]`,
-			target: this.els.root
+		// auto render first transcript
+		this.dispatch({
+			type: "render-thread",
+			id: "team-id-1::random",
 		});
-
-		// auto scroll to bottom
-		this.els.root.scrollTop(this.els.root[0].scrollHeight);
 	},
 	dispatch(event) {
 		let Self = chat.transcript,
@@ -53,6 +49,16 @@
 				if (message[0] === el[0]) return;
 				// focus
 				el.addClass("focused");
+				break;
+			case "render-thread":
+				// render transcript
+				window.render({
+					template: "transcripts",
+					match: `//Transcripts/i[@id="${event.id}"]`,
+					target: Self.els.root
+				});
+				// auto scroll to bottom
+				Self.els.root.scrollTop(Self.els.root[0].scrollHeight);
 				break;
 		}
 	}
