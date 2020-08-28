@@ -14,6 +14,7 @@
 					background-color: transparent;
 				</xsl:attribute>
 			</xsl:if>
+			<!-- <span class="notification"></span> -->
 		</div>
 	</xsl:for-each>
 </xsl:template>
@@ -26,13 +27,11 @@
 		<xsl:for-each select="./Channels/*">
 			<li class="channel" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teadId"/>::<xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:if test="position() = 1">
-					<xsl:attribute name="class">channel active</xsl:attribute>
-				</xsl:if>
 				<i class="icon-thread"></i>
 				<div class="name">
 					<xsl:value-of select="@name"/>
 				</div>
+				<!-- <span class="notification">1</span> -->
 			</li>
 		</xsl:for-each>
 		<li class="add-channel" data-click="add-channel">
@@ -57,6 +56,7 @@
 				<div class="name">
 					<xsl:value-of select="$user/@name"/>
 				</div>
+				<!-- <span class="notification">3</span> -->
 			</li>
 		</xsl:for-each>
 		<li class="add-member" data-click="add-member">

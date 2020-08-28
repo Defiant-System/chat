@@ -11,6 +11,7 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
+			xpath,
 			id,
 			el;
 		switch (event.type) {
@@ -28,12 +29,15 @@
 				// make clicked item active
 				event.el.addClass("active");
 
+				// remove unread notification flags
+				Self.dispatch({ ...event, type: "remove-unread"});
+
 				id = event.el.data("id");
 				APP.transcript.dispatch({ type: "render-thread", id });
 				break;
 			case "render-team":
 				// fix timestamps
-				let xpath = `//Transcripts/*[@id="${event.id}"]//*[@cstamp and not(@timestamp)]`;
+				xpath = `//Transcripts/*[@id="${event.id}"]//*[@cstamp and not(@timestamp)]`;
 				window.bluePrint.selectNodes(xpath).map(i => {
 					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
@@ -57,6 +61,29 @@
 				APP.transcript.dispatch({
 					type: "render-thread",
 					id: `${event.id}::general`,
+				});
+
+				Self.dispatch({ ...event, type: "check-for-unread" });
+				// auto-click first thread
+				Self.els.root.find("ul li").get(0).trigger("click");
+				break;
+			case "remove-unread":
+				// remove potential notification
+				setTimeout(() => event.el.find(".notification").remove(), 500);
+
+				xpath = `//Transcripts/*[@id="${event.el.data("id")}"]//*[@unread]`;
+				window.bluePrint.selectNodes(xpath).map(node => node.removeAttribute("unread"));
+				break;
+			case "check-for-unread":
+				xpath = `//Teams/Team[@id="${event.id}"]/*/*[@id]`;
+				window.bluePrint.selectNodes(xpath).map(node => {
+					let id = event.id +"::"+ node.getAttribute("id"),
+						xpath = `//Transcripts/*[@id="${id}"]//*[@unread]`,
+						unread = window.bluePrint.selectNodes(xpath);
+					if (unread.length) {
+						Self.els.root.find(`li[data-id="${id}"]`)
+							.append(`<span class="notification">${unread.length}</span>`);
+					}
 				});
 				break;
 		}
