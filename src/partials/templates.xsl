@@ -75,6 +75,7 @@
 		</div>
 	</xsl:if>
 	<xsl:for-each select="./*">
+		<xsl:sort order="ascending" select="@cstamp"/>
 		<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
 		<div>
 			<xsl:attribute name="class">message <xsl:choose>
