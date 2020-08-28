@@ -10,6 +10,7 @@
 	},
 	dispatch(event) {
 		let Self = chat.transcript,
+			xpath,
 			room,
 			message,
 			el;
@@ -45,6 +46,13 @@
 				el.addClass("focused");
 				break;
 			case "render-thread":
+				// fix timestamps
+				xpath = `//Transcripts/*[@id="${event.id}"]//*[@cstamp and not(@timestamp)]`;
+				window.bluePrint.selectNodes(xpath).map(i => {
+					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
+					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
+				});
+
 				// render transcript
 				window.render({
 					template: "transcripts",

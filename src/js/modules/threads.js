@@ -36,13 +36,6 @@
 				APP.transcript.dispatch({ type: "render-thread", id });
 				break;
 			case "render-team":
-				// fix timestamps
-				xpath = `//Transcripts/*[contains(@id, "${event.id}")]//*[@cstamp and not(@timestamp)]`;
-				window.bluePrint.selectNodes(xpath).map(i => {
-					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
-					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
-				});
-
 				// render channels
 				window.render({
 					template: "channels",
