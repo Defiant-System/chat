@@ -75,18 +75,27 @@
 		</div>
 	</xsl:if>
 	<xsl:for-each select="./*">
-		<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
-		<div>
-			<xsl:attribute name="class">message <xsl:choose>
-				<xsl:when test="@from = $me/@id">sent</xsl:when>
-				<xsl:otherwise>received</xsl:otherwise>
-			</xsl:choose></xsl:attribute>
-			<div class="avatar">
-				<xsl:attribute name="data-name"><xsl:value-of select="$user/@short"/></xsl:attribute>
-			</div>
-			<div class="date"><xsl:value-of select="@timestamp"/></div>
-			<xsl:value-of select="." disable-output-escaping="yes"/>
-		</div>
+		<xsl:choose>
+			<xsl:when test="name() = 'date'">
+				<div class="date-day">
+					<span><xsl:value-of select="@timestamp"/></span>
+				</div>
+			</xsl:when>
+			<xsl:otherwise>
+				<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
+				<div>
+					<xsl:attribute name="class">message <xsl:choose>
+						<xsl:when test="@from = $me/@id">sent</xsl:when>
+						<xsl:otherwise>received</xsl:otherwise>
+					</xsl:choose></xsl:attribute>
+					<div class="avatar">
+						<xsl:attribute name="data-name"><xsl:value-of select="$user/@short"/></xsl:attribute>
+					</div>
+					<div class="date"><xsl:value-of select="@timestamp"/></div>
+					<xsl:value-of select="." disable-output-escaping="yes"/>
+				</div>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:for-each>
 </xsl:template>
 

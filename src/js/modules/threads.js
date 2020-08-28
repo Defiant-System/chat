@@ -37,7 +37,7 @@
 				break;
 			case "render-team":
 				// fix timestamps
-				xpath = `//Transcripts/*[@id="${event.id}"]//*[@cstamp and not(@timestamp)]`;
+				xpath = `//Transcripts/*[contains(@id, "${event.id}")]//*[@cstamp and not(@timestamp)]`;
 				window.bluePrint.selectNodes(xpath).map(i => {
 					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));

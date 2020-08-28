@@ -327,6 +327,37 @@ content {
 				}
 			}
 
+			.date-day {
+				float: left;
+				position: relative;
+				width: 100%;
+				height: 1px;
+				text-align: center;
+				margin: 23px 0;
+				padding: 0 7px;
+
+				&:before {
+					content: "";
+					display: block;
+					width: 100%;
+					height: 0;
+					border-top: 1px solid #e1e1e1;
+				}
+
+				span {
+					display: inline-block;
+					position: relative;
+					transform: translateY(-50%);
+					background: #fafafa;
+					color: #555;
+					border: 1px solid #d1d1d1;
+					border-radius: 20px;
+					padding: 2px 21px 3px;
+					font-size: 13px;
+					white-space: nowrap;
+				}
+			}
+
 			> .message{
 				position: relative;
 				border-radius: 13px;
