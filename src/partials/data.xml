@@ -10,20 +10,20 @@
 		<i short="DC" id="cala" name="Daniel Cala" online="0" />
 	</Contacts>
 	<Teams>
-		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" img="~/icons/icon-defiant.png">
+		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" img="~/icons/icon-defiant.png" cstamp="1595006816536">
 			<Channels>
-				<i id="general" name="General" />
-				<i id="random" name="Random" />
+				<i id="general" name="General" cstamp="1595006835076" />
+				<i id="random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
 				<i id="hbi" />
 				<i id="ted" />
 			</Members>
 		</Team>
-		<Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni">
+		<Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni" cstamp="1595006835076">
 			<Channels>
-				<i id="general" name="General" />
-				<i id="random" name="Random" />
+				<i id="general" name="General" cstamp="1595006835076" />
+				<i id="random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
 				<i id="hbi" />
@@ -32,20 +32,20 @@
 				<i id="david" />
 			</Members>
 		</Team>
-		<Team id="8b4f2168-ef7b-4f05-87e8-a4490990dc1e" short="TUI" name="TUI">
+		<Team id="8b4f2168-ef7b-4f05-87e8-a4490990dc1e" short="TUI" name="TUI" cstamp="1597362011587">
 			<Channels>
-				<i id="general" name="General" />
-				<i id="random" name="Random" />
+				<i id="general" name="General" cstamp="1595006835076" />
+				<i id="random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
 				<i id="hbi" />
 				<i id="cala" />
 			</Members>
 		</Team>
-		<Team id="324e7118-79b6-488b-b662-fe22f01415b3" short="T" name="Toubwanna">
+		<Team id="324e7118-79b6-488b-b662-fe22f01415b3" short="T" name="Toubwanna" cstamp="1597110881021">
 			<Channels>
-				<i id="general" name="General" />
-				<i id="random" name="Random" />
+				<i id="general" name="General" cstamp="1595006835076" />
+				<i id="random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
 				<i id="hbi" />

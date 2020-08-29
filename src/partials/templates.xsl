@@ -2,6 +2,7 @@
 
 <xsl:template name="teams">
 	<xsl:for-each select="./Team">
+		<xsl:sort order="ascending" select="@cstamp"/>
 		<div class="team">
 			<xsl:attribute name="title"><xsl:value-of select="@name"/></xsl:attribute>
 			<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
@@ -25,6 +26,7 @@
 	
 	<div class="channels-list"><ul>
 		<xsl:for-each select="./Channels/*">
+			<xsl:sort order="ascending" select="@cstamp"/>
 			<li class="channel" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teadId"/>::<xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
@@ -46,6 +48,7 @@
 
 	<div class="members-list"><ul>
 		<xsl:for-each select="./Members/*">
+			<xsl:sort order="ascending" select="//Contacts/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
 			<li class="member" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teadId"/>::<xsl:value-of select="@id"/></xsl:attribute>
