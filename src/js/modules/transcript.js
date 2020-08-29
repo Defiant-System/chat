@@ -23,7 +23,7 @@
 				room = Self.currentThreadID;
 				from = defiant.user.username;
 				stamp = Date.now();
-				message = $.emoticons(Self.els.input.text());
+				message = Self.els.input.text();
 
 				// temp
 				Self.dispatch({ type: "receive-message", from, room, stamp, message });
@@ -36,7 +36,7 @@
 			case "receive-message":
 				// create node entry
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
-				node.appendChild($.cDataFromString(event.message));
+				node.appendChild($.cDataFromString(event.message.escapeHtml()));
 				// append node entry to room transcript
 				xpath = `//Transcripts/i[@id="${event.room}"]`;
 				room = window.bluePrint.selectSingleNode(xpath);
@@ -49,7 +49,8 @@
 				window.render({
 					template: "message",
 					match: xpath +"/*[last()]",
-					append: Self.els.output
+					append: Self.els.output,
+					markup: true,
 				});
 
 				// scroll to bottom
@@ -82,7 +83,8 @@
 				window.render({
 					template: room ? "transcripts" : "empty-room",
 					match: room ? xpath : "*",
-					target: Self.els.output
+					target: Self.els.output,
+					markup: true,
 				});
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
