@@ -1,16 +1,18 @@
 <Data>
-	<Contacts>
-		<i short="HB" id="hbi99" name="Hakan Bilgin" online="1" />
-		<i short="HB" id="hbi" name="Hakan Bilgin" me="true" />
-		<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
-		<i short="TP" id="ted" name="Ted Persson" online="0" />
-		<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
-		<i short="FL" id="fredrik" name="Fredrik Lagerträd" online="1" />
-		<i short="DC" id="david" name="David Clewette" online="0" />
-		<i short="DC" id="cala" name="Daniel Cala" online="0" />
-	</Contacts>
 	<Teams>
-		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" img="~/icons/icon-defiant.png" cstamp="1595006816536">
+		<Team id="contacts" name="Contacts" img="~/icons/icon-contacts.png" cstamp="1595006816531">
+			<Contacts>
+				<i short="HB" id="hbi99" name="Hakan Bilgin" online="1" />
+				<i short="HB" id="hbi" name="Hakan Bilgin" online="1" me="true" />
+				<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
+				<i short="TP" id="ted" name="Ted Persson" online="0" />
+				<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
+				<i short="FL" id="fredrik" name="Fredrik Lagerträd" online="1" />
+				<i short="DC" id="david" name="David Clewette" online="0" />
+				<i short="DC" id="cala" name="Daniel Cala" online="0" />
+			</Contacts>
+		</Team>
+		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" cstamp="1595006816536">
 			<Channels>
 				<i id="general" name="General" cstamp="1595006835076" />
 				<i id="random" name="Random" cstamp="1597140881021" />
@@ -90,5 +92,12 @@
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
 			<i from="fredrik" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
+		<i id="contacts::urbanal">
+			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
+			<i from="urbanal" cstamp="1595006836924"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
+			<i from="hbi" cstamp="1595006836924"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
+			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
+		</i>
+		<i id="contacts::fredrik" />
 	</Transcripts>
 </Data>

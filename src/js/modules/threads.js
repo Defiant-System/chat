@@ -4,6 +4,7 @@
 		// fast references
 		this.els = {
 			root: window.find(".threads"),
+			threadsList: window.find(".threads-list"),
 			channels: window.find(".threads .channels"),
 			members: window.find(".threads .members"),
 		};
@@ -22,6 +23,7 @@
 				break;
 			case "add-channel":
 			case "add-member":
+			case "add-friend":
 				console.log(event);
 				break;
 			case "select-thread":
@@ -34,31 +36,30 @@
 
 				id = event.el.data("id");
 				APP.transcript.dispatch({ type: "render-thread", id });
+
+				// temp
+				APP.transcript.dispatch({
+					type: "receive-message",
+					room: "contacts::urbanal",
+					from: "urbanal",
+					stamp: Date.now(),
+					message: "hello"
+				});
 				break;
 			case "render-team":
 				// render channels
 				window.render({
-					template: "channels",
+					template: "threads",
 					match: `//Teams/Team[@id="${event.id}"]`,
-					target: Self.els.channels
+					target: Self.els.threadsList
 				});
-
-				// render transcript
-				window.render({
-					template: "members",
-					match: `//Teams/Team[@id="${event.id}"]`,
-					target: Self.els.members
-				});
-
-				// auto render first transcript
-				APP.transcript.dispatch({
-					type: "render-thread",
-					id: `${event.id}::general`,
-				});
-
+				
 				Self.dispatch({ ...event, type: "check-for-unread" });
 				// auto-click first thread
-				Self.els.root.find("ul li").get(0).trigger("click");
+				el = Self.els.root.find("ul li").get(0);
+				if (!el.prop("className").startsWith("add-")) {
+					el.trigger("click");
+				}
 				break;
 			case "remove-unread":
 				// remove potential notification
