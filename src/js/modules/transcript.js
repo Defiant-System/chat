@@ -25,6 +25,7 @@
 				stamp = Date.now();
 				message = $.emoticons(Self.els.input.text());
 
+				// temp
 				Self.dispatch({ type: "receive-message", from, room, stamp, message });
 
 				// send to chat room
@@ -33,19 +34,23 @@
 				Self.els.input.html("");
 				break;
 			case "receive-message":
-				// test to see ui for received messages
-				// name = event.from === defiant.user.username ? "sent" : "received";
-				// Self.els.output.append(`<div class="message ${name}">${event.message}</div>`);
-
+				// create node entry
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
 				node.appendChild($.cDataFromString(event.message));
-
-				room = window.bluePrint.selectSingleNode(`//Transcripts/i[@id="${event.room}"]`);
+				// append node entry to room transcript
+				xpath = `//Transcripts/i[@id="${event.room}"]`;
+				room = window.bluePrint.selectSingleNode(xpath);
 				room.append(node);
 
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", thread: Self.currentThreadID });
-				console.log(room);
+				
+				// render and append HTML to output
+				window.render({
+					template: "message",
+					match: xpath +"/*[last()]",
+					append: Self.els.output
+				});
 
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());

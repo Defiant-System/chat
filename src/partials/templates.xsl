@@ -128,27 +128,31 @@
 </xsl:template>
 
 <xsl:template name="transcripts">
-	<xsl:variable name="me" select="//Contacts/i[@me = 'true']"/>
 	<xsl:if test="count(./*) = 0">
 		<xsl:call-template name="empty-room" />
 	</xsl:if>
 	<xsl:for-each select="./*">
 		<xsl:sort order="ascending" select="@cstamp"/>
-		<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
-		<div>
-			<xsl:attribute name="class">message <xsl:choose>
-				<xsl:when test="@from = $me/@id">sent</xsl:when>
-				<xsl:otherwise>received</xsl:otherwise>
-			</xsl:choose></xsl:attribute>
-			<div class="msg-wrapper">
-				<div class="avatar">
-					<xsl:attribute name="data-name"><xsl:value-of select="$user/@short"/></xsl:attribute>
-				</div>
-				<div class="date"><xsl:value-of select="@timestamp"/></div>
-				<xsl:value-of select="." disable-output-escaping="yes"/>
-			</div>
-		</div>
+		<xsl:call-template name="message"/>
 	</xsl:for-each>
+</xsl:template>
+
+<xsl:template name="message">
+	<xsl:variable name="me" select="//Contacts/i[@me = 'true']"/>
+	<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
+	<div>
+		<xsl:attribute name="class">message <xsl:choose>
+			<xsl:when test="@from = $me/@id">sent</xsl:when>
+			<xsl:otherwise>received</xsl:otherwise>
+		</xsl:choose></xsl:attribute>
+		<div class="msg-wrapper">
+			<div class="avatar">
+				<xsl:attribute name="data-name"><xsl:value-of select="$user/@short"/></xsl:attribute>
+			</div>
+			<div class="date"><xsl:value-of select="@timestamp"/></div>
+			<xsl:value-of select="." disable-output-escaping="yes"/>
+		</div>
+	</div>
 </xsl:template>
 
 <xsl:template name="info">
