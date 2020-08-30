@@ -94,10 +94,18 @@
 		</i>
 		<i id="contacts::urbanal">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej :)]]></i>
-			<!--
+			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
+			<!-- Example: GIPHY
 			<i from="urbanal" cstamp="1595006836924"><![CDATA[<div class="giphy-wrapper">![wazzup](//i.giphy.com/media/g1n3pswjr0ouc/giphy.gif)</div>]]></i>
 			-->
-			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
+			<!-- Example: CODE
+			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[```js
+var test = "red";
+
+function blue() {
+	return "blue";
+}
+```]]></i> -->
 		</i>
 		<i id="contacts::fredrik" />
 	</Transcripts>
