@@ -88,6 +88,8 @@
 				});
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
+				// auto focus input field
+				Self.els.input.focus();
 				break;
 			case "fix-timestamps":
 				// fix timestamps

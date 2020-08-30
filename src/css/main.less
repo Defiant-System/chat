@@ -361,6 +361,7 @@ content {
 					padding: 5px 11px;
 					display: inline-block;
 					text-align: left;
+					overflow-wrap: anywhere;
 
 					&:after {
 						content: "";
@@ -368,6 +369,22 @@ content {
 					    bottom: 0px;
 					    width: 16px;
 					    height: 9px;
+					}
+
+					img {
+						max-width: 100%;
+					}
+
+					.giphy-wrapper {
+						&:after {
+							content: "Powered By GIPHY";
+							font-size: 12px;
+							opacity: .6;
+						}
+
+						img {
+							margin: 5px 0 -3px;
+						}
 					}
 				}
 
@@ -542,7 +559,7 @@ content {
 				line-height: 1.35;
 				padding: 7px 9px;
 
-				&:empty:not(:focus):before {
+				&:empty:before {
 					content: attr(placeholder);
 					color: #666;
 				}
