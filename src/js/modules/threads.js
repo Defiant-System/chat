@@ -43,7 +43,7 @@
 					room: "contacts::urbanal",
 					from: "urbanal",
 					stamp: Date.now(),
-					message: "hello"
+					message: "hello :)"
 				});
 				break;
 			case "render-team":

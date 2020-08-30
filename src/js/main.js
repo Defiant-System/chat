@@ -1,6 +1,18 @@
 
 let room = "room-1";
 
+const Giphy = {
+	apiKey: "QeIoDbJPQqdpCofwa2tIl3kZ8erGh1VC",
+	async search(phrase, callback) {
+		let url = `//api.giphy.com/v1/gifs/search?q=${phrase}&api_key=${this.apiKey}&limit=1`;
+		let res = await window.fetch(url);
+		callback(res);
+	}
+};
+
+// var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=YOUR_API_KEY&limit=5");
+// xhr.done(function(data) { console.log("success got data", data); });
+
 const chat = {
 	init() {
 		// fast references
@@ -11,6 +23,8 @@ const chat = {
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
+
+		//Giphy.search("shalom", res => console.log(res));
 	},
 	dispatch(event) {
 		let Self = chat,
