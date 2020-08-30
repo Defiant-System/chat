@@ -52,7 +52,8 @@
 					append: Self.els.output,
 					markup: true,
 				});
-
+				// remove initial message, if any
+				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
 				break;
