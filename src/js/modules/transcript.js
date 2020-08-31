@@ -7,6 +7,7 @@
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
 		};
+		this.xTranscripts = window.bluePrint.selectSingleNode("//Transcripts");
 	},
 	dispatch(event) {
 		let Self = chat.transcript,
@@ -38,8 +39,11 @@
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
 				node.appendChild($.cDataFromString(event.message.escapeHtml()));
 				// append node entry to room transcript
-				xpath = `//Transcripts/i[@id="${event.room}"]`;
-				room = window.bluePrint.selectSingleNode(xpath);
+				xpath = `i[@id="${event.room}"]`;
+				room = Self.xTranscripts.selectSingleNode(xpath);
+				if (!room) {
+					room = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${Self.currentThreadID}" />`));
+				}
 				room.append(node);
 
 				// fix timestamps

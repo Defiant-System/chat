@@ -55,8 +55,12 @@
 				});
 				
 				Self.dispatch({ ...event, type: "check-for-unread" });
+
+				// temp
+				let n = defiant.user.username === "hbi" ? 2 : 3;
+
 				// auto-click first thread
-				el = Self.els.root.find("ul li").get(0);
+				el = Self.els.root.find("ul li").get(n);
 				if (!el.prop("className").startsWith("add-")) {
 					el.trigger("click");
 				}

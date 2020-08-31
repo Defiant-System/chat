@@ -579,14 +579,22 @@ content {
 					color: #666;
 				}
 
+				&:not(:empty):after {
+					background-color: @msgSent;
+					filter: invert() hue-rotate(45deg) saturate(50%);
+					opacity: 1;
+				}
+
 				&:after {
 					content: "";
-					background: url(~/icons/icon-return.png) 50% 50% no-repeat;
+					background: url(~/icons/icon-return.png) 3px 50% no-repeat;
+					background-size: 17px 17px;
 					position: absolute;
-					bottom: 7px;
-					right: 9px;
-					width: 16px;
-					height: 16px;
+					bottom: 4px;
+					right: 5px;
+					width: 24px;
+					height: 24px;
+					border-radius: 3px;
 					opacity: .35;
 				}
 			}

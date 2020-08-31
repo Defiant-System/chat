@@ -1,21 +1,17 @@
 
-let room = "room-1";
-
-const Giphy = {
-	apiKey: "QeIoDbJPQqdpCofwa2tIl3kZ8erGh1VC",
-	async search(phrase, callback) {
-		let url = `//api.giphy.com/v1/gifs/search?q=${phrase}&api_key=${this.apiKey}&limit=1`;
-		let res = await window.fetch(url);
-		callback(res);
-	}
-};
+defiant.require("modules/giphy.js");
 
 const chat = {
+	lobby: "chat-lobby",
 	init() {
 		// fast references
 		this.els = {
 			content: window.find("content"),
 		};
+
+		// identify "me"
+		let meUser = window.bluePrint.selectSingleNode(`//Contacts/*[@id="${defiant.user.username}"]`);
+		meUser.setAttribute("me", "true");
 
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")
@@ -36,8 +32,12 @@ const chat = {
 				// auto-select first team
 				Self.teams.dispatch({ type: "select-first-team" });
 
-				// join chat room
-				window.net.join({ room });
+				// join chat lobby
+				window.net.join({ room: Self.lobby });
+				break;
+			case "window.close":
+				// join chat lobby
+				window.net.leave({ room: Self.lobby });
 				break;
 			case "window.keystroke":
 				if (event.keyCode === 13) {
@@ -49,9 +49,9 @@ const chat = {
 			case "net.leave":
 				console.log(event);
 				break;
-			case "net.message":
-				Self.transcript.dispatch({ ...event, type: "receive-message" });
-				break;
+			// case "net.message":
+			// 	Self.transcript.dispatch({ ...event, type: "receive-message" });
+			// 	break;
 			// custom events
 			case "toggle-info":
 				return Self.info.dispatch({ ...event, type: "toggle-view" });

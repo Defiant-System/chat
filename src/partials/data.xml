@@ -3,7 +3,7 @@
 		<Team id="contacts" name="Contacts" img="~/icons/icon-contacts.png" cstamp="1595006816531">
 			<Contacts>
 				<i short="HB" id="hbi99" name="Hakan Bilgin" online="1" />
-				<i short="HB" id="hbi" name="Hakan Bilgin" online="1" me="true" />
+				<i short="HB" id="hbi" name="Hakan Bilgin" online="1" />
 				<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
 				<i short="TP" id="ted" name="Ted Persson" online="0" />
 				<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
@@ -90,7 +90,7 @@
 		</i>
 		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796::ted">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
-			<i from="fredrik" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
+			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
 		<i id="contacts::urbanal">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej :)]]></i>
@@ -107,6 +107,5 @@ function blue() {
 }
 ```]]></i> -->
 		</i>
-		<i id="contacts::fredrik" />
 	</Transcripts>
 </Data>
