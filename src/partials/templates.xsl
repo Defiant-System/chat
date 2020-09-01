@@ -56,7 +56,7 @@
 		<xsl:for-each select="./*">
 			<xsl:sort order="descending" select="@online"/>
 			<xsl:sort order="ascending" select="@name"/>
-			<li class="friend" data-click="select-thread">
+			<li class="friend" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="@online = 1">
 					<xsl:attribute name="class">friend online</xsl:attribute>
@@ -81,7 +81,7 @@
 	<div class="channels-list"><ul>
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="@cstamp"/>
-			<li class="channel" data-click="select-thread">
+			<li class="channel" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
 				<div class="name">
@@ -103,7 +103,7 @@
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="//Contacts/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
-			<li class="member" data-click="select-thread">
+			<li class="member" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>

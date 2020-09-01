@@ -16,7 +16,6 @@
 			xpath,
 			node,
 			channel,
-			to,
 			from,
 			stamp,
 			message,
@@ -29,7 +28,7 @@
 				message = Self.els.input.text();
 
 				// temp
-				to = defiant.user.username === "hbi" ? "hbi99" : "hbi";
+				let [ team, to ] = APP.channel.id.split("/");
 
 				// send to chat lobby
 				window.net.send({ from, to, stamp, message });
@@ -82,13 +81,11 @@
 				el.addClass("focused");
 				break;
 			case "render-channel":
-				// save current channel ID
-				Self.currentChannel = event.id;
 				// fix timestamps
-				Self.dispatch({ type: "fix-timestamps", channel: event.id });
+				Self.dispatch({ type: "fix-timestamps", channel: APP.channel.id });
 
 				// render transcript
-				xpath = `//Transcripts/i[@id="${event.id}"]`;
+				xpath = `//Transcripts/i[@id="${APP.channel.id}"]`;
 				xChannel = window.bluePrint.selectSingleNode(xpath);
 				window.render({
 					template: xChannel ? "transcripts" : "empty-channel",

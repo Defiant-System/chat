@@ -2,14 +2,17 @@
 	<Teams>
 		<Team id="contacts" name="Contacts" img="~/icons/icon-contacts.png" cstamp="1595006816531">
 			<Contacts>
-				<i short="HB" id="hbi99" name="Hakan Bilgin" online="1" />
+				<i short="SJ" id="steve" name="Steve Jobs" online="1" />
+				<i short="BG" id="bill" name="Bill Gates" online="1" />
 				<i short="HB" id="hbi" name="Hakan Bilgin" online="1" />
+				<!--
 				<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
 				<i short="TP" id="ted" name="Ted Persson" online="0" />
 				<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
 				<i short="FL" id="fredrik" name="Fredrik Lagerträd" online="1" />
 				<i short="DC" id="david" name="David Clewette" online="0" />
 				<i short="DC" id="cala" name="Daniel Cala" online="0" />
+				-->
 			</Contacts>
 		</Team>
 		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" cstamp="1595006816536">
@@ -56,7 +59,7 @@
 		</Team>
 	</Teams>
 	<Transcripts>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/general">
+<!-- 		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/general">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
 			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 			<i from="sarienn" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
@@ -95,17 +98,14 @@
 		<i id="contacts/urbanal">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej :)]]></i>
 			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
-			<!-- Example: GIPHY
 			<i from="urbanal" cstamp="1595006836924"><![CDATA[<div class="giphy-wrapper">![wazzup](//i.giphy.com/media/g1n3pswjr0ouc/giphy.gif)</div>]]></i>
-			-->
-			<!-- Example: CODE
 			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[```js
 var test = "red";
 
 function blue() {
 	return "blue";
 }
-```]]></i> -->
-		</i>
+```]]></i>
+		</i> -->
 	</Transcripts>
 </Data>

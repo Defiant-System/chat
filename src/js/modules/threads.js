@@ -13,7 +13,7 @@
 		let APP = chat,
 			Self = APP.threads,
 			xpath,
-			id,
+			channel,
 			el;
 		switch (event.type) {
 			case "toggle-channels":
@@ -26,7 +26,7 @@
 			case "add-friend":
 				console.log(event);
 				break;
-			case "select-thread":
+			case "select-channel":
 				Self.els.root.find(".active").removeClass("active");
 				// make clicked item active
 				event.el.addClass("active");
@@ -34,8 +34,11 @@
 				// remove unread notification flags
 				Self.dispatch({ ...event, type: "remove-unread"});
 
-				id = event.el.data("id");
-				APP.transcript.dispatch({ type: "render-channel", id });
+				APP.channel = {
+					el: event.el,
+					id: event.el.data("id"),
+				};
+				APP.transcript.dispatch({ type: "render-channel" });
 				break;
 			case "render-team":
 				// render channels
@@ -48,7 +51,12 @@
 				Self.dispatch({ ...event, type: "check-for-unread" });
 
 				// temp
-				let n = defiant.user.username === "hbi" ? 2 : 3;
+				let users = {
+						hbi: 0,
+						steve: 1,
+						bill: 1
+					},
+					n = users[defiant.user.username];
 
 				// auto-click first thread
 				el = Self.els.root.find("ul li").get(n);
