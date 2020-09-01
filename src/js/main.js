@@ -1,6 +1,8 @@
 
 defiant.require("modules/giphy.js");
 
+const ME = defiant.user.username;
+
 const chat = {
 	lobby: "chat-lobby",
 	init() {
@@ -10,7 +12,7 @@ const chat = {
 		};
 
 		// identify "me"
-		let meUser = window.bluePrint.selectSingleNode(`//Contacts/*[@id="${defiant.user.username}"]`);
+		let meUser = window.bluePrint.selectSingleNode(`//Contacts/*[@id="${ME}"]`);
 		meUser.setAttribute("me", "true");
 
 		Object.keys(this)
@@ -49,8 +51,9 @@ const chat = {
 			case "net.leave":
 				console.log(event);
 				break;
+			// forward events
 			case "net.receive":
-				Self.transcript.dispatch({ ...event, type: "receive-message" });
+				Self.threads.dispatch({ ...event, type: "receive-message" });
 				break;
 			// custom events
 			case "toggle-info":

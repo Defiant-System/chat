@@ -9,11 +9,17 @@
 			members: window.find(".threads .members"),
 		};
 	},
+	// idChannel(from, to) {
+	// 	// channel id based upon "from" and "to"
+	// 	return [from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1).join("-");
+	// },
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
 			xpath,
 			channel,
+			team,
+			username,
 			el;
 		switch (event.type) {
 			case "toggle-channels":
@@ -30,15 +36,32 @@
 				Self.els.root.find(".active").removeClass("active");
 				// make clicked item active
 				event.el.addClass("active");
-
 				// remove unread notification flags
 				Self.dispatch({ ...event, type: "remove-unread"});
-
+				// store channel info
+				[ team, username ] = event.el.data("id").split("/");
 				APP.channel = {
+					team,
+					username,
 					el: event.el,
 					id: event.el.data("id"),
 				};
+				// render channel transcript history
 				APP.transcript.dispatch({ type: "render-channel" });
+				break;
+			case "receive-message":
+				// log message
+				//console.log(event);
+				// event.channel = Self.idChannel(event.from, event.to);
+				APP.transcript.dispatch({ ...event, type: "log-message" });
+
+				if ([APP.channel.username, ME].includes(event.from)) {
+					APP.transcript.dispatch(event);
+				} else {
+					Self.els.root
+						.find(`.friend[data-id="${APP.channel.team}/${event.from}"]`)
+						.append(`<span class="notification">1</span>`);
+				}
 				break;
 			case "render-team":
 				// render channels
@@ -56,7 +79,7 @@
 						steve: 1,
 						bill: 1
 					},
-					n = users[defiant.user.username];
+					n = users[ME];
 
 				// auto-click first thread
 				el = Self.els.root.find("ul li").get(n);

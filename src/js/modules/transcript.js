@@ -15,48 +15,50 @@
 			xChannel,
 			xpath,
 			node,
+			team,
 			channel,
 			from,
+			to,
 			stamp,
 			message,
 			el;
 		switch (event.type) {
 			// system events
 			case "send-message":
-				from = defiant.user.username;
+				from = ME;
 				stamp = Date.now();
+				channel = APP.channel.id;
 				message = Self.els.input.text();
 
-				// temp
-				let [ team, to ] = APP.channel.id.split("/");
-
+				// split channel id
+				[ team, to ] = channel.split("/");
 				// send to chat lobby
-				window.net.send({ from, to, stamp, message });
+				window.net.send({ from, to, channel, stamp, message });
 				// clear input
 				Self.els.input.html("");
 				break;
-			case "receive-message":
+			case "log-message":
 				// create node entry
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
 				node.appendChild($.cDataFromString(event.message.escapeHtml()));
-
-				// create channel based upon "from" and "to"
-				channel = [event.from, event.to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1).join("-");
 				// append node entry to room transcript
-				xpath = `i[@id="${channel}"]`;
+				xpath = `i[@id="${event.channel}"]`;
 				xChannel = Self.xTranscripts.selectSingleNode(xpath);
 				if (!xChannel) {
-					xChannel = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${channel}" />`));
+					xChannel = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${event.channel}" />`));
 				}
+				// add message node to XML log
 				xChannel.append(node);
+				console.log(xChannel);
 
 				// fix timestamps
-				Self.dispatch({ type: "fix-timestamps", channel });
-				
+				Self.dispatch({ type: "fix-timestamps", channel: event.channel });
+				break;
+			case "receive-message":
 				// render and append HTML to output
 				window.render({
 					template: "message",
-					match: xpath +"/*[last()]",
+					match: `//Transcripts/i[@id="${event.channel}"]/*[last()]`,
 					append: Self.els.output,
 					markup: true,
 				});
