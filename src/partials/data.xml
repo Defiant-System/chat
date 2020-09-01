@@ -56,7 +56,7 @@
 		</Team>
 	</Teams>
 	<Transcripts>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796::general">
+		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/general">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
 			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 			<i from="sarienn" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
@@ -67,11 +67,11 @@
 			<i from="sarienn" cstamp="1597424631937" unread="1"><![CDATA[I'm fine thanks...]]></i>
 			<i from="ted" cstamp="1597110881021"><![CDATA[Shalom...]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796::random">
+		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/random">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
 			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
-		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::general">
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2/general">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hello World]]></i>
 			<i from="ted" cstamp="1597140881021"><![CDATA[How are you?]]></i>
 			<i from="fredrik" cstamp="1597247342375"><![CDATA[Test output for the chat]]></i>
@@ -83,16 +83,16 @@
 			<i from="sarienn" cstamp="1597424631937" unread="1"><![CDATA[I'm fine thanks...]]></i>
 			<i from="urbanal" cstamp="1595006846929" unread="1"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
 		</i>
-		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::random" cstamp="1595006835076" />
-		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2::fredrik">
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2/random" cstamp="1595006835076" />
+		<i id="cb328e59-d8cd-4cd1-8314-6c84e743afb2/fredrik">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
 			<i from="fredrik" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796::ted">
+		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/ted">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
 			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
-		<i id="contacts::urbanal">
+		<i id="contacts/urbanal">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej :)]]></i>
 			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 			<!-- Example: GIPHY

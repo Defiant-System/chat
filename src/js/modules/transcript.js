@@ -10,10 +10,13 @@
 		this.xTranscripts = window.bluePrint.selectSingleNode("//Transcripts");
 	},
 	dispatch(event) {
-		let Self = chat.transcript,
+		let APP = chat,
+			Self = APP.transcript,
+			xChannel,
 			xpath,
 			node,
-			room,
+			channel,
+			to,
 			from,
 			stamp,
 			message,
@@ -21,16 +24,15 @@
 		switch (event.type) {
 			// system events
 			case "send-message":
-				room = Self.currentThreadID;
 				from = defiant.user.username;
 				stamp = Date.now();
 				message = Self.els.input.text();
 
 				// temp
-				Self.dispatch({ type: "receive-message", from, room, stamp, message });
+				to = defiant.user.username === "hbi" ? "hbi99" : "hbi";
 
-				// send to chat room
-			//	window.net.send({ room, message });
+				// send to chat lobby
+				window.net.send({ from, to, stamp, message });
 				// clear input
 				Self.els.input.html("");
 				break;
@@ -38,16 +40,19 @@
 				// create node entry
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
 				node.appendChild($.cDataFromString(event.message.escapeHtml()));
+
+				// create channel based upon "from" and "to"
+				channel = [event.from, event.to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1).join("-");
 				// append node entry to room transcript
-				xpath = `i[@id="${event.room}"]`;
-				room = Self.xTranscripts.selectSingleNode(xpath);
-				if (!room) {
-					room = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${Self.currentThreadID}" />`));
+				xpath = `i[@id="${channel}"]`;
+				xChannel = Self.xTranscripts.selectSingleNode(xpath);
+				if (!xChannel) {
+					xChannel = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${channel}" />`));
 				}
-				room.append(node);
+				xChannel.append(node);
 
 				// fix timestamps
-				Self.dispatch({ type: "fix-timestamps", thread: Self.currentThreadID });
+				Self.dispatch({ type: "fix-timestamps", channel });
 				
 				// render and append HTML to output
 				window.render({
@@ -76,18 +81,18 @@
 				// focus
 				el.addClass("focused");
 				break;
-			case "render-thread":
-				// save current thread ID
-				Self.currentThreadID = event.id;
+			case "render-channel":
+				// save current channel ID
+				Self.currentChannel = event.id;
 				// fix timestamps
-				Self.dispatch({ type: "fix-timestamps", thread: event.id });
+				Self.dispatch({ type: "fix-timestamps", channel: event.id });
 
 				// render transcript
 				xpath = `//Transcripts/i[@id="${event.id}"]`;
-				room = window.bluePrint.selectSingleNode(xpath);
+				xChannel = window.bluePrint.selectSingleNode(xpath);
 				window.render({
-					template: room ? "transcripts" : "empty-room",
-					match: room ? xpath : "*",
+					template: xChannel ? "transcripts" : "empty-channel",
+					match: xChannel ? xpath : "*",
 					target: Self.els.output,
 					markup: true,
 				});
@@ -98,7 +103,7 @@
 				break;
 			case "fix-timestamps":
 				// fix timestamps
-				xpath = `//Transcripts/*[@id="${event.thread}"]//*[@cstamp and not(@timestamp)]`;
+				xpath = `//Transcripts/*[@id="${event.channel}"]//*[@cstamp and not(@timestamp)]`;
 				window.bluePrint.selectNodes(xpath).map(i => {
 					let timestamp = defiant.moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));

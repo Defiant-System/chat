@@ -35,16 +35,7 @@
 				Self.dispatch({ ...event, type: "remove-unread"});
 
 				id = event.el.data("id");
-				APP.transcript.dispatch({ type: "render-thread", id });
-
-				// temp
-				// APP.transcript.dispatch({
-				// 	type: "receive-message",
-				// 	room: "contacts::urbanal",
-				// 	from: "urbanal",
-				// 	stamp: Date.now(),
-				// 	message: "hello :)"
-				// });
+				APP.transcript.dispatch({ type: "render-channel", id });
 				break;
 			case "render-team":
 				// render channels
@@ -75,7 +66,7 @@
 			case "check-for-unread":
 				xpath = `//Teams/Team[@id="${event.id}"]/*/*[@id]`;
 				window.bluePrint.selectNodes(xpath).map(node => {
-					let id = event.id +"::"+ node.getAttribute("id"),
+					let id = event.id +"/"+ node.getAttribute("id"),
 						xpath = `//Transcripts/*[@id="${id}"]//*[@unread]`,
 						unread = window.bluePrint.selectNodes(xpath);
 					if (unread.length) {

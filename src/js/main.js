@@ -33,7 +33,7 @@ const chat = {
 				Self.teams.dispatch({ type: "select-first-team" });
 
 				// join chat lobby
-				window.net.join({ room: Self.lobby });
+			//	window.net.join({ room: Self.lobby });
 				break;
 			case "window.close":
 				// join chat lobby
@@ -49,9 +49,9 @@ const chat = {
 			case "net.leave":
 				console.log(event);
 				break;
-			// case "net.message":
-			// 	Self.transcript.dispatch({ ...event, type: "receive-message" });
-			// 	break;
+			case "net.receive":
+				Self.transcript.dispatch({ ...event, type: "receive-message" });
+				break;
 			// custom events
 			case "toggle-info":
 				return Self.info.dispatch({ ...event, type: "toggle-view" });

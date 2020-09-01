@@ -57,7 +57,7 @@
 			<xsl:sort order="descending" select="@online"/>
 			<xsl:sort order="ascending" select="@name"/>
 			<li class="friend" data-click="select-thread">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>::<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="@online = 1">
 					<xsl:attribute name="class">friend online</xsl:attribute>
 				</xsl:if>
@@ -82,7 +82,7 @@
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="@cstamp"/>
 			<li class="channel" data-click="select-thread">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>::<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
 				<div class="name">
 					<xsl:value-of select="@name"/>
@@ -104,7 +104,7 @@
 			<xsl:sort order="ascending" select="//Contacts/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
 			<li class="member" data-click="select-thread">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>::<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>
 				</xsl:if>
@@ -120,7 +120,7 @@
 	</ul></div>
 </xsl:template>
 
-<xsl:template name="empty-room">
+<xsl:template name="empty-channel">
 	<div class="initial-message">
 		<i class="icon-info"></i> There is no previous message in this channel / room. 
 		Type in a first message now.
@@ -129,7 +129,7 @@
 
 <xsl:template name="transcripts">
 	<xsl:if test="count(./*) = 0">
-		<xsl:call-template name="empty-room" />
+		<xsl:call-template name="empty-channel" />
 	</xsl:if>
 	<xsl:for-each select="./*">
 		<xsl:sort order="ascending" select="@cstamp"/>
