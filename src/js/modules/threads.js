@@ -75,7 +75,6 @@
 						} else {
 							if (event.typing && event.from !== ME) {
 								str = window.render({ template: "tiny-typing" });
-								console.log(str);
 								el.append(str);
 							} else {
 								el.find(".anim-typing").remove();
