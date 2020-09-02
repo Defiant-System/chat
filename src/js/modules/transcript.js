@@ -56,6 +56,8 @@
 				// number of unread messages in thread-log
 				return xChannel.selectNodes(`./*[@unread="1"]`).length;
 			case "receive-message":
+				// remove "typing" animations, if exist
+				Self.els.output.find(".message.typing").remove();
 				// render and append HTML to output
 				xpath = `//Transcripts/i[@id="${event.channel}"]`;
 				window.render({

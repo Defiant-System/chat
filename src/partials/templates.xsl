@@ -155,6 +155,19 @@
 	</div>
 </xsl:template>
 
+<xsl:template name="typing">
+	<div class="message received typing">
+		<div class="msg-wrapper">
+			<div class="avatar" data-name="placeholder"></div>
+			<i class="anim-typing"><b></b><b></b><b></b></i>
+		</div>
+	</div>
+</xsl:template>
+
+<xsl:template name="tiny-typing">
+	<i class="anim-typing tiny"><b></b><b></b><b></b></i>
+</xsl:template>
+
 <xsl:template name="info">
 	<div class="info-body">
 		<div class="profile">

@@ -13,6 +13,10 @@
 		// channel id based upon "from" and "to"
 		return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
 	},
+	getValueofContact(username, attr) {
+		let user = window.bluePrint.selectSingleNode(`//Team[@id="contacts"]//i[@id="${username}"]`);
+		if (user) return user.getAttribute(attr);
+	},
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
@@ -20,6 +24,7 @@
 			channel,
 			team,
 			username,
+			str,
 			el;
 		switch (event.type) {
 			case "toggle-channels":
@@ -52,17 +57,36 @@
 			case "receive-message":
 				// log message
 				event.channel = Self.idChannel(event.team, event.from, event.to);
-				if (event.silent) {
-					if (event.typing && event.from !== ME) {
-						Self.els.root
-							.find(`.friend[data-id="${event.team}/${event.from}"]`)
-							.append(`<i class="anim-typing tiny"><b></b><b></b><b></b></i>`);
-					} else {
-						Self.els.root
-							.find(`.friend[data-id="${event.team}/${event.from}"] .anim-typing`)
-							.remove();
-					}
-					return;
+				// pre-process message
+				switch (event.category) {
+					case "typing":
+						el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
+
+						if (el.hasClass("active")) {
+							el = APP.transcript.els.output;
+							if (event.typing && event.from !== ME) {
+								str = window.render({ template: "typing" });
+								username = Self.getValueofContact(event.from, "short");
+								el.append(str.replace(/placeholder/, username));
+							} else {
+								el.find(".message.typing")
+									.cssSequence("removing", "transitionend", e => e.remove());
+							}
+						} else {
+							if (event.typing && event.from !== ME) {
+								str = window.render({ template: "tiny-typing" });
+								console.log(str);
+								el.append(str);
+							} else {
+								el.find(".anim-typing").remove();
+							}
+						}
+						return;
+					case "giphy":
+						break;
+					case "code":
+						console.log(event);
+						break;
 				}
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });

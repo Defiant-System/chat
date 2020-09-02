@@ -54,7 +54,7 @@
 				typing = event.typing;
 
 				// send to chat lobby
-				window.net.send({ silent: true, team, from, to, channel, typing });
+				window.net.send({ category: "typing", team, from, to, channel, typing });
 				break;
 		}
 	}
