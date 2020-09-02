@@ -69,7 +69,7 @@
 				message = Self.els.input.text();
 
 				// send to chat lobby
-				window.net.send({ team, from, to, channel, stamp, message });
+				window.net.send({ category, team, from, to, channel, message, stamp });
 				// clear input
 				Self.els.input.html("");
 				break;
