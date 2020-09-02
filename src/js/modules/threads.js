@@ -9,10 +9,10 @@
 			members: window.find(".threads .members"),
 		};
 	},
-	// idChannel(from, to) {
-	// 	// channel id based upon "from" and "to"
-	// 	return [from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1).join("-");
-	// },
+	idChannel(team, from, to) {
+		// channel id based upon "from" and "to"
+		return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
+	},
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
@@ -44,15 +44,14 @@
 					team,
 					username,
 					el: event.el,
-					id: event.el.data("id"),
+					id: Self.idChannel(team, ME, username),
 				};
 				// render channel transcript history
 				APP.transcript.dispatch({ type: "render-channel" });
 				break;
 			case "receive-message":
 				// log message
-				//console.log(event);
-				// event.channel = Self.idChannel(event.from, event.to);
+				event.channel = Self.idChannel(event.team, event.from, event.to);
 				APP.transcript.dispatch({ ...event, type: "log-message" });
 
 				if ([APP.channel.username, ME].includes(event.from)) {

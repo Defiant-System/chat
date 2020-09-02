@@ -25,15 +25,15 @@
 		switch (event.type) {
 			// system events
 			case "send-message":
-				from = ME;
 				stamp = Date.now();
+				from = ME;
+				to = APP.channel.username;
+				team = APP.channel.team;
 				channel = APP.channel.id;
 				message = Self.els.input.text();
 
-				// split channel id
-				[ team, to ] = channel.split("/");
 				// send to chat lobby
-				window.net.send({ from, to, channel, stamp, message });
+				window.net.send({ team, from, to, channel, stamp, message });
 				// clear input
 				Self.els.input.html("");
 				break;
@@ -49,7 +49,6 @@
 				}
 				// add message node to XML log
 				xChannel.append(node);
-				console.log(xChannel);
 
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", channel: event.channel });
