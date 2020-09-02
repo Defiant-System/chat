@@ -9,6 +9,7 @@ const chat = {
 		// fast references
 		this.els = {
 			content: window.find("content"),
+			input: window.find(".transcript .input > div"),
 		};
 
 		// identify "me"
@@ -42,8 +43,8 @@ const chat = {
 				window.net.leave({ room: Self.lobby });
 				break;
 			case "window.keystroke":
-				if (event.keyCode === 13) {
-					Self.transcript.dispatch({ type: "send-message" });
+				if (document.activeElement === Self.els.input[0]) {
+					Self.input.dispatch(event);
 				}
 				break;
 			case "net.greet":
@@ -71,7 +72,8 @@ const chat = {
 	teams: defiant.require("modules/teams.js"),
 	threads: defiant.require("modules/threads.js"),
 	transcript: defiant.require("modules/transcript.js"),
-	info: defiant.require("modules/info.js")
+	input: defiant.require("modules/input.js"),
+	info: defiant.require("modules/info.js"),
 };
 
 window.exports = chat;

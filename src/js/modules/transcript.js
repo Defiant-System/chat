@@ -39,7 +39,7 @@
 				break;
 			case "log-message":
 				// create node entry
-				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" />`);
+				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
 				node.appendChild($.cDataFromString(event.message.escapeHtml()));
 				// append node entry to room transcript
 				xpath = `i[@id="${event.channel}"]`;
@@ -52,15 +52,21 @@
 
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", channel: event.channel });
-				break;
+				
+				// number of unread messages in thread-log
+				return xChannel.selectNodes(`./*[@unread="1"]`).length;
 			case "receive-message":
 				// render and append HTML to output
+				xpath = `//Transcripts/i[@id="${event.channel}"]`;
 				window.render({
 					template: "message",
-					match: `//Transcripts/i[@id="${event.channel}"]/*[last()]`,
+					match: `${xpath}/*[last()]`,
 					append: Self.els.output,
 					markup: true,
 				});
+				// remove unread flags
+				Self.xTranscripts.selectNodes(`${xpath}/*[@unread="1"]`)
+					.map(xMsg => xMsg.removeAttribute("unread"));
 				// remove initial message, if any
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
@@ -94,6 +100,10 @@
 					target: Self.els.output,
 					markup: true,
 				});
+				if (xChannel) {
+					// remove unread flags
+					xChannel.selectNodes(`./*[@unread="1"]`).map(xMsg => xMsg.removeAttribute("unread"));
+				}
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
 				// auto focus input field

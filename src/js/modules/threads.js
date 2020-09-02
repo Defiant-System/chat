@@ -52,14 +52,28 @@
 			case "receive-message":
 				// log message
 				event.channel = Self.idChannel(event.team, event.from, event.to);
-				APP.transcript.dispatch({ ...event, type: "log-message" });
+				if (event.silent) {
+					if (event.typing && event.from !== ME) {
+						Self.els.root
+							.find(`.friend[data-id="${event.team}/${event.from}"]`)
+							.append(`<i class="anim-typing tiny"><b></b><b></b><b></b></i>`);
+					} else {
+						Self.els.root
+							.find(`.friend[data-id="${event.team}/${event.from}"] .anim-typing`)
+							.remove();
+					}
+					return;
+				}
+				// log incoming message
+				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
 				if ([APP.channel.username, ME].includes(event.from)) {
+					// forward event for render
 					APP.transcript.dispatch(event);
 				} else {
 					Self.els.root
-						.find(`.friend[data-id="${APP.channel.team}/${event.from}"]`)
-						.append(`<span class="notification">1</span>`);
+						.find(`.friend[data-id="${event.team}/${event.from}"]`)
+						.append(`<span class="notification">${num}</span>`);
 				}
 				break;
 			case "render-team":
