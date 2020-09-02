@@ -15,28 +15,10 @@
 			xChannel,
 			xpath,
 			node,
-			team,
-			channel,
-			from,
-			to,
-			stamp,
 			message,
 			el;
 		switch (event.type) {
-			// system events
-			case "send-message":
-				stamp = Date.now();
-				from = ME;
-				to = APP.channel.username;
-				team = APP.channel.team;
-				channel = APP.channel.id;
-				message = Self.els.input.text();
-
-				// send to chat lobby
-				window.net.send({ team, from, to, channel, stamp, message });
-				// clear input
-				Self.els.input.html("");
-				break;
+			// custom events
 			case "log-message":
 				// create node entry
 				node = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
@@ -74,7 +56,6 @@
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
 				break;
-			// custom events
 			case "focus-message":
 				// remove previous focus
 				message = Self.els.root.find(".focused").removeClass("focused");

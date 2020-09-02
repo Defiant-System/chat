@@ -58,34 +58,31 @@
 				// log message
 				event.channel = Self.idChannel(event.team, event.from, event.to);
 				// pre-process message
-				switch (event.category) {
-					case "typing":
-						el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
+				if (event.category === "typing") {
+					el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
 
-						if (el.hasClass("active")) {
-							el = APP.transcript.els.output;
-							if (event.typing && event.from !== ME) {
-								str = window.render({ template: "typing" });
-								username = Self.getValueofContact(event.from, "short");
-								el.append(str.replace(/placeholder/, username));
-							} else {
-								el.find(".message.typing")
-									.cssSequence("removing", "transitionend", e => e.remove());
-							}
+					if (el.hasClass("active")) {
+						el = APP.transcript.els.output;
+						if (event.typing && event.from !== ME) {
+							// remove existing typing anim, if exist
+							el.find(".message.typing").remove();
+
+							str = window.render({ template: "typing" });
+							username = Self.getValueofContact(event.from, "short");
+							el.append(str.replace(/placeholder/, username));
 						} else {
-							if (event.typing && event.from !== ME) {
-								str = window.render({ template: "tiny-typing" });
-								el.append(str);
-							} else {
-								el.find(".anim-typing").remove();
-							}
+							el.find(".message.typing")
+								.cssSequence("removing", "transitionend", e => e.remove());
 						}
-						return;
-					case "giphy":
-						break;
-					case "code":
-						console.log(event);
-						break;
+					} else {
+						if (event.typing && event.from !== ME) {
+							str = window.render({ template: "tiny-typing" });
+							el.append(str);
+						} else {
+							el.find(".anim-typing").remove();
+						}
+					}
+					return;
 				}
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });

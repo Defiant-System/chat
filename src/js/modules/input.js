@@ -14,10 +14,12 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.input,
+			stamp,
 			team,
 			from,
 			to,
 			channel,
+			message,
 			typing,
 			el;
 		switch (event.type) {
@@ -32,7 +34,7 @@
 						clearTimeout(Self.timeout);
 					};
 				if (event.keyCode === 13) {
-					APP.transcript.dispatch({ type: "send-message" });
+					Self.dispatch({ type: "send-message" });
 					return stopTimer();
 				}
 
@@ -47,6 +49,7 @@
 				break;
 			// custom event
 			case "emit-typing-info":
+				category = "typing";
 				from = ME;
 				to = APP.channel.username;
 				team = APP.channel.team;
@@ -54,7 +57,21 @@
 				typing = event.typing;
 
 				// send to chat lobby
-				window.net.send({ category: "typing", team, from, to, channel, typing });
+				window.net.send({ category, team, from, to, channel, typing });
+				break;
+			case "send-message":
+				category = "message";
+				stamp = Date.now();
+				from = ME;
+				to = APP.channel.username;
+				team = APP.channel.team;
+				channel = APP.channel.id;
+				message = Self.els.input.text();
+
+				// send to chat lobby
+				window.net.send({ team, from, to, channel, stamp, message });
+				// clear input
+				Self.els.input.html("");
 				break;
 		}
 	}
