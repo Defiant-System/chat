@@ -72,6 +72,9 @@
 					APP.transcript.dispatch(event);
 				} else {
 					Self.els.root
+						.find(`.friend[data-id="${event.team}/${event.from}"] .notification`)
+						.remove();
+					Self.els.root
 						.find(`.friend[data-id="${event.team}/${event.from}"]`)
 						.append(`<span class="notification">${num}</span>`);
 				}
