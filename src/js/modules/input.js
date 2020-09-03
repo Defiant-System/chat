@@ -18,6 +18,7 @@
 			team,
 			from,
 			to,
+			taxonomy,
 			channel,
 			message,
 			typing,
@@ -49,7 +50,7 @@
 				break;
 			// custom event
 			case "emit-typing-info":
-				category = "typing";
+				taxonomy = "typing";
 				from = ME;
 				to = APP.channel.username;
 				team = APP.channel.team;
@@ -57,10 +58,10 @@
 				typing = event.typing;
 
 				// send to chat lobby
-				window.net.send({ category, team, from, to, channel, typing });
+				window.net.send({ taxonomy, team, from, to, channel, typing });
 				break;
 			case "send-message":
-				category = "message";
+				taxonomy = "message";
 				stamp = Date.now();
 				from = ME;
 				to = APP.channel.username;
@@ -69,7 +70,7 @@
 				message = Self.els.input.text();
 
 				// send to chat lobby
-				window.net.send({ category, team, from, to, channel, message, stamp });
+				window.net.send({ taxonomy, team, from, to, channel, message, stamp });
 				// clear input
 				Self.els.input.html("");
 				break;
