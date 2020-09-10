@@ -16,6 +16,7 @@ const chat = {
 		let meUser = window.bluePrint.selectSingleNode(`//Contacts/*[@id="${ME}"]`);
 		meUser.setAttribute("me", "true");
 
+		// init all sub-objects
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());

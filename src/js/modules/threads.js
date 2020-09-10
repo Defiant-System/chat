@@ -58,7 +58,7 @@
 				// log message
 				event.channel = Self.idChannel(event.team, event.from, event.to);
 				// pre-process message
-				if (event.taxonomy === "typing") {
+				if (event.priority === 2) {
 					el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
 
 					if (el.hasClass("active")) {
