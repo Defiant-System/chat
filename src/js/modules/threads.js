@@ -8,6 +8,9 @@
 			channels: window.find(".threads .channels"),
 			members: window.find(".threads .members"),
 		};
+		
+		// listen to system event
+		defiant.on("sys:friend-status", this.dispatch);
 	},
 	idChannel(team, from, to) {
 		// channel id based upon "from" and "to"
@@ -27,6 +30,12 @@
 			str,
 			el;
 		switch (event.type) {
+			// system events
+			case "friend-status":
+				el = Self.els.root.find(`.friend[data-id="contacts/${event.detail.username}"]`);
+				el.toggleClass("online", event.detail.online !== "1");
+				break;
+			// custom events
 			case "toggle-channels":
 			case "toggle-members":
 				el = event.el.parent();
