@@ -1,8 +1,7 @@
 <Data>
 	<Teams>
-		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531">
-			<Friends />
-		</Team>
+		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531" />
+		
 		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" cstamp="1595006816536">
 			<Channels>
 				<i id="general" name="General" cstamp="1595006835076" />

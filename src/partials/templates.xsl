@@ -21,15 +21,17 @@
 
 <xsl:template name="threads">
 	<xsl:variable name="teamId" select="@id"/>
+
+	<xsl:if test="@id = 'friends'">
+		<div class="friends">
+			<xsl:call-template name="friends">
+				<xsl:with-param name="teamId" select="$teamId" />
+			</xsl:call-template>
+		</div>
+	</xsl:if>
+
 	<xsl:for-each select="./*">
 		<xsl:choose>
-			<xsl:when test="name() = 'Friends'">
-				<div class="friends">
-					<xsl:call-template name="friends">
-						<xsl:with-param name="teamId" select="$teamId" />
-					</xsl:call-template>
-				</div>
-			</xsl:when>
 			<xsl:when test="name() = 'Channels'">
 				<div class="channels">
 					<xsl:call-template name="channels">
