@@ -12,10 +12,6 @@ const chat = {
 			input: window.find(".transcript .input > div"),
 		};
 
-		// identify "me"
-		let meUser = window.bluePrint.selectSingleNode(`//Contacts/*[@id="${ME}"]`);
-		meUser.setAttribute("me", "true");
-
 		// init all sub-objects
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")

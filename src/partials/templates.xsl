@@ -23,7 +23,7 @@
 	<xsl:variable name="teamId" select="@id"/>
 	<xsl:for-each select="./*">
 		<xsl:choose>
-			<xsl:when test="name() = 'Contacts'">
+			<xsl:when test="name() = 'Friends'">
 				<div class="friends">
 					<xsl:call-template name="friends">
 						<xsl:with-param name="teamId" select="$teamId" />
@@ -53,7 +53,7 @@
 	<h2>Friends</h2>
 
 	<div class="friends-list"><ul>
-		<xsl:for-each select="./*">
+		<xsl:for-each select="//Friends/*">
 			<xsl:sort order="descending" select="@online"/>
 			<xsl:sort order="ascending" select="@name"/>
 			<li class="friend" data-click="select-channel">
@@ -101,8 +101,8 @@
 
 	<div class="members-list"><ul>
 		<xsl:for-each select="./*">
-			<xsl:sort order="ascending" select="//Contacts/i[@id = current()/@id]/@name"/>
-			<xsl:variable name="user" select="//Contacts/i[@id = current()/@id]"/>
+			<xsl:sort order="ascending" select="//Friends/i[@id = current()/@id]/@name"/>
+			<xsl:variable name="user" select="//Friends/i[@id = current()/@id]"/>
 			<li class="member" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
@@ -138,8 +138,8 @@
 </xsl:template>
 
 <xsl:template name="message">
-	<xsl:variable name="me" select="//Contacts/i[@me = 'true']"/>
-	<xsl:variable name="user" select="//Contacts/i[@id = current()/@from]"/>
+	<xsl:variable name="me" select="//Settings/User"/>
+	<xsl:variable name="user" select="//Friends/i[@id = current()/@from]"/>
 	<div>
 		<xsl:attribute name="class">message <xsl:choose>
 			<xsl:when test="@from = $me/@id">sent</xsl:when>
@@ -153,6 +153,12 @@
 			<xsl:value-of select="." disable-output-escaping="yes"/>
 		</div>
 	</div>
+</xsl:template>
+
+<xsl:template name="user-initials">
+	<xsl:param name="user" />
+	<xsl:value-of select="substring( $user/@name, 1, 1 )" />
+	<xsl:value-of select="substring( substring-after( $user/@name, ' ' ), 1, 1 )" />
 </xsl:template>
 
 <xsl:template name="typing">

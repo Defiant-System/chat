@@ -1,19 +1,7 @@
 <Data>
 	<Teams>
-		<Team id="contacts" name="Contacts" img="~/icons/icon-contacts.png" cstamp="1595006816531">
-			<Contacts>
-				<i short="SJ" id="steve" name="Steve Jobs" online="1" />
-				<i short="BG" id="bill" name="Bill Gates" online="1" />
-				<i short="HB" id="hbi" name="Hakan Bilgin" online="1" />
-				<!--
-				<i short="LB" id="sarienn" name="Laura Bularca" online="1"/>
-				<i short="TP" id="ted" name="Ted Persson" online="0" />
-				<i short="AU" id="urbanal" name="Alvaro Urbano" online="1" />
-				<i short="FL" id="fredrik" name="Fredrik Lagerträd" online="1" />
-				<i short="DC" id="david" name="David Clewette" online="0" />
-				<i short="DC" id="cala" name="Daniel Cala" online="0" />
-				-->
-			</Contacts>
+		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531">
+			<Friends />
 		</Team>
 		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Defiant System" cstamp="1595006816536">
 			<Channels>

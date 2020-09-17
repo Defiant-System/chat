@@ -17,8 +17,10 @@
 		return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
 	},
 	getValueofContact(username, attr) {
-		let user = window.bluePrint.selectSingleNode(`//Team[@id="contacts"]//i[@id="${username}"]`);
-		if (user) return user.getAttribute(attr);
+		// let user = window.bluePrint.selectSingleNode(`//Team[@id="contacts"]//i[@id="${username}"]`);
+		// if (user) return user.getAttribute(attr);
+		let user = defiant.user.friend(username);
+		if (user) return user[attr]
 	},
 	dispatch(event) {
 		let APP = chat,
@@ -27,6 +29,7 @@
 			channel,
 			team,
 			username,
+			num,
 			str,
 			el;
 		switch (event.type) {
