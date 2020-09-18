@@ -35,7 +35,7 @@
 		switch (event.type) {
 			// system events
 			case "friend-status":
-				el = Self.els.root.find(`.friend[data-id="contacts/${event.detail.username}"]`);
+				el = Self.els.root.find(`.friend[data-id="friends/${event.detail.username}"]`);
 				el.toggleClass("online", event.detail.online !== "1");
 				break;
 			// custom events
