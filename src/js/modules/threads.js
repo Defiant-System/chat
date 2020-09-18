@@ -16,18 +16,13 @@
 		// channel id based upon "from" and "to"
 		return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
 	},
-	getValueofContact(username, attr) {
-		// let user = window.bluePrint.selectSingleNode(`//Team[@id="contacts"]//i[@id="${username}"]`);
-		// if (user) return user.getAttribute(attr);
-		let user = defiant.user.friend(username);
-		if (user) return user[attr]
-	},
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
 			xpath,
 			channel,
 			team,
+			user,
 			username,
 			num,
 			str,
@@ -80,8 +75,8 @@
 							el.find(".message.typing").remove();
 
 							str = window.render({ template: "typing" });
-							username = Self.getValueofContact(event.from, "short");
-							el.append(str.replace(/placeholder/, username));
+							user = defiant.user.friend(event.from);
+							el.append(str.replace(/placeholder/, user.short));
 						} else {
 							el.find(".message.typing")
 								.cssSequence("removing", "transitionend", e => e.remove());
@@ -123,14 +118,14 @@
 
 				// temp
 				let users = {
-						hbi: 0,
-						steve: 1,
-						bill: 1
+						hbi: "bill",
+						steve: "hbi",
+						bill: "hbi"
 					},
-					n = users[ME];
+					friend = users[ME];
 
 				// auto-click first thread
-				el = Self.els.root.find("ul li").get(n);
+				el = Self.els.root.find(`ul li[data-id="friends/${friend}"]`);
 				if (!el.prop("className").startsWith("add-")) {
 					el.trigger("click");
 				}

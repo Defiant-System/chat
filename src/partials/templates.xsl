@@ -56,7 +56,7 @@
 
 	<div class="friends-list"><ul>
 		<xsl:for-each select="//Friends/*">
-			<xsl:sort order="descending" select="@online"/>
+			<!-- <xsl:sort order="descending" select="@online"/> -->
 			<xsl:sort order="ascending" select="@name"/>
 			<li class="friend" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
