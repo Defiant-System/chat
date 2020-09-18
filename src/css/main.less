@@ -37,6 +37,7 @@ content {
 		&.icon-date         { background-image: url(~/icons/icon-date.png); }
 		&.icon-info         { background-image: url(~/icons/icon-info.png); }
 		&.icon-phone        { background-image: url(~/icons/icon-phone.png); }
+		&.icon-camera       { background-image: url(~/icons/icon-camera.png); }
 		&.icon-arrow-right  { background-image: url(~/icons/icon-arrow-right.png); }
 		&.icon-arrow-left   { background-image: url(~/icons/icon-arrow-left.png); }
 		&.icon-users        { background-image: url(~/icons/icon-users.png); }
@@ -317,9 +318,10 @@ content {
 		flex-direction: column;
 
 		i[class^="icon-"] {
-			width: 12px;
-			height: 12px;
+			width: 15px;
+			height: 15px;
 			margin: -2px 0 0 3px;
+			filter: opacity(.5);
 		}
 
 		.output {
@@ -347,12 +349,6 @@ content {
 				margin: 5px 5px;
 				border-radius: 5px;
 				box-shadow: 0 0 0 1px #ddd;
-
-				i[class^="icon-"] {
-					filter: invert() opacity(.55);
-
-					&.icon-info { filter: opacity(.8); }
-				}
 			}
 
 			.message {
@@ -644,7 +640,17 @@ content {
 				text-align: center;
 				border-bottom: 1px solid #eee;
 
+				&.online {
+					h2 {
+						.icon-offline {
+							background-image: url(~/icons/icon-online.png);
+							filter: none;
+						}
+					}
+				}
+
 				.avatar {
+					background-image: url(/ant/icons/user.png);
 					background-color: #eee;
 					background-position: 50% 50%;
 					background-size: 100% auto;
@@ -663,6 +669,35 @@ content {
 
 				h2 {
 					font-size: 16px;
+
+					.icon-offline {
+						margin: -5px 3px 0 0;
+						filter: invert() opacity(.25);
+					}
+				}
+
+				.action-options {
+					padding: 9px 0 0;
+
+					.action {
+						background: #ddd;
+						display: inline-block;
+						position: relative;
+						margin: 0 3px;
+						padding: 6px;
+						cursor: pointer;
+						border-radius: 50%;
+
+						&:hover {
+							background: #4a4;
+						}
+
+						i[class^="icon-"] {
+							width: 15px;
+							height: 15px;
+							filter: invert() brightness(2);
+						}
+					}
 				}
 			}
 
@@ -675,6 +710,7 @@ content {
 						width: 40%;
 						color: #888;
 					}
+
 					&:nth-child(2) {
 						width: 60%;
 						color: #222;

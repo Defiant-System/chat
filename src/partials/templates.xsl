@@ -179,18 +179,38 @@
 <xsl:template name="info">
 	<div class="info-body">
 		<div class="profile">
-			<div class="avatar" style="background-image: url(~/img/hbi.jpg);"></div>
-			<h2>Hakan Bilgin</h2>
+			<xsl:if test="@online = 1">
+				<xsl:attribute name="class">profile online</xsl:attribute>
+			</xsl:if>
+			<div class="avatar">
+				<xsl:if test="@avatar">
+					<xsl:attribute name="style">background-image: url(<xsl:value-of select="@avatar"/>);</xsl:attribute>
+				</xsl:if>
+			</div>
+			<h2>
+				<i class="icon-offline"></i>
+				<xsl:value-of select="@name"/>
+			</h2>
+			<div class="action-options">
+				<div class="action">
+					<i class="icon-phone"></i>
+				</div>
+				<div class="action">
+					<i class="icon-camera"></i>
+				</div>
+			</div>
 		</div>
 
 		<div class="field">
 			<span>Nickname</span>
-			<span>hbi</span>
+			<span><xsl:value-of select="@id"/></span>
 		</div>
 
-		<div class="field">
-			<span>Phone</span>
-			<span>+46(8) 622 07 07</span>
-		</div>
+		<xsl:if test="@mobile">
+			<div class="field">
+				<span>Phone</span>
+				<span><xsl:value-of select="@mobile"/></span>
+			</div>
+		</xsl:if>
 	</div>
 </xsl:template>

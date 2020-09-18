@@ -60,6 +60,8 @@
 				};
 				// render channel transcript history
 				APP.transcript.dispatch({ type: "render-channel" });
+				// forward event to threads column
+				APP.info.dispatch({ type: "render-user", username });
 				break;
 			case "receive-message":
 				// log message
