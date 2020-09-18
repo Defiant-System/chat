@@ -118,18 +118,20 @@
 				
 				Self.dispatch({ ...event, type: "check-for-unread" });
 
-				// temp
-				let users = {
-						hbi: "bill",
-						steve: "hbi",
-						bill: "hbi"
-					},
-					friend = users[ME];
-
-				// auto-click first thread
-				el = Self.els.root.find(`ul li[data-id="friends/${friend}"]`);
-				if (!el.prop("className").startsWith("add-")) {
-					el.trigger("click");
+				if (event.id === "friends") {
+					// temp: auto-click first thread
+					let users = {
+							hbi: "bill",
+							steve: "hbi",
+							bill: "hbi"
+						},
+						friend = users[ME];
+					el = Self.els.root.find(`ul li[data-id="friends/${friend}"]`);
+					if (!el.prop("className").startsWith("add-")) {
+						el.trigger("click");
+					}
+				} else {
+					Self.els.root.find(".channel").get(0).trigger("click");
 				}
 				break;
 			case "remove-unread":

@@ -18,7 +18,7 @@ const chat = {
 			.map(i => this[i].init());
 
 		// temp
-		window.find(".toolbar-tool_[data-click='toggle-info']").trigger("click");
+		//window.find(".toolbar-tool_[data-click='toggle-info']").trigger("click");
 
 		//Giphy.search("shalom", res => console.log(res));
 	},

@@ -12,7 +12,7 @@
 				<i id="ted" />
 			</Members>
 		</Team>
-		<Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni" cstamp="1595006835076">
+		<!-- <Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni" cstamp="1595006835076">
 			<Channels>
 				<i id="general" name="General" cstamp="1595006835076" />
 				<i id="random" name="Random" cstamp="1597140881021" />
@@ -43,7 +43,7 @@
 				<i id="hbi" />
 				<i id="sarienn" />
 			</Members>
-		</Team>
+		</Team> -->
 	</Teams>
 	<Transcripts>
 <!-- 		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796/general">
