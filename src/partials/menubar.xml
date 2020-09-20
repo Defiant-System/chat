@@ -2,12 +2,6 @@
 	<Menu name="Chat">
 		<Menu name="About Chat" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="New Game" click="restart"/>
-		<Menu type="divider"/>
-		<Menu name="Hide Chat"/>
-		<Menu name="Hide Others"/>
-		<Menu name="Show All" disabled="1"/>
-		<Menu type="divider"/>
 		<Menu name="Quit Chat" shell="win -c"/>
 	</Menu>
 	<Menu name="Help">
