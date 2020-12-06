@@ -1,5 +1,5 @@
 
-defiant.require("modules/giphy.js");
+@import "modules/giphy.js";
 
 const ME = defiant.user.username;
 
@@ -69,11 +69,11 @@ const chat = {
 				}
 		}
 	},
-	teams: defiant.require("modules/teams.js"),
-	threads: defiant.require("modules/threads.js"),
-	transcript: defiant.require("modules/transcript.js"),
-	input: defiant.require("modules/input.js"),
-	info: defiant.require("modules/info.js"),
+	teams:      @import "modules/teams.js",
+	threads:    @import "modules/threads.js",
+	transcript: @import "modules/transcript.js",
+	input:      @import "modules/input.js",
+	info:       @import "modules/info.js",
 };
 
 window.exports = chat;
