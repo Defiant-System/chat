@@ -8,7 +8,10 @@
 		// fast references
 		this.els = {
 			root: window.find(".transcript .input"),
+			fxEl: window.find(".transcript .input .fx-container"),
+			newMsg: window.find(".transcript .input .new-message"),
 			input: window.find(".transcript .input > div"),
+			output: window.find(".output-body"),
 		};
 	},
 	dispatch(event) {
@@ -65,6 +68,26 @@
 				team = APP.channel.team;
 				channel = APP.channel.id;
 				message = Self.els.input.text();
+
+				// prepare animation
+				let tEl = Self.els.output.find(".hidden");
+				Self.els.fxEl
+					.cssSequence("sending", "transitionend", (el, property) => {
+						if (property !== "left") return;
+						Self.els.fxEl.removeClass("sending");
+						tEl.removeClass("hidden");
+						el.css({ top: "", left: "" }).html("");
+					})
+				Self.els.newMsg.html(message);
+
+				requestAnimationFrame(() => {
+					let top = -55,
+						left = 560;
+					Self.els.newMsg.css({
+						top: top +"px",
+						left: left +"px",
+					});
+				});
 
 				// send to chat lobby
 				window.net.send({ team, from, to, channel, message, stamp });
