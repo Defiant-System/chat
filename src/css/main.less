@@ -581,15 +581,13 @@ content {
 		}
 
 		.input {
-			background: linear-gradient(#e2e2e2 30%, transparent 100%);
-			position: relative;
 			padding: 9px;
 
 			> div {
 				position: relative;
-				border: 1px solid #bbb;
 				background: #fff;
 				border-radius: 5px;
+				box-shadow: 0 0 0 1px #bbb;
 				line-height: 1.35;
 				padding: 7px 9px;
 
@@ -615,45 +613,6 @@ content {
 					height: 24px;
 					border-radius: 3px;
 					opacity: .35;
-				}
-			}
-
-			.fx-container {
-				background: #e2e2e2;
-				position: absolute;
-				top: 4px;
-				left: 11px;
-				right: 11px;
-				height: 20px;
-				border-radius: 6px;
-
-				&.typing {
-					filter: url(#goo);
-
-					i {
-						background: #e2e2e2;
-						display: inline-block;
-						position: absolute;
-						top: 0;
-						width: 8px;
-						height: 8px;
-						border-radius: 50%;
-						animation: jump 700ms alternate infinite ease-in-out;
-
-						&:nth-child(1) {
-							left: 9px;
-						}
-
-						&:nth-child(2) {
-							left: 20px;
-							animation-delay: 140ms;
-						}
-
-						&:nth-child(3) {
-							left: 31px;
-							animation-delay: 280ms;
-						}
-					}
 				}
 			}
 		}
@@ -766,10 +725,4 @@ content {
 @keyframes wave {
 	0%, 40% { top: 8px; }
 	20%     { top: 1px; }
-}
-
-@keyframes jump {
-	0%   { top: 0px; }
-	50%  { top: -21px; }
-	100% { top: 0px; }
 }
