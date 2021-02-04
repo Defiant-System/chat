@@ -14,7 +14,8 @@
 	},
 	idChannel(team, from, to) {
 		// channel id based upon "from" and "to"
-		return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
+		return [team, from, to].join("-");
+		// return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
 	},
 	dispatch(event) {
 		let APP = chat,

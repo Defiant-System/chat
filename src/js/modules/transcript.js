@@ -73,7 +73,8 @@
 			case "render-channel":
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", channel: APP.channel.id });
-
+				//console.log(APP.channel.id);
+				
 				// render transcript
 				xpath = `//Transcripts/i[@id="${APP.channel.id}"]`;
 				xChannel = window.bluePrint.selectSingleNode(xpath);

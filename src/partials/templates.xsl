@@ -52,12 +52,15 @@
 
 <xsl:template name="friends">
 	<xsl:param name="teamId" />
+	<xsl:variable name="me" select="//Friends/*[@me = 'true']/@id"/>
 	<h2>Friends</h2>
 
 	<div class="friends-list"><ul>
 		<xsl:for-each select="//Friends/*">
 			<!-- <xsl:sort order="descending" select="@online"/> -->
 			<xsl:sort order="ascending" select="@name"/>
+			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', @id )"/>
+
 			<li class="friend" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="@online = 1">
@@ -68,6 +71,9 @@
 					<xsl:value-of select="@name"/>
 					<xsl:if test="@me = 'true'"><span>(you)</span></xsl:if>
 				</div>
+				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
+					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
+				</xsl:if>
 			</li>
 		</xsl:for-each>
 		<li class="add-friend" data-click="add-friend">
@@ -78,17 +84,23 @@
 
 <xsl:template name="channels">
 	<xsl:param name="teamId" />
+	<xsl:variable name="me" select="//Friends/*[@me = 'true']/@id"/>
 	<h2 data-click="toggle-channels"><i class="icon-chevron-left"></i>Channels</h2>
 	
 	<div class="channels-list"><ul>
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="@cstamp"/>
+			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', @id )"/>
+			
 			<li class="channel" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
 				<div class="name">
 					<xsl:value-of select="@name"/>
 				</div>
+				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
+					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
+				</xsl:if>
 			</li>
 		</xsl:for-each>
 		<li class="add-channel" data-click="add-channel">
@@ -99,12 +111,14 @@
 
 <xsl:template name="members">
 	<xsl:param name="teamId" />
+	<xsl:variable name="me" select="//Friends/*[@me = 'true']/@id"/>
 	<h2 data-click="toggle-members"><i class="icon-chevron-left"></i>Members</h2>
 
 	<div class="members-list"><ul>
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="//Friends/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Friends/i[@id = current()/@id]"/>
+			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', $user/@id )"/>
 			<li class="member" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
@@ -114,6 +128,9 @@
 				<div class="name">
 					<xsl:value-of select="$user/@name"/>
 				</div>
+				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
+					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
+				</xsl:if>
 			</li>
 		</xsl:for-each>
 		<li class="add-member" data-click="add-member">
