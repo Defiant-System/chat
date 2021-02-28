@@ -42,12 +42,15 @@
 				Self.els.output.find(".message.typing").remove();
 				// render and append HTML to output
 				xpath = `//Transcripts/i[@id="${event.channel}"]`;
-				window.render({
+				el = window.render({
 					template: "message",
 					match: `${xpath}/*[last()]`,
 					append: Self.els.output,
 					markup: true,
 				});
+				// pop animation
+				el.cssSequence("pop", "animationend", el => el.removeClass("pop"));
+
 				// remove unread flags
 				Self.xTranscripts.selectNodes(`${xpath}/*[@unread="1"]`)
 					.map(xMsg => xMsg.removeAttribute("unread"));

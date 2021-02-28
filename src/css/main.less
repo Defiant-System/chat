@@ -357,7 +357,11 @@ content {
 				text-align: right;
 				//clear: both;
 				transition: margin 150ms ease-in-out;
-				
+
+				&.pop .msg-wrapper {
+					animation: pop 200ms linear forwards;
+				}
+
 				.msg-wrapper {
 					position: relative;
 					border-radius: 13px;
@@ -426,6 +430,7 @@ content {
 
 				&.sent {
 					text-align: right;
+					transform-origin: 100% 100%;
 
 					.msg-wrapper {
 						background: @msgSent;
@@ -454,6 +459,7 @@ content {
 
 				&.received {
 					text-align: left;
+					transform-origin: 0% 100%;
 
 					.msg-wrapper {
 						background: @msgReceived;
@@ -722,7 +728,16 @@ content {
 	}
 }
 
+
+// animations
+@keyframes pop {
+	0%   { transform: scale(.25); opacity: 0; }
+	91%  { transform: scale(1.1); opacity: 1; }
+	100% { transform: scale(1); opacity: 1; }
+}
+
 @keyframes wave {
 	0%, 40% { top: 8px; }
 	20%     { top: 1px; }
 }
+

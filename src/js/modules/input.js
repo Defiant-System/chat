@@ -10,6 +10,12 @@
 			root: window.find(".transcript .input"),
 			input: window.find(".transcript .input > div"),
 		};
+
+		// temp
+		// setTimeout(() => {
+		// 	this.els.input.text("hello");
+		// 	this.dispatch({ type: "window.keystroke", keyCode: 13 });
+		// }, 800);
 	},
 	dispatch(event) {
 		let APP = chat,
