@@ -203,13 +203,21 @@ content {
 		}
 
 		i[class^="icon-"] {
-			width: 12px;
-			height: 12px;
-			margin: 1px 5px 0 0;
+			width: 13px;
+			height: 13px;
+			margin: 0px 5px 0 0;
 			pointer-events: none;
 
-			&.icon-chevron-left { width: 10px; height: 10px; }
-			&.icon-plus         { width: 9px; height: 9px; margin: 2px 7px 0 2px; }
+			&.icon-chevron-left {
+				position: relative;
+				top: -2px;
+			}
+			
+			&.icon-plus {
+				// width: 9px;
+				// height: 9px;
+				margin: 0 4px 0 1px;
+			}
 		}
 
 		.name {
@@ -657,7 +665,7 @@ content {
 
 				.avatar {
 					background-image: url(~/icons/user.png);
-					background-color: #eee;
+					background-color: #fff;
 					background-position: 50% 50%;
 					background-size: 100% auto;
 					background-repeat: no-repeat;
