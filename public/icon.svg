@@ -1,36 +1,22 @@
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55">
 	<style type="text/css">
-		.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#messages-path-2_2_);}
-		.st2{fill-rule:evenodd;clip-rule:evenodd;fill:url(#messages-path-5_2_);}
+		.st0{fill-rule:evenodd;clip-rule:evenodd;fill:url(#messages-path-2_2_);}
+		.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#messages-path-5_2_);}
 	</style>
-	<linearGradient id="messages-path-2_2_" gradientUnits="userSpaceOnUse" x1="192.0724" y1="304.4075" x2="192.0724" y2="303.3778" gradientTransform="matrix(442 0 0 -399.7934 -84659 121725.1797)">
+	<linearGradient id="messages-path-2_2_" gradientUnits="userSpaceOnUse" x1="204.5396" y1="-261.5115" x2="204.5396" y2="-261.3962" gradientTransform="matrix(442 0 0 399.7934 -90379 104554.0625)">
 		<stop  offset="0" style="stop-color:#61CDFB"/>
 		<stop  offset="1" style="stop-color:#059CFE"/>
 	</linearGradient>
-	<linearGradient id="messages-path-5_2_" gradientUnits="userSpaceOnUse" x1="406.6764" y1="304.6662" x2="406.6764" y2="303.6365" gradientTransform="matrix(-268.125 0 0 -238.5648 109322.3594 72890.8359)">
+	<path id="messages-path-2_1_" class="st0" d="M20.7,44.9c2.2,0.5,4.5,0.8,6.8,0.8c14.1,0,25.5-9.4,25.5-21.1S41.6,3.5,27.5,3.5
+		S2,12.9,2,24.6c0,7.5,4.8,14.2,12,17.9c0.1,1.2-0.4,3.1-2.8,5.6c-2.6,2.6,1.5,1.3,5.2-0.5C18.1,46.7,19.7,45.6,20.7,44.9z"/>
+	<linearGradient id="messages-path-5_2_" gradientUnits="userSpaceOnUse" x1="418.531" y1="-262.5222" x2="418.531" y2="-262.4069" gradientTransform="matrix(268.125 0 0 238.5648 -112182.1094 62652.5508)">
 		<stop  offset="0" style="stop-color:#F8FCFE"/>
 		<stop  offset="1" style="stop-color:#E5F1F9"/>
 	</linearGradient>
-	<filter x="-6.1%" y="-3.9%" width="112.1%" height="113.2%" filterUnits="objectBoundingBox" id="chat-filter-1">
-		<feOffset dx="0" dy="6" in="SourceAlpha" result="chatShadowOffsetOuter1"></feOffset>
-		<feGaussianBlur stdDeviation="4" in="chatShadowOffsetOuter1" result="chatShadowBlurOuter1"></feGaussianBlur>
-		<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="chatShadowBlurOuter1" result="chatShadowMatrixOuter1"></feColorMatrix>
-		<feMerge>
-			<feMergeNode in="chatShadowMatrixOuter1"></feMergeNode>
-			<feMergeNode in="SourceGraphic"></feMergeNode>
-		</feMerge>
-	</filter>
-
-	<g id="Messages" transform="translate(13.000000, 7.000000)" filter="url(#chat-filter-1)">
-		<g id="Combined-Shape">
-			<path id="messages-path-2_1_" class="st1" d="M176,395.2c19.4,4.5,39.9,6.9,61,6.9c125.7,0,227.6-84.4,227.6-188.5 S362.7,25.1,237,25.1S9.4,109.5,9.4,213.5c0,67.4,42.7,126.6,107,159.9c0.8,10.5-3.2,27.4-25.3,50 c-23.1,23.6,13.1,11.9,46.2-4.8C153,410.6,167.7,400.9,176,395.2z"/>
-		</g>
-		<g id="Combined-Shape_1_" transform="translate(299.937500, 298.425261) scale(-1, 1) translate(-299.937500, -298.425261) ">
-			<path id="messages-path-5_1_" class="st2" d="M246.2,430c11.5,2.5,23.6,3.9,36.1,3.9c76.2,0,138-50.5,138-112.9 s-61.8-112.9-138-112.9s-138,50.5-138,112.9c0,41.7,27.7,78.2,68.9,97.7c0.1,6.1-2.7,15.3-14.2,27.5 c-12.9,13.6,7.3,6.8,25.7-2.8C233.4,438.9,241.6,433.3,246.2,430z"/>
-		</g>
-		<ellipse id="messages-path-7_1_" class="st0" cx="254.8" cy="324.8" rx="23" ry="23.1"/>
-		<ellipse id="messages-path-9_1_" class="st0" cx="321.4" cy="324.8" rx="23" ry="23.1"/>
-		<ellipse id="messages-path-11_1_" class="st0" cx="388.1" cy="324.8" rx="23" ry="23.1"/>
-	</g>
+	<path id="messages-path-5_1_" class="st1" d="M40.6,48.8c-1.3,0.3-2.6,0.4-4,0.4c-8.5,0-15.5-5.7-15.5-12.6S28,24,36.5,24
+		S52,29.6,52,36.6c0,4.7-3.1,8.8-7.7,10.9c0,0.7,0.3,1.7,1.6,3.1c1.4,1.5-0.8,0.8-2.9-0.3C42,49.8,41.1,49.2,40.6,48.8z"/>
+	<ellipse id="messages-path-7_1_" cx="29.5" cy="37.1" rx="2.6" ry="2.6"/>
+	<ellipse id="messages-path-9_1_" cx="36.9" cy="37.1" rx="2.6" ry="2.6"/>
+	<ellipse id="messages-path-11_1_" cx="44.4" cy="37.1" rx="2.6" ry="2.6"/>
 </svg>
