@@ -62,7 +62,7 @@
 				typing = event.typing;
 
 				// send to chat lobby
-				window.net.send({ priority: 2, team, from, to, channel, typing });
+				window.net.send({ priority: 1, team, from, to, channel, typing });
 				break;
 			case "send-message":
 				stamp = Date.now();

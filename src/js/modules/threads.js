@@ -4,6 +4,7 @@
 		// fast references
 		this.els = {
 			root: window.find(".threads"),
+			teams: window.find(".teams"),
 			threadsList: window.find(".threads-list"),
 			channels: window.find(".threads .channels"),
 			members: window.find(".threads .members"),
@@ -23,6 +24,7 @@
 			xpath,
 			channel,
 			team,
+			thread,
 			user,
 			username,
 			num,
@@ -51,8 +53,9 @@
 				event.el.addClass("active");
 				// remove unread notification flags
 				Self.dispatch({ ...event, type: "remove-unread"});
+				// prepare for next case
+				event.channel = event.el.data("id");
 				// store channel info
-				[ team, username ] = event.el.data("id").split("/");
 				APP.channel = {
 					team,
 					username,
@@ -64,11 +67,28 @@
 				// forward event to threads column
 				APP.info.dispatch({ type: "render-user", username });
 				break;
+			case "go-to-channel":
+				// de-hash channel info
+				[ channel, username ] = event.channel.split("/");
+				// activate team
+				team = Self.els.teams.find(`.team[data-id="${channel}"]`);
+				if (!team.hasClass("active")) team.trigger("click");
+				// activate thread
+				thread = Self.els.threadsList.find(`li[data-id="${channel}/${username}"]`);
+				if (!thread.hasClass("active")) thread.trigger("click");
+				break;
 			case "receive-message":
+				if (event.action === "go-to-channel") {
+					return Self.dispatch({
+						type: event.action,
+						channel: event.channel,
+						username: event.from,
+					});
+				}
 				// log message
 				event.channel = Self.idChannel(event.team, event.from, event.to);
 				// pre-process message
-				if (event.priority === 2) {
+				if (event.priority === 1) {
 					el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
 
 					if (el.hasClass("active")) {
