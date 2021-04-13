@@ -23,6 +23,7 @@
 			stamp,
 			team,
 			from,
+			fromName,
 			to,
 			channel,
 			message,
@@ -55,25 +56,27 @@
 				break;
 			// custom event
 			case "emit-typing-info":
-				from = ME;
+				from = ME.username;
+				fromName = ME.name;
 				to = APP.channel.username;
 				team = APP.channel.team;
 				channel = APP.channel.id;
 				typing = event.typing;
 
 				// send to chat lobby
-				window.net.send({ priority: 1, team, from, to, channel, typing });
+				window.net.send({ priority: 1, team, from, fromName, to, channel, typing });
 				break;
 			case "send-message":
 				stamp = Date.now();
-				from = ME;
+				from = ME.username;
+				fromName = ME.name;
 				to = APP.channel.username;
 				team = APP.channel.team;
 				channel = APP.channel.id;
-				message = Self.els.input.text();
+				message = `${fromName}: ${Self.els.input.text()}`;
 
 				// send to chat lobby
-				window.net.send({ team, from, to, channel, message, stamp });
+				window.net.send({ team, from, fromName, to, channel, message, stamp });
 				// clear input
 				Self.els.input.html("");
 				break;

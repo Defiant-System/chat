@@ -55,12 +55,14 @@
 				Self.dispatch({ ...event, type: "remove-unread"});
 				// prepare for next case
 				event.channel = event.el.data("id");
+				// de-hash channel info
+				[ team, username ] = event.channel.split("/");
 				// store channel info
 				APP.channel = {
 					team,
 					username,
 					el: event.el,
-					id: Self.idChannel(team, ME, username),
+					id: Self.idChannel(team, ME.username, username),
 				};
 				// render channel transcript history
 				APP.transcript.dispatch({ type: "render-channel" });
@@ -69,12 +71,12 @@
 				break;
 			case "go-to-channel":
 				// de-hash channel info
-				[ channel, username ] = event.channel.split("/");
+				[ team, username ] = event.channel.split("/");
 				// activate team
-				team = Self.els.teams.find(`.team[data-id="${channel}"]`);
-				if (!team.hasClass("active")) team.trigger("click");
+				el = Self.els.teams.find(`.team[data-id="${team}"]`);
+				if (!el.hasClass("active")) el.trigger("click");
 				// activate thread
-				thread = Self.els.threadsList.find(`li[data-id="${channel}/${username}"]`);
+				thread = Self.els.threadsList.find(`li[data-id="${team}/${username}"]`);
 				if (!thread.hasClass("active")) thread.trigger("click");
 				break;
 			case "receive-message":
@@ -93,7 +95,7 @@
 
 					if (el.hasClass("active")) {
 						el = APP.transcript.els.output;
-						if (event.typing && event.from !== ME) {
+						if (event.typing && event.from !== ME.username) {
 							// remove existing typing anim, if exist
 							el.find(".message.typing").remove();
 
@@ -105,7 +107,7 @@
 								.cssSequence("removing", "transitionend", e => e.remove());
 						}
 					} else {
-						if (event.typing && event.from !== ME) {
+						if (event.typing && event.from !== ME.username) {
 							str = window.render({ template: "tiny-typing" });
 							el.append(str);
 						} else {
@@ -117,7 +119,7 @@
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
-				if ([APP.channel.username, ME].includes(event.from)) {
+				if ([APP.channel.username, ME.username].includes(event.from)) {
 					// forward event for render
 					APP.transcript.dispatch(event);
 				} else {
@@ -146,7 +148,7 @@
 							steve: "hbi",
 							bill: "hbi"
 						},
-						friend = users[ME];
+						friend = users[ME.username];
 					el = Self.els.root.find(`ul li[data-id="friends/${friend}"]`);
 					if (!el.prop("className").startsWith("add-")) {
 						el.trigger("click");
