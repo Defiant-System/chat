@@ -57,13 +57,13 @@
 
 	<div class="friends-list"><ul>
 		<xsl:for-each select="//Friends/*">
-			<!-- <xsl:sort order="descending" select="@online"/> -->
+			<!-- <xsl:sort order="descending" select="@status"/> -->
 			<xsl:sort order="ascending" select="@name"/>
 			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', @id )"/>
 
 			<li class="friend" data-click="select-channel">
 				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:if test="@online = 1">
+				<xsl:if test="@status = 1">
 					<xsl:attribute name="class">friend online</xsl:attribute>
 				</xsl:if>
 				<i class="icon-offline"></i>

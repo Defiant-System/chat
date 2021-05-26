@@ -34,7 +34,7 @@
 			// system events
 			case "friend-status":
 				el = Self.els.root.find(`.friend[data-id="friends/${event.detail.username}"]`);
-				el.toggleClass("online", event.detail.online !== "1");
+				el.toggleClass("online", event.detail.status !== 1);
 				break;
 			// custom events
 			case "toggle-channels":
