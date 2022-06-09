@@ -32,7 +32,7 @@ const chat = {
 		// console.log(event);
 		switch (event.type) {
 			// system events
-			case "window.open":
+			case "window.init":
 				// auto-select first team
 				Self.teams.dispatch({ type: "select-first-team" });
 
