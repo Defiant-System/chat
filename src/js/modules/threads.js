@@ -11,7 +11,7 @@
 		};
 		
 		// listen to system event
-		defiant.on("sys:friend-status", this.dispatch);
+		karaqu.on("sys:friend-status", this.dispatch);
 	},
 	idChannel(team, from, to) {
 		// channel id based upon "from" and "to"
@@ -100,7 +100,7 @@
 							el.find(".message.typing").remove();
 
 							str = window.render({ template: "typing" });
-							user = defiant.user.friend(event.from);
+							user = karaqu.user.friend(event.from);
 							el.append(str.replace(/placeholder/, user.short));
 						} else {
 							el.find(".message.typing")

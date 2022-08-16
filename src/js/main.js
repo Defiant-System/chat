@@ -1,7 +1,7 @@
 
 @import "modules/giphy.js";
 
-const ME = defiant.user;
+const ME = karaqu.user;
 
 const chat = {
 	lobby: "chat-lobby",

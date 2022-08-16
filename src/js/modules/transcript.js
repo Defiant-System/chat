@@ -100,7 +100,7 @@
 				// fix timestamps
 				xpath = `//Transcripts/*[@id="${event.channel}"]//*[@cstamp and not(@timestamp)]`;
 				window.bluePrint.selectNodes(xpath).map(i => {
-					let timestamp = new defiant.Moment(+i.getAttribute("cstamp"));
+					let timestamp = new karaqu.Moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
 				});
 				break;

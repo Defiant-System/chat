@@ -17,7 +17,7 @@
 				Self.els.root.toggleClass("hidden", value);
 				return value;
 			case "render-user":
-				user = defiant.user.friend(event.username);
+				user = karaqu.user.friend(event.username);
 				
 				// render transcript
 				window.render({
