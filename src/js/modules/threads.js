@@ -11,7 +11,7 @@
 		};
 		
 		// listen to system event
-		karaqu.on("sys:friend-status", this.dispatch);
+		window.on("sys:friend-status", this.dispatch);
 	},
 	idChannel(team, from, to) {
 		// channel id based upon "from" and "to"
