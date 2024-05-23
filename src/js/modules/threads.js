@@ -1,4 +1,6 @@
 
+// chat.threads
+
 {
 	init() {
 		// fast references
@@ -142,17 +144,9 @@
 				Self.dispatch({ ...event, type: "check-for-unread" });
 
 				if (event.id === "friends") {
-					// temp: auto-click first thread
-					let users = {
-							hbi: "bill",
-							steve: "hbi",
-							bill: "hbi"
-						},
-						friend = users[ME.username];
-					el = Self.els.root.find(`ul li[data-id="friends/${friend}"]`);
-					if (!el.prop("className").startsWith("add-")) {
-						el.trigger("click");
-					}
+					el = Self.els.root.find(`ul li.online:nth(0)`);
+					if (!el.length) el = Self.els.root.find(`ul li:nth(0)`);
+					el.trigger("click");
 				} else {
 					Self.els.root.find(".channel").get(0).trigger("click");
 				}

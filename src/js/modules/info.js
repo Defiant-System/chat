@@ -1,4 +1,6 @@
 
+// chat.info
+
 {
 	init() {
 		// fast references
@@ -7,7 +9,8 @@
 		};
 	},
 	dispatch(event) {
-		let Self = chat.info,
+		let APP = chat,
+			Self = APP.info,
 			user,
 			value,
 			el;

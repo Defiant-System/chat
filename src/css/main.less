@@ -364,10 +364,18 @@ content {
 				margin: 11px 5px;
 				text-align: right;
 				//clear: both;
-				transition: margin 150ms ease-in-out;
 
-				&.pop .msg-wrapper {
-					animation: pop 200ms linear forwards;
+				&.new-message {
+					min-height: 0px;
+					transition: min-height 250ms ease-in-out;
+
+					&.appear {
+						min-height: 1px;
+
+						.msg-wrapper {
+							animation: bubble-pop 240ms linear forwards;
+						}
+					}
 				}
 
 				.msg-wrapper {
@@ -738,10 +746,15 @@ content {
 
 
 // animations
-@keyframes pop {
-	0%   { transform: scale(.25); opacity: 0; }
-	91%  { transform: scale(1.1); opacity: 1; }
-	100% { transform: scale(1); opacity: 1; }
+@keyframes popping {
+	0%   { min-height: 1px; }
+	100% { min-height: 2px; }
+}
+
+@keyframes bubble-pop {
+	0%   { transform: scale(.25); }
+	91%  { transform: scale(1.1); }
+	100% { transform: scale(1); }
 }
 
 @keyframes wave {

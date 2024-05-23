@@ -1,4 +1,5 @@
 
+@import "modules/test.js";
 @import "modules/giphy.js";
 
 const ME = karaqu.user;
@@ -38,6 +39,10 @@ const chat = {
 
 				// join chat lobby
 			//	window.net.join({ room: Self.lobby });
+
+				// DEV-ONLY-START
+				Test.init();
+				// DEV-ONLY-END
 				break;
 			case "window.close":
 				// join chat lobby
@@ -70,6 +75,7 @@ const chat = {
 				}
 		}
 	},
+	toolbar:    @import "modules/toolbar.js",
 	teams:      @import "modules/teams.js",
 	threads:    @import "modules/threads.js",
 	transcript: @import "modules/transcript.js",

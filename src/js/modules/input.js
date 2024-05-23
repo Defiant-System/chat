@@ -1,4 +1,6 @@
 
+// chat.input
+
 {
 	typing: {
 		timer: 2500,
@@ -10,6 +12,9 @@
 			root: window.find(".transcript .input"),
 			input: window.find(".transcript .input > div"),
 		};
+
+		// bind event handler
+		this.els.input.on("keydown", this.dispatch);
 
 		// temp
 		// setTimeout(() => {
@@ -30,6 +35,13 @@
 			typing,
 			el;
 		switch (event.type) {
+			// native events
+			case "keydown":
+				if (event.keyCode === 13) {
+					// prevent default behaviour
+					event.preventDefault();
+				}
+				break;
 			// system events
 			case "window.keystroke":
 				let stopTimer = () => {
@@ -73,12 +85,13 @@
 				to = APP.channel.username;
 				team = APP.channel.team;
 				channel = APP.channel.id;
-				message = `${fromName}: ${Self.els.input.text()}`;
+				message = Self.els.input.text();
+				// message = `${fromName}: ${Self.els.input.text()}`;
 
 				// send to chat lobby
 				window.net.send({ team, from, fromName, to, channel, message, stamp });
 				// clear input
-				Self.els.input.html("");
+				setTimeout(() => Self.els.input.html(""), 1);
 				break;
 		}
 	}

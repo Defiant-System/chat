@@ -1,4 +1,6 @@
 
+// chat.transcript
+
 {
 	init() {
 		// fast references
@@ -43,13 +45,14 @@
 				// render and append HTML to output
 				xpath = `//Transcripts/i[@id="${event.channel}"]`;
 				el = window.render({
-					template: "message",
-					match: `${xpath}/*[last()]`,
-					append: Self.els.output,
-					markup: true,
-				});
-				// pop animation
-				el.cssSequence("pop", "animationend", el => el.removeClass("pop"));
+						template: "message",
+						match: `${xpath}/*[last()]`,
+						append: Self.els.output,
+						markup: true,
+					}).addClass("new-message");
+
+				// bubble-pop animation
+				setTimeout(() => el.cssSequence("appear", "transitionend", el => el.removeClass("appear bubble-pop new-message")), 1);
 
 				// remove unread flags
 				Self.xTranscripts.selectNodes(`${xpath}/*[@unread="1"]`)
