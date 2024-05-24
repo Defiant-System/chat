@@ -46,8 +46,10 @@
 				break;
 			case "add-channel":
 			case "add-member":
-			case "add-friend":
 				console.log(event);
+				break;
+			case "add-friend":
+				karaqu.shell("sys -o");
 				break;
 			case "select-channel":
 				Self.els.root.find(".active").removeClass("active");
