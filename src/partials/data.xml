@@ -15,38 +15,6 @@
 				<i id="itzaks"/>
 			</Members>
 		</Team>
-		<!-- <Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni" cstamp="1595006835076">
-			<Channels>
-				<i id="general" name="General" cstamp="1595006835076" />
-				<i id="random" name="Random" cstamp="1597140881021" />
-			</Channels>
-			<Members>
-				<i id="hbi" />
-				<i id="linus" />
-				<i id="itzaks" />
-				<i id="david" />
-			</Members>
-		</Team>
-		<Team id="8b4f2168-ef7b-4f05-87e8-a4490990dc1e" short="TUI" name="TUI" cstamp="1597362011587">
-			<Channels>
-				<i id="general" name="General" cstamp="1595006835076" />
-				<i id="random" name="Random" cstamp="1597140881021" />
-			</Channels>
-			<Members>
-				<i id="hbi" />
-				<i id="cala" />
-			</Members>
-		</Team>
-		<Team id="324e7118-79b6-488b-b662-fe22f01415b3" short="T" name="Toubwanna" cstamp="1597110881021">
-			<Channels>
-				<i id="general" name="General" cstamp="1595006835076" />
-				<i id="random" name="Random" cstamp="1597140881021" />
-			</Channels>
-			<Members>
-				<i id="hbi" />
-				<i id="steve" />
-			</Members>
-		</Team> -->
 	</Teams>
 	<Transcripts>
 		<i id="friends-hbi-bill">
