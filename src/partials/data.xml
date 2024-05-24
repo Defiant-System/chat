@@ -2,17 +2,17 @@
 	<Teams>
 		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531" />
 		
-		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="DS" name="Karaqu" cstamp="1595006816536">
+		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="QU" name="Karaqu" cstamp="1595006816536">
 			<Channels>
 				<i id="general" name="General" cstamp="1595006835076" />
 				<i id="random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
 				<i id="hbi"/>
-				<i id="ted"/>
-				<i id="fredrik"/>
-				<i id="sarienn"/>
-				<i id="urbanal"/>
+				<i id="bill"/>
+				<i id="steve"/>
+				<i id="linus"/>
+				<i id="itzaks"/>
 			</Members>
 		</Team>
 		<!-- <Team id="cb328e59-d8cd-4cd1-8314-6c84e743afb2" short="TA" name="Tac Alumni" cstamp="1595006835076">
@@ -22,8 +22,8 @@
 			</Channels>
 			<Members>
 				<i id="hbi" />
-				<i id="urbanal" />
-				<i id="fredrik" />
+				<i id="linus" />
+				<i id="itzaks" />
 				<i id="david" />
 			</Members>
 		</Team>
@@ -44,7 +44,7 @@
 			</Channels>
 			<Members>
 				<i id="hbi" />
-				<i id="sarienn" />
+				<i id="steve" />
 			</Members>
 		</Team> -->
 	</Teams>
@@ -56,30 +56,30 @@
 			<i from="hbi" cstamp="1597140881021"><![CDATA[Wait a minute...you already get that]]></i>
 			<i from="hbi" cstamp="1597140881021"><![CDATA[And that is why you are rich!]]></i>
 		</i>
-		<i id="friends-hbi-ted">
+		<i id="friends-hbi-steve">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
-			<i from="ted" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
+			<i from="steve" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
 		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-general">
-			<i from="ted" cstamp="1597140881021"><![CDATA[How are you?]]></i>
-			<i from="fredrik" cstamp="1597247342375"><![CDATA[Test output for the chat]]></i>
-			<i from="sarienn" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
-			<i from="ted" cstamp="1597362011587"><![CDATA[How are you?]]></i>
-			<i from="sarienn" cstamp="1597424631937" unread="1"><![CDATA[I'm fine thanks...]]></i>
-			<i from="urbanal" cstamp="1595006846929" unread="1"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
+			<i from="steve" cstamp="1597140881021"><![CDATA[How are you?]]></i>
+			<i from="itzaks" cstamp="1597247342375"><![CDATA[Test output for the chat]]></i>
+			<i from="steve" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
+			<i from="steve" cstamp="1597362011587"><![CDATA[How are you?]]></i>
+			<i from="steve" cstamp="1597424631937" unread="1"><![CDATA[I'm fine thanks...]]></i>
+			<i from="linus" cstamp="1595006846929" unread="1"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
 			<i from="hbi" cstamp="1595006846939"><![CDATA[Hello World]]></i>
 		</i>
 		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-random">
-			<i from="fredrik" cstamp="1595006835076"><![CDATA[What’s the difference between a virus and windows?]]></i>
-			<i from="fredrik" cstamp="1595006835077"><![CDATA[Viruses rarely fail.]]></i>
+			<i from="itzaks" cstamp="1595006835076"><![CDATA[What’s the difference between a virus and windows?]]></i>
+			<i from="itzaks" cstamp="1595006835077"><![CDATA[Viruses rarely fail.]]></i>
 			<i from="hbi" cstamp="1595006835078"><![CDATA[hahaha]]></i>
-			<i from="sarienn" cstamp="1595006835079"><![CDATA[What do you call Windows Multitasking?]]></i>
-			<i from="sarienn" cstamp="1595006835079" unread="1"><![CDATA[Screwing up several things at once.]]></i>
+			<i from="steve" cstamp="1595006835079"><![CDATA[What do you call Windows Multitasking?]]></i>
+			<i from="steve" cstamp="1595006835079" unread="1"><![CDATA[Screwing up several things at once.]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-urbanal">
+		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-linus">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hey dude :)]]></i>
-			<i from="urbanal" cstamp="1595006836924" unread="1"><![CDATA[<div class="giphy-wrapper">![wazzup](//i.giphy.com/media/g1n3pswjr0ouc/giphy.gif)</div>]]></i>
-			<i from="urbanal" cstamp="1597140881021" unread="1"><![CDATA[```js
+			<i from="linus" cstamp="1595006836924" unread="1"><![CDATA[<div class="giphy-wrapper">![wazzup](//i.giphy.com/media/g1n3pswjr0ouc/giphy.gif)</div>]]></i>
+			<i from="linus" cstamp="1597140881021" unread="1"><![CDATA[```js
 var test = "red";
 
 function blue() {
