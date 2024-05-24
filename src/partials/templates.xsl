@@ -127,6 +127,9 @@
 				<i class="icon-offline"></i>
 				<div class="name">
 					<xsl:value-of select="$user/@name"/>
+					<xsl:if test="not(//Friends/i[@id = current()/@id])">
+						<xsl:value-of select="@id"/>
+					</xsl:if>
 				</div>
 				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
 					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
@@ -166,7 +169,10 @@
 		</xsl:choose></xsl:attribute>
 		<div class="msg-wrapper">
 			<div class="avatar">
-				<xsl:attribute name="data-name"><xsl:value-of select="$user/@short"/></xsl:attribute>
+				<xsl:attribute name="data-name">
+					<xsl:value-of select="$user/@short"/>
+					<xsl:if test="not(//Friends/i[@id = current()/@from])"><xsl:value-of select="substring( @from, 1, 2 )"/></xsl:if>
+				</xsl:attribute>
 			</div>
 			<div class="date"><xsl:value-of select="@timestamp"/></div>
 			<xsl:value-of select="." disable-output-escaping="yes"/>
