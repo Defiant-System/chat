@@ -9,7 +9,7 @@
 		
 	</Group>
 	<Group width="43%" class="tools-right">
-		<Search width="190px" placeholder="Search"/>
+		<Search width="190px" placeholder="Search" state="disabled"/>
 		<Tool symbol="icon-info" click="toggle-info" />
 	</Group>
 </CaptionToolBar>
