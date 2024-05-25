@@ -14,6 +14,8 @@
 		
 		// listen to system event
 		window.on("sys:friend-status", this.dispatch);
+		window.on("sys:friend-added", this.dispatch);
+		window.on("sys:friend-removed", this.dispatch);
 	},
 	idChannel(team, from, to) {
 		// channel id based upon "from" and "to"
@@ -29,14 +31,39 @@
 			thread,
 			user,
 			username,
-			num,
-			str,
+			num, str,
 			el;
+		// console.log(event);
 		switch (event.type) {
-			// system events
+			// subscribed events
 			case "friend-status":
 				el = Self.els.root.find(`.friend[data-id="friends/${event.detail.username}"]`);
 				el.toggleClass("online", event.detail.status !== 1);
+				break;
+			case "friend-added":
+				if (Self.els.threadsList.find(".friends-list").length) {
+					// render channels
+					let vdom = window.render({
+							template: "threads",
+							match: `//Teams/Team[@id="friends"]`,
+							vdom: true
+						}),
+						vEl = vdom.find(`li.friend[data-id="friends/${event.detail.username}"]`);
+					// vdom.find(`li.friend`).map(el => console.log(el));
+					// insert new friend at "index"
+					Self.els.threadsList.find(`li.friend:nth(${vEl.index()-1})`).after(vEl);
+				}
+				break;
+			case "friend-removed":
+				// remove from view
+				el = Self.els.threadsList.find(`.friends-list .friend[data-id="friends/${event.detail.username}"]`);
+				user = el.hasClass("active");
+				// remove friend from UI
+				el.remove();
+				// if friend is active now, click on another friend
+				if (user) Self.els.threadsList.find(`.friends-list .friend`).trigger("click");
+
+				// TODO: delete logs from "//Data" ??
 				break;
 			// custom events
 			case "toggle-channels":
