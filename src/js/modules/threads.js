@@ -49,7 +49,6 @@
 							vdom: true
 						}),
 						vEl = vdom.find(`li.friend[data-id="friends/${event.detail.username}"]`);
-					// vdom.find(`li.friend`).map(el => console.log(el));
 					// insert new friend at "index"
 					Self.els.threadsList.find(`li.friend:nth(${vEl.index()-1})`).after(vEl);
 				}
