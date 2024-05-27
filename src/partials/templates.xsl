@@ -59,10 +59,10 @@
 		<xsl:for-each select="//Friends/*">
 			<!-- <xsl:sort order="descending" select="@status"/> -->
 			<xsl:sort order="ascending" select="@name"/>
-			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', @id )"/>
 
 			<li class="friend" data-click="select-channel">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-team"><xsl:value-of select="$teamId"/></xsl:attribute>
+				<xsl:attribute name="data-username"><xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="@status = 1">
 					<xsl:attribute name="class">friend online</xsl:attribute>
 				</xsl:if>
@@ -71,8 +71,8 @@
 					<xsl:value-of select="@name"/>
 					<xsl:if test="@me = 'true'"><span>(you)</span></xsl:if>
 				</div>
-				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
-					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
+				<xsl:if test="count(//Transcripts/*[@id = current()/@id]/*[@unread]) &gt; 0">
+					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = current()/@id]/*[@unread])"/></span>
 				</xsl:if>
 			</li>
 		</xsl:for-each>
@@ -90,10 +90,10 @@
 	<div class="channels-list"><ul>
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="@cstamp"/>
-			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', @id )"/>
+			<xsl:variable name="channelId" select="current()/@id"/>
 			
 			<li class="channel" data-click="select-channel">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
 				<div class="name">
 					<xsl:value-of select="@name"/>
@@ -118,9 +118,9 @@
 		<xsl:for-each select="./*">
 			<xsl:sort order="ascending" select="//Friends/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Friends/i[@id = current()/@id]"/>
-			<xsl:variable name="channelId" select="concat( $teamId, '-', $me, '-', $user/@id )"/>
+			<xsl:variable name="channelId" select="current()/@id"/>
 			<li class="member" data-click="select-channel">
-				<xsl:attribute name="data-id"><xsl:value-of select="$teamId"/>/<xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>
 				</xsl:if>

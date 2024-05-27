@@ -1,6 +1,6 @@
 
 @import "modules/test.js";
-@import "modules/giphy.js";
+
 
 const ME = karaqu.user;
 
@@ -13,19 +13,14 @@ const chat = {
 			input: window.find(".transcript .input > div"),
 		};
 
-		// hide test data for non-test users
-		let xTest = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
-		if (!["hbi", "bill", "steve", "linus"].includes(ME.username)) xTest.parentNode.removeChild(xTest);
-
 		// init all sub-objects
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")
 			.map(i => this[i].init());
 
-		// temp
-		//window.find(".toolbar-tool_[data-click='toggle-info']").trigger("click");
-
-		//Giphy.search("shalom", res => console.log(res));
+		// DEV-ONLY-START
+		Test.init(this);
+		// DEV-ONLY-END
 	},
 	dispatch(event) {
 		let Self = chat,
@@ -38,42 +33,33 @@ const chat = {
 		switch (event.type) {
 			// system events
 			case "window.init":
-				// auto-select first team
+				Self.teams.dispatch({ type: "render-teams" });
 				Self.teams.dispatch({ type: "select-first-team" });
-
-				// join chat lobby
-			//	window.net.join({ room: Self.lobby });
-
-				// DEV-ONLY-START
-				Test.init();
-				// DEV-ONLY-END
 				break;
 			case "window.close":
-				// join chat lobby
-				window.net.leave({ room: Self.lobby });
 				break;
 			case "window.keystroke":
-				if (document.activeElement === Self.els.input[0]) {
-					Self.input.dispatch(event);
-				}
 				break;
-			case "net.greet":
-			case "net.join":
-			case "net.leave":
-				console.log(event);
+			case "window.blur":
+				Self.els.input.blur();
+				break;
+			case "window.focus":
+				Self.els.input.focus();
+				break;
+			// custom events
+			case "set-ui-theme":
+				Self.els.content.data({ theme: event.arg });
 				break;
 			// forward events
 			case "net.receive":
 				Self.threads.dispatch({ ...event, type: "receive-message" });
 				break;
 			// custom events
-			case "toggle-info":
-				return Self.info.dispatch({ ...event, type: "toggle-view" });
 			default:
 				if (event.el) {
 					pEl = event.el.parents("div[data-area]");
 					name = pEl.attr("data-area");
-					if (pEl.length && Self[name].dispatch) {
+					if (pEl.length && Self[name] && Self[name].dispatch) {
 						Self[name].dispatch(event);
 					}
 				}
@@ -82,8 +68,6 @@ const chat = {
 	toolbar:    @import "modules/toolbar.js",
 	teams:      @import "modules/teams.js",
 	threads:    @import "modules/threads.js",
-	transcript: @import "modules/transcript.js",
-	input:      @import "modules/input.js",
 	info:       @import "modules/info.js",
 };
 

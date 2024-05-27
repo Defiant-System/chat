@@ -2,11 +2,19 @@
 	<Menu name="Chat">
 		<Menu name="About Chat" shell="win -a"/>
 		<Menu type="divider"/>
+		<Menu name="Theme&#8230;" invoke="settings"/>
+		<Menu type="divider"/>
 		<Menu name="Quit Chat" shell="win -c"/>
 	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>
 		<Menu type="divider"/>
 		<Menu name="License" shell="win -al"/>
+	</Menu>
+
+	<Menu for="settings">
+		<Menu name="Theme Default" click="set-ui-theme" arg="default" check-group="chat-ui-theme" is-checked="1"/>
+		<Menu name="Theme Purple" click="set-ui-theme" arg="purple" check-group="chat-ui-theme"/>
+		<Menu name="Theme Amber" click="set-ui-theme" arg="amber" check-group="chat-ui-theme"/>
 	</Menu>
 </MenuBar>

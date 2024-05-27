@@ -7,29 +7,21 @@
 		this.els = {
 			teams: window.find(".teams > div"),
 		};
-
-		// render transcript
-		window.render({
-			template: "teams",
-			match: `//Teams`,
-			target: this.els.teams
-		});
-
-		window.bluePrint.selectNodes("//Teams/Team").map(node => {
-			let id = node.getAttribute("id"),
-				xpath = `//Transcripts/*[contains(@id, "${id}")]//*[@unread]`,
-				unread = window.bluePrint.selectNodes(xpath);
-			if (unread.length) {
-				this.els.teams.find(`.team[data-id="${id}"]`)
-					.append(`<span class="notification"></span>`);
-			}
-		});
 	},
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.teams,
 			el;
+		// console.log(event);
 		switch (event.type) {
+			case "render-teams":
+				// render transcript
+				window.render({
+					template: "teams",
+					match: `//Teams`,
+					target: Self.els.teams
+				});
+				break;
 			case "select-first-team":
 				// auto-select first team
 				event.target = Self.els.teams.find(".team:first");
@@ -44,7 +36,7 @@
 				el.addClass("active");
 
 				// forward event to threads column
-				APP.threads.dispatch({ type: "render-team", id: el.data("id") });
+				APP.threads.dispatch({ type: "render-threads", id: el.data("id") });
 				break;
 		}
 	}
