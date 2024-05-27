@@ -56,7 +56,7 @@
 	<h2>Friends</h2>
 
 	<div class="friends-list"><ul>
-		<xsl:for-each select="//Friends/*">
+		<xsl:for-each select="//Teams/Team[@id = 'friends']/*">
 			<!-- <xsl:sort order="descending" select="@status"/> -->
 			<xsl:sort order="ascending" select="@name"/>
 
