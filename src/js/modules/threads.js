@@ -151,6 +151,8 @@
 					}
 					return;
 				}
+				// nothing to do - probably "silent" event
+				if (!event.message) return;
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
