@@ -77,8 +77,14 @@
 				channel = APP.channel.id;
 				typing = event.typing;
 
-				// send to chat lobby
-				window.net.send({ priority: 1, team, from, fromName, to, channel, typing });
+				// exit if user is not online
+				karaqu.shell(`user -i '${to}'`)
+					.then(check => {
+						if (check.result.online) {
+							// send to chat lobby
+							window.net.send({ priority: 1, team, from, fromName, to, channel, typing });
+						}
+					});
 				break;
 			case "send-message":
 				stamp = Date.now();
