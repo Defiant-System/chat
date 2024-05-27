@@ -13,6 +13,10 @@ const chat = {
 			input: window.find(".transcript .input > div"),
 		};
 
+		// hide test data for non-test users
+		let xTest = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
+		if (!["hbi", "bill", "steve", "linus"].includes(ME.username)) xTest.parentNode.removeChild(xTest);
+
 		// init all sub-objects
 		Object.keys(this)
 			.filter(i => typeof this[i].init === "function")

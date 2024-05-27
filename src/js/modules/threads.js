@@ -118,7 +118,9 @@
 					});
 				}
 				// log message
-				event.channel = Self.idChannel(event.team, event.from, event.to);
+				if (!event.channel) {
+					event.channel = Self.idChannel(event.team, event.from, event.to);
+				}
 				// pre-process message
 				if (event.priority === 1) {
 					el = Self.els.root.find(`.friend[data-id="${event.team}/${event.from}"]`);
@@ -132,6 +134,9 @@
 							str = window.render({ template: "typing" });
 							user = karaqu.user.friend(event.from);
 							el.append(str.replace(/placeholder/, user.short));
+							// remove potential "zombies"
+							setTimeout(() => el.find(".message.typing")
+								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
 						} else {
 							el.find(".message.typing")
 								.cssSequence("removing", "transitionend", e => e.remove());
@@ -148,6 +153,11 @@
 				}
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
+
+				if (!APP.channel) {
+					// application is not finished "init"
+					APP.teams.els.teams.find(`.team[data-id="${event.team}"]`).trigger("click");
+				}
 
 				if ([APP.channel.username, ME.username].includes(event.from)) {
 					// forward event for render

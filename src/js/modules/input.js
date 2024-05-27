@@ -30,8 +30,10 @@
 			from,
 			fromName,
 			to,
+			action,
 			channel,
 			message,
+			options,
 			typing,
 			el;
 		switch (event.type) {
@@ -80,6 +82,7 @@
 				break;
 			case "send-message":
 				stamp = Date.now();
+				action = "initiate";
 				from = ME.username;
 				fromName = ME.name;
 				to = APP.channel.username;
@@ -87,9 +90,21 @@
 				channel = APP.channel.id;
 				message = Self.els.input.text();
 				// message = `${fromName}: ${Self.els.input.text()}`;
+				options = [
+					{
+						id: karaqu.AFFIRMATIVE,
+						name: "Show",
+						payload: "action,team,message,channel",
+					},
+					{
+						id: karaqu.NEGATIVE,
+						name: "Close",
+						payload: "action,team,message,channel",
+					}
+				];
 
 				// send to chat lobby
-				window.net.send({ team, from, fromName, to, channel, message, stamp });
+				window.net.send({ action, team, from, fromName, to, channel, message, stamp, options });
 				// clear input
 				setTimeout(() => Self.els.input.html(""), 1);
 				break;
