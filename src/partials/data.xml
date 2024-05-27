@@ -2,7 +2,7 @@
 	<Teams>
 		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531" />
 		
-		<Team id="5076e375-3461-4e85-bc1a-1edb1d36d796" short="QU" name="Karaqu" cstamp="1595006816536">
+		<Team id="5076e37534614e85bc1a1edb1d36d796" short="QU" name="Karaqu" cstamp="1595006816536">
 			<Channels>
 				<i id="general" name="General" cstamp="1595006835076" />
 				<i id="random" name="Random" cstamp="1597140881021" />
@@ -28,7 +28,7 @@
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hej]]></i>
 			<i from="steve" cstamp="1597140881021" unread="1"><![CDATA[Hej!]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-general">
+		<i id="5076e37534614e85bc1a1edb1d36d796-hbi-general">
 			<i from="steve" cstamp="1597140881021"><![CDATA[How are you?]]></i>
 			<i from="itzaks" cstamp="1597247342375"><![CDATA[Test output for the chat]]></i>
 			<i from="steve" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
@@ -37,14 +37,14 @@
 			<i from="linus" cstamp="1595006846929" unread="1"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></i>
 			<i from="hbi" cstamp="1595006846939"><![CDATA[Hello World]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-random">
+		<i id="5076e37534614e85bc1a1edb1d36d796-hbi-random">
 			<i from="itzaks" cstamp="1595006835076"><![CDATA[What’s the difference between a virus and windows?]]></i>
 			<i from="itzaks" cstamp="1595006835077"><![CDATA[Viruses rarely fail.]]></i>
 			<i from="hbi" cstamp="1595006835078"><![CDATA[hahaha]]></i>
 			<i from="steve" cstamp="1595006835079"><![CDATA[What do you call Windows Multitasking?]]></i>
 			<i from="steve" cstamp="1595006835079" unread="1"><![CDATA[Screwing up several things at once.]]></i>
 		</i>
-		<i id="5076e375-3461-4e85-bc1a-1edb1d36d796-hbi-linus">
+		<i id="5076e37534614e85bc1a1edb1d36d796-hbi-linus">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Hey dude :)]]></i>
 			<i from="linus" cstamp="1595006836924" unread="1"><![CDATA[<div class="giphy-wrapper">![wazzup](//i.giphy.com/media/g1n3pswjr0ouc/giphy.gif)</div>]]></i>
 			<i from="linus" cstamp="1597140881021" unread="1"><![CDATA[```js

@@ -11,16 +11,23 @@
 			channels: window.find(".threads .channels"),
 			members: window.find(".threads .members"),
 		};
+
+		// console.log( this.idChannel("friend-hbi-linus") );
+		// console.log( this.idChannel("friend-linus-hbi") );
 		
 		// listen to system event
 		window.on("sys:friend-status", this.dispatch);
 		window.on("sys:friend-added", this.dispatch);
 		window.on("sys:friend-removed", this.dispatch);
 	},
-	idChannel(team, from, to) {
-		// channel id based upon "from" and "to"
-		return [team, from, to].join("-");
-		// return [team].concat([from, to].sort((a, b) => a === b ? 0 : a < b ? -1 : 1)).join("-");
+	idChannel(id) {
+		// team is first
+		let parts = id.split("-"),
+			team = parts.shift();
+		// sort parts alphabeticaly
+		parts = parts.sort((a, b) => a === b ? 0 : a < b ? -1 : 1);
+		// reaturn true ID
+		return [team, ...parts].join("-");
 	},
 	dispatch(event) {
 		let APP = chat,
@@ -92,7 +99,7 @@
 					team,
 					username,
 					el: event.el,
-					id: Self.idChannel(team, ME.username, username),
+					id: Self.idChannel(`${team}-${ME.username}-${username}`),
 				};
 				// render channel transcript history
 				APP.transcript.dispatch({ type: "render-channel" });
@@ -119,7 +126,7 @@
 				}
 				// log message
 				if (!event.channel) {
-					event.channel = Self.idChannel(event.team, event.from, event.to);
+					event.channel = Self.idChannel(`${event.team}-${event.from}-${event.to}`);
 				}
 				// pre-process message
 				if (event.priority === 1) {
@@ -143,8 +150,14 @@
 						}
 					} else {
 						if (event.typing && event.from !== ME.username) {
+							// remove existing typing anim, if exist
+							el.find(".anim-typing").remove();
+
 							str = window.render({ template: "tiny-typing" });
 							el.append(str);
+							// remove potential "zombies"
+							setTimeout(() => el.find(".anim-typing")
+								.cssSequence("removing", "transitionend", e => e.remove()), 5e3);
 						} else {
 							el.find(".anim-typing").remove();
 						}
@@ -153,6 +166,7 @@
 				}
 				// nothing to do - probably "silent" event
 				if (!event.message) return;
+				
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 

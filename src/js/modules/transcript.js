@@ -31,6 +31,7 @@
 				if (!xChannel) {
 					xChannel = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${event.channel}" />`));
 				}
+				// console.log(Self.xTranscripts);
 				// add message node to XML log
 				xChannel.append(node);
 
@@ -79,14 +80,13 @@
 			case "render-channel":
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", channel: APP.channel.id });
-				//console.log(APP.channel.id);
 				
 				// render transcript
-				xpath = `//Transcripts/i[@id="${APP.channel.id}"]`;
+				xpath = `//Data/Transcripts/i[@id="${APP.channel.id}"]`;
 				xChannel = window.bluePrint.selectSingleNode(xpath);
 				window.render({
 					template: xChannel ? "transcripts" : "empty-channel",
-					match: xChannel ? xpath : "*",
+					match: xChannel ? xpath : "//Data",
 					target: Self.els.output,
 					markup: true,
 				});
