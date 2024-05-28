@@ -81,6 +81,10 @@
 				// bubble-pop animation
 				setTimeout(() => el.cssSequence("appear", "transitionend", el => el.removeClass("appear bubble-pop new-message")), 1);
 
+				// remove unread flags
+				Self.xTranscripts.selectNodes(`./i[@id="${event.channelId}"]/*[@unread="1"]`)
+					.map(xMsg => xMsg.removeAttribute("unread"));
+
 				// remove initial (first/empty channel) message, if any
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
