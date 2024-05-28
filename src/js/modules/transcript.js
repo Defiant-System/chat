@@ -16,6 +16,7 @@
 		let APP = chat,
 			Self = APP.transcript,
 			message,
+			channelId,
 			xChannel,
 			xpath,
 			xnode,
@@ -27,8 +28,13 @@
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps" });
 
+				// remove unread flags
+				channelId = event.channelId || APP.channel.id;
+				Self.xTranscripts.selectNodes(`./i[@id="${channelId}"]/*[@unread="1"]`)
+					.map(xMsg => xMsg.removeAttribute("unread"));
+
 				// render transcript
-				xpath = `//Data/Transcripts/i[@id="${event.channelId || APP.channel.id}"]`;
+				xpath = `//Data/Transcripts/i[@id="${channelId}"]`;
 				xChannel = window.bluePrint.selectSingleNode(xpath);
 				window.render({
 					template: xChannel ? "transcripts" : "empty-channel",
@@ -36,6 +42,14 @@
 					target: Self.els.output,
 					markup: true,
 				});
+
+				// remove potential notification
+				setTimeout(() => {
+						// remove notification indicator from "thread" element
+						APP.threads.els.threadsList.find(`li[data-id="${channelId}"] .notification`).remove();
+						// check for unreaad message count
+						APP.teams.dispatch({ type: "check-team-unread" });
+					}, 300);
 				break;
 			case "focus-message":
 				// remove previous focus
@@ -67,10 +81,7 @@
 				// bubble-pop animation
 				setTimeout(() => el.cssSequence("appear", "transitionend", el => el.removeClass("appear bubble-pop new-message")), 1);
 
-				// remove unread flags
-				Self.xTranscripts.selectNodes(`${xpath}/*[@unread="1"]`)
-					.map(xMsg => xMsg.removeAttribute("unread"));
-				// remove initial message, if any
+				// remove initial (first/empty channel) message, if any
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());

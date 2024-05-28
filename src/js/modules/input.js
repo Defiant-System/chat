@@ -68,11 +68,12 @@
 				to = APP.channel.username;
 				channelId = APP.channel.id;
 				typing = event.typing;
+				if (!to) return;
 
 				// exit if user is not online
 				karaqu.shell(`user -i '${to}'`)
 					.then(check => {
-						if (check.result.online) {
+						if (check.result && check.result.online) {
 							// send to chat lobby
 							window.net.send({ priority: 1, from, fromName, to, channelId, typing });
 						}

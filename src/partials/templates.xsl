@@ -15,6 +15,7 @@
 					background-color: transparent;
 				</xsl:attribute>
 			</xsl:if>
+			<span class="notification"></span>
 		</div>
 	</xsl:for-each>
 </xsl:template>
@@ -127,8 +128,8 @@
 				<i class="icon-offline"></i>
 				<div class="name">
 					<xsl:value-of select="$user/@name"/>
-					<xsl:if test="not(//Friends/i[@id = current()/@id])">
-						<xsl:value-of select="@id"/>
+					<xsl:if test="not(//Friends/i[@id = $channelId])">
+						<xsl:value-of select="@username"/>
 					</xsl:if>
 				</div>
 				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
