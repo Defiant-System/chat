@@ -6,15 +6,19 @@
 				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-random" name="Random" cstamp="1597140881021" />
 			</Channels>
 			<Members>
-				<i id="hbi"/>
-				<i id="bill"/>
-				<i id="steve"/>
-				<i id="linus"/>
-				<i id="itzaks"/>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-hbi" username="hbi"/>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-bill" username="bill"/>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-steve" username="steve"/>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-linus" username="linus"/>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-itzaks" username="itzaks"/>
 			</Members>
 		</Team>
 	</Teams>
 	<Transcripts>
+		<i id="friends-hbi">
+			<i from="hbi" cstamp="1595006835076"><![CDATA[This is a message to self]]></i>
+			<i from="steve" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
+		</i>
 		<i id="friends-hbi-bill">
 			<i from="bill" cstamp="1595006835076"><![CDATA[Hey]]></i>
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Greetings]]></i>
