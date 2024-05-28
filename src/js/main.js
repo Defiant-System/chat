@@ -5,13 +5,16 @@
 const ME = karaqu.user;
 
 const chat = {
-	lobby: "chat-lobby",
 	init() {
 		// fast references
 		this.els = {
 			content: window.find("content"),
 			input: window.find(".transcript .input > div"),
 		};
+
+		// obtain lobby ID
+		let xLobby = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
+		this.lobbyId = xLobby.getAttribute("id");
 
 		// init all sub-objects
 		Object.keys(this)
@@ -35,8 +38,14 @@ const chat = {
 			case "window.init":
 				Self.teams.dispatch({ type: "render-teams" });
 				Self.teams.dispatch({ type: "select-first-team" });
+
+				// join chat lobby
+				console.log("join: ", Self.lobbyId);
+				window.net.join({ room: Self.lobbyId });
 				break;
 			case "window.close":
+				// leave chat lobby
+				window.net.leave({ room: Self.lobbyId });
 				break;
 			case "window.keystroke":
 				if (document.activeElement === Self.els.input[0]) {
@@ -49,6 +58,14 @@ const chat = {
 			case "window.focus":
 				Self.els.input.focus(); // regain focus
 				break;
+
+			// lobby events
+			case "net.greet":
+			case "net.join":
+			case "net.leave":
+				console.log(event);
+				break;
+
 			// custom events
 			case "set-ui-theme":
 				Self.els.content.data({ theme: event.arg });
