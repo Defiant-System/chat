@@ -1,12 +1,6 @@
 <Data>
 	<Teams>
-		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531">
-			<i id="hbi" name="Hakan Bilgin" status="1"/>
-			<i id="bill" name="Bill Gates" status=""/>
-			<i id="steve" name="Steve Jobs" status="1"/>
-			<i id="linus" name="Linus Torvalds" status="1"/>
-			<i id="itzaks" name="Isak Burström" status=""/>
-		</Team>
+		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531"/>
 		<!-- additional teams goes here -->
 		<Team id="5076e37534614e85bc1a1edb1d36d796" short="QU" name="Karaqu" cstamp="1595006816536">
 			<Channels>
@@ -21,10 +15,14 @@
 				<i id="itzaks"/>
 			</Members>
 		</Team>
-		<Team id="1076e37534614e85bc1a1edb1d36d796" short="HB" name="Hakan Bilgin" cstamp="1595012816536"/>
+		<!-- <Team id="1076e37534614e85bc1a1edb1d36d796" short="HB" name="Hakan Bilgin" cstamp="1595012816536"/> -->
 	</Teams>
 	<Transcripts>
 		<!-- transcripts goes here -->
+		<i id="friends-hbi">
+			<i from="hbi" cstamp="1595006835076"><![CDATA[This is a message to self]]></i>
+			<i from="steve" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>
+		</i>
 		<i id="friends-hbi-bill">
 			<i from="bill" cstamp="1595006835076"><![CDATA[Hey]]></i>
 			<i from="hbi" cstamp="1595006835076"><![CDATA[Greetings]]></i>

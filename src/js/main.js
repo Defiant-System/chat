@@ -39,12 +39,15 @@ const chat = {
 			case "window.close":
 				break;
 			case "window.keystroke":
+				if (document.activeElement === Self.els.input[0]) {
+					Self.input.dispatch(event);
+				}
 				break;
 			case "window.blur":
-				Self.els.input.blur();
+				Self.els.input.blur(); // force release of focus
 				break;
 			case "window.focus":
-				Self.els.input.focus();
+				Self.els.input.focus(); // regain focus
 				break;
 			// custom events
 			case "set-ui-theme":
@@ -60,7 +63,7 @@ const chat = {
 					pEl = event.el.parents("div[data-area]");
 					name = pEl.attr("data-area");
 					if (pEl.length && Self[name] && Self[name].dispatch) {
-						Self[name].dispatch(event);
+						return Self[name].dispatch(event);
 					}
 				}
 		}
@@ -68,6 +71,8 @@ const chat = {
 	toolbar:    @import "modules/toolbar.js",
 	teams:      @import "modules/teams.js",
 	threads:    @import "modules/threads.js",
+	transcript: @import "modules/transcript.js",
+	input:      @import "modules/input.js",
 	info:       @import "modules/info.js",
 };
 

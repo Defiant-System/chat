@@ -72,8 +72,7 @@ content {
 		}
 
 		b {
-			// background: lighten(@base, 23%);
-			background: red;
+			background: #8cf;
 			display: inline-block;
 			position: absolute;
 			top: 8px;
@@ -145,14 +144,17 @@ content {
 				filter: brightness(1.075);
 			}
 
-			// &[style^="background-image: url"] {
-			// 	filter: brightness(0.85) hue-rotate(85deg);
-			// }
+			&[style^="background-image: url"] {
+				opacity: .45;
+			}
 
 			&.active {
 				background-color: #1f77b7;
 				color: #13466d;
-				// filter: brightness(.9) hue-rotate(5deg);
+				
+				&[style^="background-image: url"] {
+					opacity: 1;
+				}
 
 				&:after {
 					border: 3px solid #1f77b7;
@@ -233,6 +235,7 @@ content {
 				top: -2px;
 			}
 			
+			&.icon-thread,
 			&.icon-plus {
 				// width: 9px;
 				// height: 9px;
@@ -277,7 +280,12 @@ content {
 			padding: 4px 7px 5px 23px;
 			cursor: pointer;
 
-			&:hover {
+			&.disabled {
+				opacity: .35;
+				cursor: default;
+			}
+
+			&:not(.disabled):hover {
 				opacity: 1;
 			}
 		}
@@ -313,6 +321,10 @@ content {
 				&.active {
 					background: rgba(#fff,.15);
 					color: #eef;
+
+					.icon-thread {
+						opacity: 1;
+					}
 				}
 			}
 		}
@@ -475,22 +487,23 @@ content {
 							transform-origin: 100% 100%;
 
 							.msg-wrapper {
-								background: #f90;
+								background: #4f91c4;
 								color: #fff;
 								margin-right: 43px;
 
 								&:after {
 								    right: -9px;
-								    background: radial-gradient(circle at top right, transparent 49%, #f90 56%);
+								    background: radial-gradient(circle at top right, transparent 49%, #4f91c4 56%);
 								    border-radius: 0 0 0 11px;
 								}
 							}
 
 							.avatar {
-								background: #f90;
+								background: #4f91c4;
+								color: #fff;
 								left: auto;
 								right: -37px;
-								filter: brightness(.75);
+								filter: saturate(0.75) brightness(1.15);
 							}
 
 							.date {
@@ -505,14 +518,14 @@ content {
 							transform-origin: 0% 100%;
 
 							.msg-wrapper {
-								background: #eee;
-								color: #222;
+								background: #ddd;
+								color: #333;
 								text-align: left;
 								margin-left: 43px;
 
 								&:after {
 								    left: -9px;
-								    background: radial-gradient(circle at top left, transparent 49%, #eee 56%);
+								    background: radial-gradient(circle at top left, transparent 49%, #ddd 56%);
 								    border-radius: 0 0 11px 0;
 								}
 
@@ -523,7 +536,6 @@ content {
 									left: 5px;
 									font-size: 11px;
 									white-space: nowrap;
-									color: #aaa;
 								}
 
 								& + .received {
@@ -539,8 +551,8 @@ content {
 							transition: max-height 120ms ease-in-out;
 
 							.msg-wrapper {
-								background: #eee;
-								color: #222;
+								background: #ddd;
+								color: #333;
 								text-align: left;
 								margin-left: 43px;
 
@@ -564,9 +576,12 @@ content {
 									left: -3px;
 								}
 
+								.avatar {
+									background: #ccc;
+								}
+
 								b {
-									background-color: #eee;
-									filter: brightness(.8);
+									background-color: #aaa;
 								}
 							}
 
@@ -577,29 +592,27 @@ content {
 						}
 
 						.avatar {
-							background-color: #eee;
+							background: #aaa;
+							color: #fff;
 							position: absolute;
 							left: -37px;
 							bottom: 0;
 							display: inline-block;
 							width: 28px;
 							border-radius: 50%;
-							filter: brightness(.85);
 							//box-shadow: 0 0 0 1px #ddd;
 
 							&:before {
 								content: attr(data-name);
 								position: absolute;
-								top: 50%;
+								top: 5px;
 								left: 0;
 								width: 100%;
 								z-index: 1;
-								transform: translateY(-50%);
-								font-size: 13px;
+								font-size: 14px;
 								font-weight: 400;
 								text-align: center;
 								text-transform: uppercase;
-								color: #fff;
 								text-shadow: 0 1px 1px rgba(0,0,0,.25);
 							}
 

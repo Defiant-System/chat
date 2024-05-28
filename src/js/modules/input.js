@@ -13,29 +13,23 @@
 			input: window.find(".transcript .input > div"),
 		};
 
-		// bind event handler
+		// bind event handler (to capture "return")
 		this.els.input.on("keydown", this.dispatch);
-
-		// temp
-		// setTimeout(() => {
-		// 	this.els.input.text("hello");
-		// 	this.dispatch({ type: "window.keystroke", keyCode: 13 });
-		// }, 800);
 	},
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.input,
+			action,
 			stamp,
-			team,
+			to,
 			from,
 			fromName,
-			to,
-			action,
-			channel,
+			channelId,
 			message,
 			options,
 			typing,
 			el;
+		// console.log(event);
 		switch (event.type) {
 			// native events
 			case "keydown":
@@ -73,8 +67,7 @@
 				from = ME.username;
 				fromName = ME.name;
 				to = APP.channel.username;
-				team = APP.channel.team;
-				channel = APP.channel.id;
+				channelId = APP.channel.id;
 				typing = event.typing;
 
 				// exit if user is not online
@@ -82,7 +75,7 @@
 					.then(check => {
 						if (check.result.online) {
 							// send to chat lobby
-							window.net.send({ priority: 1, team, from, fromName, to, channel, typing });
+							window.net.send({ priority: 1, from, fromName, to, channelId, typing });
 						}
 					});
 				break;
@@ -92,26 +85,25 @@
 				from = ME.username;
 				fromName = ME.name;
 				to = APP.channel.username;
-				team = APP.channel.team;
-				channel = APP.channel.id;
+				channelId = APP.channel.id;
 				message = Self.els.input.text();
 				// message = `${fromName}: ${Self.els.input.text()}`;
 				options = [
 					{
 						id: karaqu.AFFIRMATIVE,
 						name: "Show",
-						payload: "action,team,message,channel",
+						payload: "action,message,channelId",
 					},
 					{
 						id: karaqu.NEGATIVE,
 						name: "Close",
-						payload: "action,team,message,channel",
+						payload: "action,message,channelId",
 					}
 				];
 
 				// send to chat lobby
-				window.net.send({ action, team, from, fromName, to, channel, message, stamp, options });
-				// clear input
+				window.net.send({ action, from, fromName, to, channelId, message, stamp, options });
+				// clear input on "next tick"
 				setTimeout(() => Self.els.input.html(""), 1);
 				break;
 		}

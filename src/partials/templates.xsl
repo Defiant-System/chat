@@ -57,13 +57,13 @@
 
 	<div class="friends-list"><ul>
 		<xsl:for-each select="//Teams/Team[@id = 'friends']/*">
-			<!-- <xsl:sort order="descending" select="@status"/> -->
+			<!-- <xsl:sort order="descending" select="@online"/> -->
 			<xsl:sort order="ascending" select="@name"/>
 
 			<li class="friend" data-click="select-channel">
-				<xsl:attribute name="data-team"><xsl:value-of select="$teamId"/></xsl:attribute>
-				<xsl:attribute name="data-username"><xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:if test="@status = 1">
+				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
+				<xsl:attribute name="data-username"><xsl:value-of select="@username"/></xsl:attribute>
+				<xsl:if test="@online = 1">
 					<xsl:attribute name="class">friend online</xsl:attribute>
 				</xsl:if>
 				<i class="icon-offline"></i>
@@ -103,9 +103,9 @@
 				</xsl:if>
 			</li>
 		</xsl:for-each>
-		<li class="add-channel" data-click="add-channel">
-			<i class="icon-plus"></i>Add a channel
-		</li>
+		<!-- <li class="add-channel disabled" data-click="add-channel">
+			<i class="icon-plus"></i>Add channel
+		</li> -->
 	</ul></div>
 </xsl:template>
 
@@ -136,9 +136,9 @@
 				</xsl:if>
 			</li>
 		</xsl:for-each>
-		<li class="add-member" data-click="add-member">
+		<!-- <li class="add-member disabled" data-click="add-member">
 			<i class="icon-plus"></i>Invite people
-		</li>
+		</li> -->
 	</ul></div>
 </xsl:template>
 

@@ -9,9 +9,9 @@
 			threadsList: window.find(".threads-list"),
 		};
 
-		// console.log( this.idChannel("friend-hbi-linus") );
-		// console.log( this.idChannel("friend-linus-hbi") );
-		
+		// get friends list from system
+		this.dispatch({ type: "get-friends-list" });
+
 		// listen to system event
 		window.on("sys:friend-status", this.dispatch);
 		window.on("sys:friend-added", this.dispatch);
@@ -30,12 +30,34 @@
 		let APP = chat,
 			Self = APP.threads,
 			user,
+			num, str,
+			id,
 			el;
 		// console.log(event);
 		switch (event.type) {
 			// subscribed events
+			case "get-friends-list":
+				// friends root node
+				Self.xFriends = window.bluePrint.selectSingleNode(`//Team[@id="friends"]`);
+				// add "me" to friends list
+				id = Self.idChannel(`friends-${ME.username}`);
+				user = $.nodeFromString(`<i online="1" me="true" username="${ME.username}" name="${ME.name}" id="${id}"/>`);
+				Self.xFriends.appendChild(user);
+
+				// get friends list (array)
+				karaqu.shell(`user -f`)
+					.then(resp => {
+						resp.result.map(friend => {
+							let online = friend.online ? 1 : 0,
+								id = Self.idChannel(`friends-${friend.username}-${ME.username}`),
+								str = `<i id="${id}" online="${online}" username="${friend.username}" name="${friend.name}"/>`,
+								xFriend = $.nodeFromString(str);
+							Self.xFriends.appendChild(xFriend);
+						});
+					});
+				break;
 			case "friend-status":
-				el = Self.els.root.find(`.friend[data-id="friends/${event.detail.username}"]`);
+				el = Self.els.root.find(`.friend[data-username="${event.detail.username}"]`);
 				el.toggleClass("online", event.detail.status !== 1);
 				break;
 			case "friend-added":
@@ -46,14 +68,14 @@
 							match: `//Teams/Team[@id="friends"]`,
 							vdom: true
 						}),
-						vEl = vdom.find(`li.friend[data-id="friends/${event.detail.username}"]`);
+						vEl = vdom.find(`li.friend[data-username="${event.detail.username}"]`);
 					// insert new friend at "index"
 					Self.els.threadsList.find(`li.friend:nth(${vEl.index()-1})`).after(vEl);
 				}
 				break;
 			case "friend-removed":
 				// remove from view
-				el = Self.els.threadsList.find(`.friends-list .friend[data-id="friends/${event.detail.username}"]`);
+				el = Self.els.threadsList.find(`.friends-list .friend[data-username="${event.detail.username}"]`);
 				user = el.hasClass("active");
 				// remove friend from UI
 				el.remove();
@@ -70,6 +92,16 @@
 				Self.els.root.find(".active").removeClass("active");
 				// make clicked item active
 				event.el.addClass("active");
+
+				// store channel info
+				APP.channel = {
+					id: event.el.data("id"),
+					username: event.el.data("username"),
+				};
+				// render channel transcript history
+				APP.transcript.dispatch({ type: "render-thread" });
+				// forward event to threads column
+				APP.info.dispatch({ type: "render-user", username: APP.channel.username });
 				break;
 			case "render-threads":
 				// render channels
@@ -85,6 +117,60 @@
 					el.trigger("click");
 				} else {
 					Self.els.root.find(".channel").get(0).trigger("click");
+				}
+				break;
+			case "receive-message":
+				// pre-process message
+				if (event.priority === 1) {
+					el = Self.els.root.find(`.friend[data-id="${event.channelId}"]`);
+
+					if (el.hasClass("active")) {
+						el = APP.transcript.els.output;
+						if (event.typing && event.from !== ME.username) {
+							// remove existing typing anim, if exist
+							el.find(".message.typing").remove();
+
+							str = window.render({ template: "typing" });
+							user = karaqu.user.friend(event.from);
+							el.append(str.replace(/placeholder/, user.short));
+							// remove potential "zombies"
+							setTimeout(() => el.find(".message.typing")
+								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
+						} else {
+							el.find(".message.typing")
+								.cssSequence("removing", "transitionend", e => e.remove());
+						}
+					} else {
+						if (event.typing && event.from !== ME.username) {
+							// remove existing typing anim, if exist
+							el.find(".anim-typing").remove();
+
+							str = window.render({ template: "tiny-typing" });
+							el.append(str);
+							// remove potential "zombies"
+							setTimeout(() => el.find(".anim-typing")
+								.cssSequence("removing", "transitionend", e => e.remove()), 5e3);
+						} else {
+							el.find(".anim-typing").remove();
+						}
+					}
+					return;
+				}
+				// nothing to do - probably "silent" event
+				if (!event.message) return;
+
+				// log incoming message
+				num = APP.transcript.dispatch({ ...event, type: "log-message" });
+
+				if (event.from === APP.channel.username) {
+					// forward event for render
+					APP.transcript.dispatch(event);
+				} else {
+					let userEl = Self.els.root.find(`.friend[data-id="${event.channelId}"]`);
+					// remove "old" element
+					userEl.find(".notification").remove();
+					// append new number
+					userEl.append(`<span class="notification">${num}</span>`);
 				}
 				break;
 		}
