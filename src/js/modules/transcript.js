@@ -20,6 +20,7 @@
 			xpath,
 			xnode,
 			el;
+		// console.log(event);
 		switch (event.type) {
 			// custom events
 			case "render-thread":

@@ -4,7 +4,8 @@ let Test = {
 		// return;
 
 		return setTimeout(() => {
-			APP.els.content.find(`.friends .friend[data-username="linus"]`).trigger("click");
+			if (ME.username === "hbi") APP.els.content.find(`.friends .friend[data-username="linus"]`).trigger("click");
+			if (ME.username === "linus") APP.els.content.find(`.friends .friend[data-username="linus"]`).trigger("click");
 		}, 100);
 
 

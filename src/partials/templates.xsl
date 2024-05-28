@@ -60,7 +60,7 @@
 			<!-- <xsl:sort order="descending" select="@online"/> -->
 			<xsl:sort order="ascending" select="@name"/>
 
-			<li class="friend" data-click="select-channel">
+			<li class="friend" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:attribute name="data-username"><xsl:value-of select="@username"/></xsl:attribute>
 				<xsl:if test="@online = 1">
@@ -92,7 +92,7 @@
 			<xsl:sort order="ascending" select="@cstamp"/>
 			<xsl:variable name="channelId" select="current()/@id"/>
 			
-			<li class="channel" data-click="select-channel">
+			<li class="channel" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<i class="icon-thread"></i>
 				<div class="name">
@@ -119,7 +119,7 @@
 			<xsl:sort order="ascending" select="//Friends/i[@id = current()/@id]/@name"/>
 			<xsl:variable name="user" select="//Friends/i[@id = current()/@id]"/>
 			<xsl:variable name="channelId" select="current()/@id"/>
-			<li class="member" data-click="select-channel">
+			<li class="member" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>

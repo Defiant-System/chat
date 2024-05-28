@@ -88,7 +88,7 @@
 			case "add-friend":
 				karaqu.shell("sys -o");
 				break;
-			case "select-channel":
+			case "select-thread":
 				Self.els.root.find(".active").removeClass("active");
 				// make clicked item active
 				event.el.addClass("active");
@@ -162,7 +162,7 @@
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
-				if (event.from === APP.channel.username) {
+				if ([APP.channel.username, ME.username].includes(event.from)) {
 					// forward event for render
 					APP.transcript.dispatch(event);
 				} else {

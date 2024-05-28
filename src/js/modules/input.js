@@ -19,7 +19,6 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.input,
-			action,
 			stamp,
 			to,
 			from,
@@ -81,7 +80,6 @@
 				break;
 			case "send-message":
 				stamp = Date.now();
-				action = "initiate";
 				from = ME.username;
 				fromName = ME.name;
 				to = APP.channel.username;
@@ -92,17 +90,17 @@
 					{
 						id: karaqu.AFFIRMATIVE,
 						name: "Show",
-						payload: "action,message,channelId",
+						payload: "message,channelId",
 					},
 					{
 						id: karaqu.NEGATIVE,
 						name: "Close",
-						payload: "action,message,channelId",
+						payload: "message,channelId",
 					}
 				];
 
 				// send to chat lobby
-				window.net.send({ action, from, fromName, to, channelId, message, stamp, options });
+				window.net.send({ from, fromName, to, channelId, message, stamp, options });
 				// clear input on "next tick"
 				setTimeout(() => Self.els.input.html(""), 1);
 				break;
