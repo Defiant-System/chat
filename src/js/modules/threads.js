@@ -29,7 +29,7 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
-			user,
+			user, online,
 			num, str,
 			id,
 			el;
@@ -47,13 +47,7 @@
 				// get friends list (array)
 				karaqu.shell(`user -f`)
 					.then(resp => {
-						resp.result.map(friend => {
-							let online = friend.online ? 1 : 0,
-								id = Self.idChannel(`friends-${friend.username}-${ME.username}`),
-								str = `<i id="${id}" online="${online}" username="${friend.username}" name="${friend.name}"/>`,
-								xFriend = $.nodeFromString(str);
-							Self.xFriends.appendChild(xFriend);
-						});
+						resp.result.map(friend => Self.dispatch({ type: "populate-friend-roster", friend }));
 					});
 				break;
 			case "friend-status":
@@ -61,19 +55,29 @@
 				el.toggleClass("online", event.detail.status !== 1);
 				break;
 			case "friend-added":
-				if (Self.els.threadsList.find(".friends-list").length) {
-					// render channels
-					let vdom = window.render({
-							template: "threads",
-							match: `//Teams/Team[@id="friends"]`,
-							vdom: true
-						}),
-						vEl = vdom.find(`li.friend[data-username="${event.detail.username}"]`);
-					// insert new friend at "index"
-					Self.els.threadsList.find(`li.friend:nth(${vEl.index()-1})`).after(vEl);
-				}
+				// add new friend to "local" friend roster
+				karaqu.shell(`user -i '${event.detail.username}'`)
+					.then(resp => {
+						Self.dispatch({ type: "populate-friend-roster", friend: resp.result });
+
+						// if friends list is visible, attempt to add user to list
+						if (Self.els.threadsList.find(".friends-list").length) {
+							// render channels
+							let vdom = window.render({
+									template: "threads",
+									match: `//Teams/Team[@id="friends"]`,
+									vdom: true
+								}),
+								vEl = vdom.find(`li.friend[data-username="${event.detail.username}"]`);
+							// insert new friend at "index"
+							Self.els.threadsList.find(`li.friend:nth(${vEl.index()-1})`).after(vEl);
+						}
+					});
 				break;
 			case "friend-removed":
+				// remove friend from "local" data
+				user = Self.xFriends.selectSingleNode(`./*[@username="${event.detail.username}"]`);
+				if (user) user.parentNode.removeChild(user);
 				// remove from view
 				el = Self.els.threadsList.find(`.friends-list .friend[data-username="${event.detail.username}"]`);
 				user = el.hasClass("active");
@@ -85,6 +89,13 @@
 				// TODO: delete logs from "//Data" ??
 				break;
 			// custom events
+			case "populate-friend-roster":
+				online = event.friend.online ? 1 : 0;
+				id = Self.idChannel(`friends-${event.friend.username}-${ME.username}`);
+				str = `<i id="${id}" online="${online}" username="${event.friend.username}" name="${event.friend.name}"/>`;
+				user = $.nodeFromString(str);
+				Self.xFriends.appendChild(user);
+				break;
 			case "add-friend":
 				karaqu.shell("sys -o");
 				break;
@@ -149,7 +160,7 @@
 							el.append(str);
 							// remove potential "zombies"
 							setTimeout(() => el.find(".anim-typing")
-								.cssSequence("removing", "transitionend", e => e.remove()), 5e3);
+								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
 						} else {
 							el.find(".anim-typing").remove();
 						}

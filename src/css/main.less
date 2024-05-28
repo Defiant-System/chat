@@ -16,7 +16,7 @@ content {
 	&[data-theme="amber"] {
 		.teams,
 		.threads {
-			filter: hue-rotate(45deg);
+			filter: hue-rotate(135deg);
 		}
 	}
 
@@ -107,10 +107,8 @@ content {
 
 		.team {
 			background: #158;
+			background-size: 0 0;
 			color: #13466d;
-			background-repeat: no-repeat;
-			background-size: contain;
-			background-position: 50% 50%;
 			position: relative;
 			display: inline-block;
 			width: 37px;
@@ -127,6 +125,7 @@ content {
 				transform: translateY(-50%);
 				font-size: 17px;
 				font-weight: 700;
+				text-transform: uppercase;
 			}
 
 			&:after {
@@ -137,15 +136,26 @@ content {
 				right: -6px;
 				bottom: -6px;
 				border-radius: 12px;
+				background-image: inherit;
+				background-repeat: no-repeat;
+				background-size: 37px 37px;
+				background-position: 50% 50%;
 			}
 
 			&:hover:not(.active) {
 				cursor: pointer;
-				filter: brightness(1.075);
+
+				&:after {
+					filter: brightness(1.075);
+				}
 			}
 
 			&[style^="background-image: url"] {
-				opacity: .45;
+				background-color: transparent;
+
+				&:after {
+					opacity: .45;
+				}
 			}
 
 			&.active {
@@ -153,7 +163,11 @@ content {
 				color: #13466d;
 				
 				&[style^="background-image: url"] {
-					opacity: 1;
+					background-color: transparent;
+
+					&:after {
+						opacity: 1;
+					}
 				}
 
 				&:after {

@@ -1,7 +1,11 @@
 
 let Test = {
 	init(APP) {
-		return;
+		// return;
+		
+		return setTimeout(() => {
+			APP.els.content.find(`.teams .team:nth(1)`).trigger("click");
+		}, 100);
 
 		return setTimeout(() => {
 			if (ME.username === "hbi") {

@@ -12,7 +12,6 @@
 			<xsl:if test="@img">
 				<xsl:attribute name="style">
 					background-image: url(<xsl:value-of select="@img"/>);
-					background-color: transparent;
 				</xsl:attribute>
 			</xsl:if>
 			<span class="notification"></span>

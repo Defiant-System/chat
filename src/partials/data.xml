@@ -1,6 +1,13 @@
 <Data>
 	<Teams>
 		<Team id="friends" name="Friends" img="~/icons/icon-contacts.png" cstamp="1595006816531"/>
+		<Team id="5076e37534614e85bc1a1edb1d36d796" name="Karaqu" short="KA" cstamp="1595006816536">
+			<Channels>
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-general" name="General" cstamp="1595006835076" />
+				<i id="5076e37534614e85bc1a1edb1d36d796-hbi-random" name="Random" cstamp="1597140881021" />
+			</Channels>
+			<Members/>
+		</Team>
 		<!-- additional teams goes here -->
 	</Teams>
 	<Transcripts>
