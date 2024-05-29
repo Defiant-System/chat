@@ -8,14 +8,14 @@ let Test = {
 
 			if (ME.username === "hbi") {
 				setTimeout(() => {
-					APP.els.content.find(".threads-list li:nth(2)").trigger("click");
-					// console.log( APP.els.content.find(".threads-list li") );
+					APP.els.content.find(".threads-list li:nth(3)").trigger("click");
 				}, 300);
-			}
 
-			// setTimeout(() => {
-			// 	window.net.send({ from: ME.username, uri: "ant/chat/5076e37534614e85bc1a1edb1d36d796", message: "hello world" });
-			// }, 1500);
+				setTimeout(() => {
+					// window.net.send({ from: ME.username, uri: "ant/chat/5076e37534614e85bc1a1edb1d36d796", message: "hello world" });
+					APP.input.dispatch({ type: "send-message", message: "test 123" });
+				}, 1000);
+			}
 		}, 100);
 
 		return setTimeout(() => {

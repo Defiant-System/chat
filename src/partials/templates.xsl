@@ -124,6 +124,9 @@
 					<xsl:value-of select="@username"/>
 					<xsl:if test="@username = $me"><span>(you)</span></xsl:if>
 				</div>
+				<xsl:if test="count(//Transcripts/*[@id = current()/@id]/*[@unread]) &gt; 0">
+					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = current()/@id]/*[@unread])"/></span>
+				</xsl:if>
 			</li>
 		</xsl:for-each>
 		<!-- <li class="add-member disabled" data-click="add-member">

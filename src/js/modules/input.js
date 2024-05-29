@@ -86,7 +86,7 @@
 				data.fromName = ME.name;
 				data.to = APP.channel.username;
 				data.channelId = APP.channel.id;
-				data.message = Self.els.input.text();
+				data.message = event.message || Self.els.input.text();
 				// message = `${fromName}: ${Self.els.input.text()}`;
 				if (APP.room.id === "friends") {
 					data.options = [
