@@ -3,7 +3,7 @@
 <xsl:template name="teams">
 	<xsl:for-each select="./Team">
 		<xsl:sort order="ascending" select="@cstamp"/>
-		<div class="team">
+		<div class="team all-read">
 			<xsl:attribute name="title"><xsl:value-of select="@name"/></xsl:attribute>
 			<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
 			<xsl:if test="not(@img)">

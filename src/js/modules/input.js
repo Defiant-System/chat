@@ -19,14 +19,15 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.input,
-			stamp,
-			to,
-			from,
-			fromName,
-			channelId,
-			message,
-			options,
-			typing,
+			data = {},
+			// stamp,
+			// to,
+			// from,
+			// fromName,
+			// channelId,
+			// message,
+			// options,
+			// typing,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -63,45 +64,53 @@
 				break;
 			// custom event
 			case "emit-typing-info":
-				from = ME.username;
-				fromName = ME.name;
-				to = APP.channel.username;
-				channelId = APP.channel.id;
-				typing = event.typing;
-				if (!to) return;
+				data.from = ME.username;
+				data.fromName = ME.name;
+				data.to = APP.channel.username;
+				data.channelId = APP.channel.id;
+				data.typing = event.typing;
+				if (!data.to) return;
 
 				// exit if user is not online
-				karaqu.shell(`user -i '${to}'`)
+				karaqu.shell(`user -i '${data.to}'`)
 					.then(check => {
 						if (check.result && check.result.online) {
 							// send to chat lobby
-							window.net.send({ priority: 1, from, fromName, to, channelId, typing });
+							window.net.send({ priority: 1, ...data });
 						}
 					});
 				break;
 			case "send-message":
-				stamp = Date.now();
-				from = ME.username;
-				fromName = ME.name;
-				to = APP.channel.username;
-				channelId = APP.channel.id;
-				message = Self.els.input.text();
+				data.stamp = Date.now();
+				data.from = ME.username;
+				data.fromName = ME.name;
+				data.to = APP.channel.username;
+				data.channelId = APP.channel.id;
+				data.message = Self.els.input.text();
 				// message = `${fromName}: ${Self.els.input.text()}`;
-				options = [
-					{
-						id: karaqu.AFFIRMATIVE,
-						name: "Show",
-						payload: "message,channelId",
-					},
-					{
-						id: karaqu.NEGATIVE,
-						name: "Close",
-						payload: "message,channelId",
-					}
-				];
+				if (APP.room.id === "friends") {
+					data.options = [
+						{
+							id: karaqu.AFFIRMATIVE,
+							name: "Show",
+							payload: "message,channelId",
+						},
+						{
+							id: karaqu.NEGATIVE,
+							name: "Close",
+							payload: "message,channelId",
+						}
+					];
+				} else {
+					// message is sent to a "team"
+					data.room = APP.room.id;
+					// hygiene
+					delete data.to;
+					// return console.log(data);
+				}
 
 				// send to chat lobby
-				window.net.send({ from, fromName, to, channelId, message, stamp, options });
+				window.net.send(data);
 				// clear input on "next tick"
 				setTimeout(() => Self.els.input.html(""), 1);
 				break;

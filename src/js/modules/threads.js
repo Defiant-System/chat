@@ -234,12 +234,16 @@
 				if ([APP.channel.username, ME.username].includes(event.from)) {
 					// forward event for render
 					APP.transcript.dispatch(event);
+				} else if (event.room && APP.channel.id === event.channelId) {
+					// message is to a "team" / room
+					APP.transcript.dispatch(event);
 				} else {
-					let userEl = Self.els.root.find(`.friend[data-id="${event.channelId}"]`);
+					// message is to a "team" / room
+					el = Self.els.threadsList.find(`li[data-id="${event.channelId}"]`);
 					// remove "old" element
-					userEl.find(".notification").remove();
+					el.find(".notification").remove();
 					// append new number
-					userEl.append(`<span class="notification">${num}</span>`);
+					el.append(`<span class="notification">${num}</span>`);
 				}
 				break;
 		}

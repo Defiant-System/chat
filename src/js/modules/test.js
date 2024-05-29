@@ -6,6 +6,13 @@ let Test = {
 		return setTimeout(() => {
 			APP.els.content.find(`.teams .team:nth(1)`).trigger("click");
 
+			if (ME.username === "hbi") {
+				setTimeout(() => {
+					APP.els.content.find(".threads-list li:nth(2)").trigger("click");
+					// console.log( APP.els.content.find(".threads-list li") );
+				}, 300);
+			}
+
 			// setTimeout(() => {
 			// 	window.net.send({ from: ME.username, uri: "ant/chat/5076e37534614e85bc1a1edb1d36d796", message: "hello world" });
 			// }, 1500);
