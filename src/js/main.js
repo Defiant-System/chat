@@ -13,8 +13,8 @@ const chat = {
 		};
 
 		// obtain lobby ID
-		let xLobby = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
-		this.lobbyId = xLobby.getAttribute("id");
+		let xTeam = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
+		this.lobbyId = xTeam.getAttribute("id");
 
 		// init all sub-objects
 		Object.keys(this)
@@ -40,7 +40,6 @@ const chat = {
 				Self.teams.dispatch({ type: "select-first-team" });
 
 				// join chat lobby
-				console.log("join: ", Self.lobbyId);
 				window.net.join({ room: Self.lobbyId });
 				break;
 			case "window.close":
@@ -61,9 +60,11 @@ const chat = {
 
 			// lobby events
 			case "net.greet":
+				console.log(event);
+				break;
 			case "net.join":
 			case "net.leave":
-				console.log(event);
+				// console.log(event);
 				break;
 
 			// custom events
