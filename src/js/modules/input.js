@@ -75,6 +75,7 @@
 				break;
 			case "send-message":
 				data.stamp = Date.now();
+				data.action = "initiate";
 				data.from = ME.username;
 				data.fromName = ME.name;
 				data.to = APP.channel.username;
@@ -86,12 +87,12 @@
 						{
 							id: karaqu.AFFIRMATIVE,
 							name: "Show",
-							payload: "message,channelId",
+							payload: "action,message,channelId",
 						},
 						{
 							id: karaqu.NEGATIVE,
 							name: "Close",
-							payload: "message,channelId",
+							// payload: "message,channelId",
 						}
 					];
 				} else {

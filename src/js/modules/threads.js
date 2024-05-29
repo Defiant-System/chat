@@ -109,7 +109,7 @@
 				id = Self.idChannel(`${event.room}-${event.from}-${ME.username}`);
 				xParent = window.bluePrint.selectSingleNode(`//Teams/Team[@id = "${event.room}"]/Members`);
 				xNode = xParent.selectSingleNode(`./*[@id="${id}"]`);
-				xParent.removeChild(xNode);
+				if (xParent && xNode) xParent.removeChild(xNode);
 
 				// UI update if "team" is active
 				if (APP.room.id === event.room) {
@@ -189,6 +189,13 @@
 				}
 				break;
 			case "receive-message":
+				// if message is received while app was not started
+				if (event.action === "initiate") {
+					// finish initating app first
+					APP.dispatch({ type: "window.init" });
+					// go to correct channelID
+					setTimeout(() => Self.els.threadsList.find(`li[data-id="${event.channelId}"]`).trigger("click"), 100);
+				}
 				// pre-process message
 				if (event.priority === 1) {
 					el = Self.els.root.find(`.friend[data-id="${event.channelId}"]`);

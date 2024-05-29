@@ -5,10 +5,10 @@
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0"/>
 		<meta name="repository" value="https://github.com/Defiant-System/chat"/>
-		<meta name="width" value="950" min="700"/>
+		<meta name="width" value="920" min="700"/>
 		<meta name="height" value="540" min="300"/>
-		<meta name="top" value="200"/>
-		<meta name="left" value="250"/>
+		<meta name="top" value="150"/>
+		<meta name="left" value="30"/>
 		<meta name="minimize"/>
 		<meta name="maximize"/>
 		<meta name="resize"/>

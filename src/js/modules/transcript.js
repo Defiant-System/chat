@@ -111,7 +111,8 @@
 				return xChannel.selectNodes(`./*[@unread="1"]`).length;
 			case "fix-timestamps":
 				// fix timestamps
-				xpath = `//Transcripts/*[@id="${APP.channel.id}"]//*[@cstamp and not(@timestamp)]`;
+				xpath = `//Transcripts//*[@cstamp and not(@timestamp)]`;
+				// xpath = `//Transcripts/*[@id="${APP.channel.id}"]//*[@cstamp and not(@timestamp)]`;
 				window.bluePrint.selectNodes(xpath).map(i => {
 					let timestamp = new karaqu.Moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
