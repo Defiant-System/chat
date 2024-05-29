@@ -19,15 +19,8 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.input,
+			fnSend,
 			data = {},
-			// stamp,
-			// to,
-			// from,
-			// fromName,
-			// channelId,
-			// message,
-			// options,
-			// typing,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -87,7 +80,7 @@
 				data.to = APP.channel.username;
 				data.channelId = APP.channel.id;
 				data.message = event.message || Self.els.input.text();
-				// message = `${fromName}: ${Self.els.input.text()}`;
+
 				if (APP.room.id === "friends") {
 					data.options = [
 						{
@@ -109,10 +102,27 @@
 					// return console.log(data);
 				}
 
-				// send to chat lobby
-				window.net.send(data);
-				// clear input on "next tick"
-				setTimeout(() => Self.els.input.html(""), 1);
+				// send function
+				fnSend = data => {
+					// send to chat lobby
+					window.net.send(data);
+					// clear input on "next tick"
+					setTimeout(() => Self.els.input.html(""), 1);
+				};
+
+				let mod = data.message.match(/^\/\w+/);
+				if (mod) {
+					let cmd = mod[0].trim(),
+						phrase = data.message.slice(cmd.length).trim();
+					Mod[cmd].action(phrase, data.message, stdOut => {
+						data.message = stdOut;
+						// send message package
+						fnSend(data);
+					});
+				} else {
+					// send message package
+					fnSend(data);
+				}
 				break;
 		}
 	}

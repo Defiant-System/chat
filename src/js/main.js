@@ -1,5 +1,11 @@
 
+@import "modules/giphy.js";
 @import "modules/test.js";
+
+
+let Mod = {
+		"/giphy": Giphy,
+	};
 
 
 const ME = karaqu.user;
@@ -68,6 +74,9 @@ const chat = {
 			// custom events
 			case "set-ui-theme":
 				Self.els.content.data({ theme: event.arg });
+				break;
+			case "open-help":
+				karaqu.shell("fs -u '~/help/index.md'");
 				break;
 			// forward events
 			case "net.receive":

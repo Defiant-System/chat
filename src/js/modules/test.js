@@ -2,6 +2,18 @@
 let Test = {
 	init(APP) {
 		// return;
+
+		if (ME.username === "hbi") {
+			setTimeout(() => {
+				APP.els.content.find(".threads-list li:nth(3)").trigger("click");
+			}, 300);
+
+			// setTimeout(() => {
+			// 	APP.input.dispatch({ type: "send-message", message: "/giphy yolo" });
+			// }, 1000);
+		}
+
+		return;
 		
 		return setTimeout(() => {
 			APP.els.content.find(`.teams .team:nth(1)`).trigger("click");
