@@ -116,24 +116,14 @@
 
 	<div class="members-list"><ul>
 		<xsl:for-each select="./*">
-			<xsl:sort order="ascending" select="//Friends/i[@id = current()/@id]/@name"/>
-			<xsl:variable name="user" select="//Friends/i[@id = current()/@id]"/>
-			<xsl:variable name="channelId" select="current()/@id"/>
+			<xsl:sort order="ascending" select="@username"/>
 			<li class="member" data-click="select-thread">
 				<xsl:attribute name="data-id"><xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:if test="$user/@online = 1">
-					<xsl:attribute name="class">member online</xsl:attribute>
-				</xsl:if>
 				<i class="icon-online"></i>
 				<div class="name">
-					<xsl:value-of select="$user/@name"/>
-					<xsl:if test="not(//Friends/i[@id = $channelId])">
-						<xsl:value-of select="@username"/>
-					</xsl:if>
+					<xsl:value-of select="@username"/>
+					<xsl:if test="@username = $me"><span>(you)</span></xsl:if>
 				</div>
-				<xsl:if test="count(//Transcripts/*[@id = $channelId]/*[@unread]) &gt; 0">
-					<span class="notification"><xsl:value-of select="count(//Transcripts/*[@id = $channelId]/*[@unread])"/></span>
-				</xsl:if>
 			</li>
 		</xsl:for-each>
 		<!-- <li class="add-member disabled" data-click="add-member">

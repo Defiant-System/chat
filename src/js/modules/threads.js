@@ -140,14 +140,14 @@
 				xParent = window.bluePrint.selectSingleNode(`//Teams/Team[@id = "${event.member.team}"]/Members`);
 				id = Self.idChannel(`${event.member.team}-${event.member.username}-${ME.username}`);
 				xNode = $.nodeFromString(`<i id="${id}" username="${event.member.username}"/>`);
-				xParent.appendChild(xNode);
+				if (!xParent.selectSingleNode(`./*[@id="${xNode.getAttribute("id")}"]`)) xParent.appendChild(xNode);
 				break;
 			case "x-populate-friend-roster":
 				online = event.friend.online ? 1 : 0;
 				id = Self.idChannel(`friends-${event.friend.username}-${ME.username}`);
 				str = `<i id="${id}" online="${online}" username="${event.friend.username}" name="${event.friend.name}"/>`;
 				xNode = $.nodeFromString(str);
-				Self.xFriends.appendChild(xNode);
+				if (!Self.xFriends.selectSingleNode(`./*[@id="${xNode.getAttribute("id")}"]`)) Self.xFriends.appendChild(xNode);
 				break;
 			case "add-friend":
 				karaqu.shell("sys -o");
