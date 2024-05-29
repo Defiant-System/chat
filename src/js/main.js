@@ -60,12 +60,10 @@ const chat = {
 
 			// lobby events
 			case "net.greet":
-				console.log(event);
-				break;
 			case "net.join":
 			case "net.leave":
-				// console.log(event);
-				break;
+				// proxy event to threads
+				return Self.threads.dispatch(event);
 
 			// custom events
 			case "set-ui-theme":

@@ -37,7 +37,10 @@
 				Self.els.teams.find(".active").removeClass("active");
 				// make active
 				el.addClass("active");
-
+				// easily accessible reference to active "room"
+				APP.room = {
+					id: el.data("id"),
+				};
 				// forward event to threads column
 				APP.threads.dispatch({ type: "render-threads", id: el.data("id") });
 				break;

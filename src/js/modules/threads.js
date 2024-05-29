@@ -29,6 +29,7 @@
 	dispatch(event) {
 		let APP = chat,
 			Self = APP.threads,
+			xParent, xNode,
 			user, online,
 			num, str,
 			id,
@@ -47,7 +48,7 @@
 				// get friends list (array)
 				karaqu.shell(`user -f`)
 					.then(resp => {
-						resp.result.map(friend => Self.dispatch({ type: "populate-friend-roster", friend }));
+						resp.result.map(friend => Self.dispatch({ type: "x-populate-friend-roster", friend }));
 					});
 				break;
 			case "friend-status":
@@ -58,7 +59,7 @@
 				// add new friend to "local" friend roster
 				karaqu.shell(`user -i '${event.detail.username}'`)
 					.then(resp => {
-						Self.dispatch({ type: "populate-friend-roster", friend: resp.result });
+						Self.dispatch({ type: "x-populate-friend-roster", friend: resp.result });
 
 						// if friends list is visible, attempt to add user to list
 						if (Self.els.threadsList.find(".friends-list").length) {
@@ -88,13 +89,65 @@
 
 				// TODO: delete logs from "//Data" ??
 				break;
+
+			// lobby events
+			case "net.greet":
+				// add user to app data
+				event.list.map(username => {
+					Self.dispatch({ type: "x-populate-member-roster", member: { username, team: event.room } });
+				});
+				// update UI
+				Self.dispatch({ type: "ui-populate-member-roster", room: event.room });
+				break;
+			case "net.join":
+				Self.dispatch({ type: "x-populate-member-roster", member: { username: event.from, team: event.room } });
+				// update UI
+				Self.dispatch({ type: "ui-populate-member-roster", room: event.room });
+				break;
+			case "net.leave":
+				// UI update if "team" is active
+				if (APP.room.id === event.room) {
+					let id = Self.idChannel(`${event.room}-${event.from}-${ME.username}`);
+					Self.els.threadsList.find(`.members-list li[data-id="${id}"]`).remove();
+
+					// TODO: remove all logs of chat with user?
+				}
+				break;
+
 			// custom events
-			case "populate-friend-roster":
+			case "ui-populate-member-roster":
+				// UI update if "team" is active
+				if (APP.room.id === event.room) {
+					// render member
+					let pEl = Self.els.threadsList.find(".members-list ul"),
+						vdom = window.render({
+							template: "members",
+							match: `//Teams/Team[@id="${event.room}"]/Members`,
+							vdom: true,
+						});
+					// add members, if there are not in list already
+					vdom.find(".member").map(el => {
+						let mEl = $(el);
+						if (!pEl.find(`.member[data-id="${mEl.data("id")}"]`).length) {
+							if (mEl.index() - 1 < 0) pEl.append(el);
+							else pEl.find(`li:nth(${mEl.index()-1})`).after(el);
+						}
+					});
+				}
+				break;
+
+			case "x-populate-member-roster":
+				xParent = window.bluePrint.selectSingleNode(`//Teams/Team[@id = "${event.member.team}"]/Members`);
+				id = Self.idChannel(`${event.member.team}-${event.member.username}-${ME.username}`);
+				xNode = $.nodeFromString(`<i id="${id}" username="${event.member.username}"/>`);
+				xParent.appendChild(xNode);
+				break;
+			case "x-populate-friend-roster":
 				online = event.friend.online ? 1 : 0;
 				id = Self.idChannel(`friends-${event.friend.username}-${ME.username}`);
 				str = `<i id="${id}" online="${online}" username="${event.friend.username}" name="${event.friend.name}"/>`;
-				user = $.nodeFromString(str);
-				Self.xFriends.appendChild(user);
+				xNode = $.nodeFromString(str);
+				Self.xFriends.appendChild(xNode);
 				break;
 			case "add-friend":
 				karaqu.shell("sys -o");

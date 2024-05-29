@@ -5,6 +5,10 @@ let Test = {
 		
 		return setTimeout(() => {
 			APP.els.content.find(`.teams .team:nth(1)`).trigger("click");
+
+			// setTimeout(() => {
+			// 	window.net.send({ from: ME.username, uri: "ant/chat/5076e37534614e85bc1a1edb1d36d796", message: "hello world" });
+			// }, 1500);
 		}, 100);
 
 		return setTimeout(() => {

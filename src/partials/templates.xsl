@@ -124,7 +124,7 @@
 				<xsl:if test="$user/@online = 1">
 					<xsl:attribute name="class">member online</xsl:attribute>
 				</xsl:if>
-				<i class="icon-offline"></i>
+				<i class="icon-online"></i>
 				<div class="name">
 					<xsl:value-of select="$user/@name"/>
 					<xsl:if test="not(//Friends/i[@id = $channelId])">
