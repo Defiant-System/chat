@@ -105,9 +105,14 @@
 				Self.dispatch({ type: "ui-populate-member-roster", room: event.room });
 				break;
 			case "net.leave":
+				// remove node from data
+				id = Self.idChannel(`${event.room}-${event.from}-${ME.username}`);
+				xParent = window.bluePrint.selectSingleNode(`//Teams/Team[@id = "${event.room}"]/Members`);
+				xNode = xParent.selectSingleNode(`./*[@id="${id}"]`);
+				xParent.removeChild(xNode);
+
 				// UI update if "team" is active
 				if (APP.room.id === event.room) {
-					let id = Self.idChannel(`${event.room}-${event.from}-${ME.username}`);
 					Self.els.threadsList.find(`.members-list li[data-id="${id}"]`).remove();
 
 					// TODO: remove all logs of chat with user?
