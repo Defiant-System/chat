@@ -25,13 +25,16 @@
 				// render transcript
 				window.render({
 					template: "info",
-					match: `sys://Friends/*[@id="${event.username}"]`,
+					match: `//Team[@id="friends"]/*[@username="${event.username}"]`,
 					target: Self.els.root
 				});
 				break;
 			case "voice-call-user":
 			case "camera-call-user":
-				karaqu.shell(`win -o ant:bell { 'type': 'camera-call-user', 'username': 'linus' }`);
+				el = event.el.parents(".profile");
+				if (el.hasClass("online")) {
+					karaqu.shell(`win -o ant:bell { 'type': 'camera-call-user', 'username': '${el.data("username")}' }`);
+				}
 				break;
 		}
 	}

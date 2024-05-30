@@ -762,7 +762,7 @@ content {
 					padding: 9px 0 0;
 
 					.action {
-						background: #ddd;
+						background: #5c5;
 						display: inline-block;
 						position: relative;
 						margin: 0 3px;
@@ -770,7 +770,12 @@ content {
 						cursor: pointer;
 						border-radius: 50%;
 
-						&:hover {
+						&.disabled {
+							filter: grayscale(1) brightness(1.2);
+							cursor: default;
+						}
+
+						&:hover:not(.disabled) {
 							background: #4a4;
 						}
 

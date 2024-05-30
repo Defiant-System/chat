@@ -195,12 +195,13 @@
 <xsl:template name="info">
 	<div class="info-body">
 		<div class="profile">
+			<xsl:attribute name="data-username"><xsl:value-of select="@username"/></xsl:attribute>
 			<xsl:if test="@online = 1">
 				<xsl:attribute name="class">profile online</xsl:attribute>
 			</xsl:if>
 			<div class="avatar">
 				<xsl:if test="@avatar">
-					<xsl:attribute name="style">background-image: url(<xsl:value-of select="@avatar"/>);</xsl:attribute>
+					<xsl:attribute name="style">background-image: url(/res/avatar/<xsl:value-of select="@username"/>.jpg);</xsl:attribute>
 				</xsl:if>
 			</div>
 			<h2>
@@ -209,9 +210,11 @@
 			</h2>
 			<div class="action-options">
 				<div class="action" data-click="voice-call-user">
+					<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
 					<i class="icon-phone"></i>
 				</div>
 				<div class="action" data-click="camera-call-user">
+					<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
 					<i class="icon-camera"></i>
 				</div>
 			</div>
@@ -219,7 +222,7 @@
 
 		<div class="field">
 			<span>Nickname</span>
-			<span><xsl:value-of select="@id"/></span>
+			<span><xsl:value-of select="@username"/></span>
 		</div>
 
 		<xsl:if test="@mobile">
