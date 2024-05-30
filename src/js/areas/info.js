@@ -29,8 +29,8 @@
 					target: Self.els.root
 				});
 				break;
-			case "audio-call-user":
-			case "video-call-user":
+			case "voice-call-user":
+			case "camera-call-user":
 				console.log(event);
 				break;
 		}

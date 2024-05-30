@@ -1,9 +1,13 @@
 
+@import "modules/canvas.js";
+@import "modules/file.js";
 @import "modules/giphy.js";
 @import "modules/test.js";
 
 
 let Mod = {
+		"/canvas": Canvas,
+		"/file": File,
 		"/giphy": Giphy,
 	};
 
@@ -93,12 +97,12 @@ const chat = {
 				}
 		}
 	},
-	toolbar:    @import "modules/toolbar.js",
-	teams:      @import "modules/teams.js",
-	threads:    @import "modules/threads.js",
-	transcript: @import "modules/transcript.js",
-	input:      @import "modules/input.js",
-	info:       @import "modules/info.js",
+	toolbar:    @import "areas/toolbar.js",
+	teams:      @import "areas/teams.js",
+	threads:    @import "areas/threads.js",
+	transcript: @import "areas/transcript.js",
+	input:      @import "areas/input.js",
+	info:       @import "areas/info.js",
 };
 
 window.exports = chat;
