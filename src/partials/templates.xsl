@@ -208,10 +208,10 @@
 				<xsl:value-of select="@name"/>
 			</h2>
 			<div class="action-options">
-				<div class="action" data-click="audio-call-user">
+				<div class="action" data-click="voice-call-user">
 					<i class="icon-phone"></i>
 				</div>
-				<div class="action" data-click="video-call-user">
+				<div class="action" data-click="camera-call-user">
 					<i class="icon-camera"></i>
 				</div>
 			</div>

@@ -31,7 +31,7 @@
 				break;
 			case "voice-call-user":
 			case "camera-call-user":
-				console.log(event);
+				karaqu.shell(`win -o ant:bell { 'type': 'camera-call-user', 'username': 'linus' }`);
 				break;
 		}
 	}
