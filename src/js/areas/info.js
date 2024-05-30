@@ -21,13 +21,19 @@
 				return value;
 			case "render-user":
 				user = karaqu.user.friend(event.username);
-				
 				// render transcript
 				window.render({
 					template: "info",
 					match: `//Team[@id="friends"]/*[@username="${event.username}"]`,
 					target: Self.els.root
 				});
+				break;
+			case "update-user-status":
+				el = Self.els.root.find(`.profile[data-username="${event.username}"]`);
+				if (el.length) {
+					el.toggleClass("online", !event.status);
+					Self.els.root.find(`.action-options .action`).toggleClass("disabled", event.status);
+				}
 				break;
 			case "voice-call-user":
 			case "camera-call-user":

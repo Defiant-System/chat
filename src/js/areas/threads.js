@@ -54,6 +54,8 @@
 			case "friend-status":
 				el = Self.els.root.find(`.friend[data-username="${event.detail.username}"]`);
 				el.toggleClass("online", event.detail.status !== 1);
+				// update "info", of user status (if it might be showing user info)
+				APP.info.dispatch({ ...event.detail, type: "update-user-status" });
 				break;
 			case "friend-added":
 				// add new friend to "local" friend roster
