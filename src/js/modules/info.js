@@ -29,6 +29,10 @@
 					target: Self.els.root
 				});
 				break;
+			case "audio-call-user":
+			case "video-call-user":
+				console.log(event);
+				break;
 		}
 	}
 }

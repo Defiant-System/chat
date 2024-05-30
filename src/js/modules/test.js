@@ -1,11 +1,12 @@
 
 let Test = {
 	init(APP) {
-		return;
+		// return;
 
 		if (ME.username === "hbi") {
 			setTimeout(() => {
 				APP.els.content.find(".threads-list li:nth(3)").trigger("click");
+				window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click");
 			}, 300);
 
 			// setTimeout(() => {
