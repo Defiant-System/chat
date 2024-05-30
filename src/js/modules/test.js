@@ -1,7 +1,7 @@
 
 let Test = {
 	init(APP) {
-		// return;
+		return;
 
 		if (ME.username === "hbi") {
 			setTimeout(() => {

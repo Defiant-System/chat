@@ -3,7 +3,10 @@
 
 {
 	init() {
-		
+		// fast references
+		this.els = {
+			root: window.find(`div[data-area="toolbar"]`),
+		};
 	},
 	dispatch(event) {
 		let APP = chat,

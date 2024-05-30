@@ -20,13 +20,25 @@
 				Self.els.root.toggleClass("hidden", value);
 				return value;
 			case "render-user":
-				user = karaqu.user.friend(event.username);
-				// render transcript
-				window.render({
-					template: "info",
-					match: `//Team[@id="friends"]/*[@username="${event.username}"]`,
-					target: Self.els.root
-				});
+				if (APP.channel.id.startsWith("friends-")) {
+					user = karaqu.user.friend(event.username);
+					// render transcript
+					window.render({
+						template: "info",
+						match: `//Team[@id="friends"]/*[@username="${event.username}"]`,
+						target: Self.els.root
+					});
+					// enable toolbar tool
+					APP.toolbar.els.root.find(`.toolbar-tool_[data-click="toggle-info"]`)
+						.removeClass("tool-disabled_");
+				} else {
+					// empty element
+					Self.els.root.addClass("hidden").html("");
+					// disable toolbar tool
+					APP.toolbar.els.root.find(`.toolbar-tool_[data-click="toggle-info"]`)
+						.removeClass("tool-active_")
+						.addClass("tool-disabled_");
+				}
 				break;
 			case "update-user-status":
 				el = Self.els.root.find(`.profile[data-username="${event.username}"]`);
