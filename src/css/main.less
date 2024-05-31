@@ -614,6 +614,34 @@ content {
 								right: 0;
 								text-align: right;
 							}
+
+							.file-transmit {
+								> div {
+									&.transmit-left {
+
+									}
+
+									&.transmit-body {
+										color: rgba(#fff,.5);
+
+										.transmit-info {
+											color: #fff;
+										}
+									}
+
+									&.transmit-right {
+										.btn-abort {
+											background: rgba(#000,.25);
+
+											&:before,
+											&:after {
+												background: #eee;
+											}
+										}
+									}
+								}
+							}
+
 						}
 
 						&.received {
@@ -815,7 +843,7 @@ content {
 										background: #bbb;
 										display: inline-block;
 										position: relative;
-										top: 12px;
+										top: 13px;
 										left: -3px;
 										width: 18px;
 										height: 18px;
@@ -835,7 +863,7 @@ content {
 											top: 3px;
 											left: 8px;
 											width: 2px;
-											height: 13px;
+											height: 12px;
 											transform-origin: 50% 50%;
 											transform: rotate(45deg);
 										}

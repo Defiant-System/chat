@@ -179,7 +179,7 @@
 </xsl:template>
 
 <xsl:template name="message-board">
-	<div class="message sent">
+	<div class="message received">
 		<div class="msg-wrapper">
 			<div class="avatar" data-name="hb"></div>
 			<div class="date">Fri 31 May 19:40</div>

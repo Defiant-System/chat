@@ -24,20 +24,6 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
-			case "tmp-message-board":
-				// white board
-				window.render({
-					template: "message-board",
-					match: `//Transcripts`,
-					target: Self.els.output,
-				});
-				// file transfer
-				window.render({
-					template: "message-transmit",
-					match: `//Transcripts`,
-					append: Self.els.output,
-				});
-				break;
 			case "render-thread":
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps" });
