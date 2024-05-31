@@ -152,6 +152,32 @@
 	</xsl:for-each>
 </xsl:template>
 
+<xsl:template name="message-transmit">
+	<div class="message received">
+		<div class="msg-wrapper">
+			<div class="avatar" data-name="hb"></div>
+			<div class="date">Tue 21 Jun 12:14</div>
+			<div class="file-transmit">
+				<div class="transmit-left">
+					<i class="icon-folder"></i>
+				</div>
+				<div class="transmit-body">
+					<div class="transmit-info">Transfering <i>some-file.txt</i></div>
+					<div class="transmit-progress">
+						<span style="width: 37%"></span>
+					</div>
+					<div class="transmit-details">
+						137 KB of 2.1 MB ~ 3 minutes
+					</div>
+				</div>
+				<div class="transmit-right">
+					<span class="btn-abort"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</xsl:template>
+
 <xsl:template name="message-board">
 	<div class="message sent">
 		<div class="msg-wrapper">
@@ -162,11 +188,10 @@
 				<ul class="palette">
 					<li style="--color: #000;"></li>
 					<li style="--color: #f00;"></li>
-					<li style="--color: #0f0;"></li>
+					<li style="--color: #0f0;" class="active"></li>
 					<li style="--color: #00f;"></li>
 					<li style="--color: #ff0;"></li>
 					<li style="--color: #f0f;"></li>
-					<li style="--color: #909;"></li>
 					<li style="--color: #f90;"></li>
 					<li style="--color: #0ff;"></li>
 					<li style="--color: #369;"></li>
