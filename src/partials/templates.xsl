@@ -208,16 +208,18 @@
 				<i class="icon-offline"></i>
 				<xsl:value-of select="@name"/>
 			</h2>
-			<div class="action-options">
-				<div class="action" data-click="voice-call-user">
-					<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
-					<i class="icon-phone"></i>
+			<xsl:if test="not(@me)">
+				<div class="action-options">
+					<div class="action" data-click="camera-call-user">
+						<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
+						<i class="icon-camera"></i>
+					</div>
+					<div class="action" data-click="voice-call-user">
+						<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
+						<i class="icon-phone"></i>
+					</div>
 				</div>
-				<div class="action" data-click="camera-call-user">
-					<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
-					<i class="icon-camera"></i>
-				</div>
-			</div>
+			</xsl:if>
 		</div>
 
 		<div class="field">

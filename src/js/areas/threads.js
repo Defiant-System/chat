@@ -243,7 +243,8 @@
 				let msgChannelTeam = event.channelId.split("-")[0],
 					appChannelTeam = APP.channel.id.split("-")[0];
 
-				if ([APP.channel.username, ME.username].includes(event.from)) {
+				// if ([APP.channel.username, ME.username].includes(event.from)) {
+				if (APP.channel.id === event.channelId) {
 					// forward event for render
 					APP.transcript.dispatch(event);
 				} else if (event.room && APP.channel.id === event.channelId) {
