@@ -152,6 +152,31 @@
 	</xsl:for-each>
 </xsl:template>
 
+<xsl:template name="message-board">
+	<div class="message sent">
+		<div class="msg-wrapper">
+			<div class="avatar" data-name="hb"></div>
+			<div class="date">Fri 31 May 19:40</div>
+			<div class="board">
+				<canvas width="360" height="220"></canvas>
+				<ul class="palette">
+					<li style="--color: #000;"></li>
+					<li style="--color: #f00;"></li>
+					<li style="--color: #0f0;"></li>
+					<li style="--color: #00f;"></li>
+					<li style="--color: #ff0;"></li>
+					<li style="--color: #f0f;"></li>
+					<li style="--color: #909;"></li>
+					<li style="--color: #f90;"></li>
+					<li style="--color: #0ff;"></li>
+					<li style="--color: #369;"></li>
+					<li style="--color: #fff;"></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</xsl:template>
+
 <xsl:template name="message">
 	<xsl:variable name="me" select="//Settings/User"/>
 	<xsl:variable name="user" select="//Friends/i[@id = current()/@from]"/>

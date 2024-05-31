@@ -1,5 +1,5 @@
 
-const Canvas = {
+const Board = {
 	action(phrase, stdOut, callback) {
 		
 	}

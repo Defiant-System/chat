@@ -24,6 +24,13 @@
 		// console.log(event);
 		switch (event.type) {
 			// custom events
+			case "tmp-message-board":
+				window.render({
+					template: "message-board",
+					match: `//Transcripts`,
+					target: Self.els.output,
+				});
+				break;
 			case "render-thread":
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps" });

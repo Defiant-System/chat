@@ -1,12 +1,12 @@
 
-@import "modules/canvas.js";
 @import "modules/file.js";
 @import "modules/giphy.js";
+@import "modules/board.js";
 @import "modules/test.js";
 
 
 let Mod = {
-		"/canvas": Canvas,
+		"/board": Board,
 		"/file": File,
 		"/giphy": Giphy,
 	};
