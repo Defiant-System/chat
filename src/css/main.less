@@ -62,6 +62,20 @@ content {
 				}
 			}
 		}
+
+		.transcript .output .wrapper .output-body .message {
+			&.sent .msg-wrapper {
+				background: #d56d7f;
+
+				&:after {
+				    background: radial-gradient(circle at top right, transparent 49%, #d56d7f 56%);
+				}
+
+				.avatar {
+					background: #d56d7f;
+				}
+			}
+		}
 	}
 
 	&[data-theme="purple"] {
@@ -110,6 +124,20 @@ content {
 			.friends .friend {
 				&.active {
 					color: #fef;
+				}
+			}
+		}
+
+		.transcript .output .wrapper .output-body .message {
+			&.sent .msg-wrapper {
+				background: #b168d0;
+
+				&:after {
+				    background: radial-gradient(circle at top right, transparent 49%, #b168d0 56%);
+				}
+
+				.avatar {
+					background: #b168d0;
 				}
 			}
 		}
@@ -618,7 +646,9 @@ content {
 							.file-transmit {
 								> div {
 									&.transmit-left {
-
+										.icon-folder {
+											background: url(/app/icons/generic-document.png) 50% 50%/contain no-repeat;
+										}
 									}
 
 									&.transmit-body {
