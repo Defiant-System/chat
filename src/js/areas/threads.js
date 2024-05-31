@@ -192,7 +192,7 @@
 				break;
 			case "receive-message":
 				// if message is received while app was not started
-				if (event.action === "initiate") {
+				if (event.action === "initiate" && !Self.els.threadsList.find(`li[data-id]`).length) {
 					// finish initating app first
 					APP.dispatch({ type: "window.init" });
 					// go to correct channelID
@@ -240,12 +240,18 @@
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
+				let msgChannelTeam = event.channelId.split("-")[0],
+					appChannelTeam = APP.channel.id.split("-")[0];
+
 				if ([APP.channel.username, ME.username].includes(event.from)) {
 					// forward event for render
 					APP.transcript.dispatch(event);
 				} else if (event.room && APP.channel.id === event.channelId) {
 					// message is to a "team" / room
 					APP.transcript.dispatch(event);
+				} else if (msgChannelTeam !== appChannelTeam) {
+					// UI indicate new message in team
+					APP.teams.dispatch({ type: "check-team-unread", id: msgChannelTeam });
 				} else {
 					// message is to a "team" / room
 					el = Self.els.threadsList.find(`li[data-id="${event.channelId}"]`);

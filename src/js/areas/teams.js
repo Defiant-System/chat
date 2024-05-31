@@ -22,8 +22,8 @@
 					target: Self.els.teams
 				});
 				
-				window.bluePrint.selectNodes("//Teams/Team").map(node =>
-					Self.dispatch({ type: "check-team-unread", id: node.getAttribute("id") }));
+				// window.bluePrint.selectNodes("//Teams/Team").map(node =>
+				// 	Self.dispatch({ type: "check-team-unread", id: node.getAttribute("id") }));
 				break;
 			case "select-first-team":
 				// auto-select first team
@@ -48,8 +48,8 @@
 				let id = event.id || APP.channel.id.split("-")[0],
 					xpath = `//Transcripts/i[contains( @id, "${id}-" )]/*[@unread="1"]`,
 					xUnread = window.bluePrint.selectNodes(xpath);
-				// console.log( xUnread );
-				APP.els.content.find(".teams-list .team.active").toggleClass("all-read", xUnread.length);
+				// show "unread" indicator
+				APP.els.content.find(`.teams-list .team[data-id="${id}"]`).toggleClass("all-read", xUnread.length);
 				break;
 		}
 	}

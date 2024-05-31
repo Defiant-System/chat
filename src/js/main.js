@@ -12,6 +12,11 @@ let Mod = {
 	};
 
 
+let defaultSettings = {
+		"ui-theme": "default",
+	};
+
+
 const ME = karaqu.user;
 
 const chat = {
@@ -21,6 +26,9 @@ const chat = {
 			content: window.find("content"),
 			input: window.find(".transcript .input > div"),
 		};
+
+		// init settings
+		this.dispatch({ type: "init-settings" });
 
 		// obtain lobby ID
 		let xTeam = window.bluePrint.selectSingleNode(`//Team[@name="Karaqu"]`);
@@ -53,6 +61,8 @@ const chat = {
 				window.net.join({ room: Self.lobbyId });
 				break;
 			case "window.close":
+				// save settings
+				window.settings.setItem("settings", Self.settings);
 				// leave chat lobby
 				window.net.leave({ room: Self.lobbyId });
 				break;
@@ -76,8 +86,29 @@ const chat = {
 				return Self.threads.dispatch(event);
 
 			// custom events
+			case "init-settings":
+				// get settings, if any
+				Self.settings = window.settings.getItem("settings") || defaultSettings;
+
+				// apply settings
+				for (let key in Self.settings) {
+					let type = "set-"+ key,
+						arg = Self.settings[key];
+					// call dispatch
+					Self.dispatch({ type, arg });
+
+					// update menu
+					window.bluePrint.selectNodes(`//Menu[@click="${type}"]`).map(xMenu => {
+						let xArg = xMenu.getAttribute("arg");
+						if (xArg === arg || +xArg === +arg) xMenu.setAttribute("is-checked", 1);
+						else xMenu.removeAttribute("is-checked");
+					});
+				}
+				break;
 			case "set-ui-theme":
 				Self.els.content.data({ theme: event.arg });
+				// update settings
+				Self.settings["ui-theme"] = event.arg;
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

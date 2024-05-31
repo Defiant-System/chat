@@ -47,8 +47,8 @@
 				setTimeout(() => {
 						// remove notification indicator from "thread" element
 						APP.threads.els.threadsList.find(`li[data-id="${channelId}"] .notification`).remove();
-						// check for unreaad message count
-						APP.teams.dispatch({ type: "check-team-unread" });
+						// UI indicate new message in team
+						APP.teams.dispatch({ type: "check-team-unread", id: channelId.split("-")[0] });
 					}, 300);
 				break;
 			case "focus-message":

@@ -14,16 +14,104 @@ content {
 	color: #333;
 
 	&[data-theme="amber"] {
-		.teams,
+		.teams {
+			background: #7d2c3c;
+			color: #7d2c3c;
+
+			.team {
+				background-color: #a43a4f;
+				color: #7d2c3c;
+
+				&[style^="background-image: url"]:after {
+					filter: hue-rotate(135deg);
+				}
+
+				&.active {
+					background-color: #d24b66;
+					color: #7d2c3c;
+
+					&:not([style^="background-image: url"]) {
+						&:after {
+							border-color: #d24b66;
+						}
+					}
+				}
+
+				&:hover:not([style^="background-image: url"]) {
+					filter: brightness(1.075);
+				}
+
+				&:hover[style^="background-image: url"] {
+					filter: brightness(1.075);
+
+					&:after {
+						filter: hue-rotate(135deg);
+					}
+				}
+			}
+		}
+
 		.threads {
-			filter: hue-rotate(135deg);
+			background: #9c3347;
+			color: #e0677d;
+
+			.members .member,
+			.friends .friend {
+				&.active {
+					color: #fab;
+				}
+			}
 		}
 	}
 
 	&[data-theme="purple"] {
-		.teams,
+		.teams {
+			background: #612d74;
+			color: #5aa8e3;
+
+			.team {
+				background-color: #773491;
+				color: #612d74;
+
+				&[style^="background-image: url"]:after {
+					filter: hue-rotate(75deg);
+				}
+
+				&.active {
+					background-color: #a24dc3;
+					color: #612d74;
+
+					&:not([style^="background-image: url"]) {
+						&:after {
+							border-color: #a24dc3;
+						}
+					}
+				}
+
+				&:hover:not([style^="background-image: url"]) {
+					filter: brightness(1.075);
+				}
+
+				&:hover[style^="background-image: url"] {
+					filter: brightness(1.075);
+
+					&:after {
+						filter: hue-rotate(75deg);
+					}
+				}
+			}
+		}
+
 		.threads {
-			filter: hue-rotate(75deg);
+			background: #773491;
+			color: #ab6fc3;
+
+			.members .member,
+			.friends .friend {
+				&.active {
+					color: #fef;
+				}
+			}
 		}
 	}
 
@@ -253,7 +341,7 @@ content {
 				// width: 9px;
 				// height: 9px;
 				margin: 1px 4px 0 1px;
-				opacity: .5;
+				opacity: .35;
 			}
 		}
 
@@ -272,6 +360,7 @@ content {
 				top: -1px;
 				left: 5px;
 				font-size: 12px;
+				// mix-blend-mode: overlay;
 			}
 		}
 
@@ -361,7 +450,7 @@ content {
 			}
 
 			.icon-offline {
-				opacity: .35;
+				opacity: .15;
 			}
 
 			.name {
@@ -470,6 +559,7 @@ content {
 									content: "Powered By GIPHY";
 									font-size: 12px;
 									opacity: .6;
+									display: block;
 								}
 
 								img {
