@@ -1,5 +1,5 @@
 
-@import "modules/file.js";
+@import "modules/transmit.js";
 @import "modules/giphy.js";
 @import "modules/board.js";
 @import "modules/test.js";
@@ -7,7 +7,7 @@
 
 let Mod = {
 		"/board": Board,
-		"/file": File,
+		"/transmit": Transmit,
 		"/giphy": Giphy,
 	};
 

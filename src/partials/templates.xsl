@@ -162,8 +162,8 @@
 					Sending file <i>some-file.txt</i>
 				</div>
 				<div class="transmit-options">
-					<span class="btn-reject">Reject</span>
-					<span class="btn-accept">Accept</span>
+					<span class="btn-reject" data-click="reject-file">Reject</span>
+					<span class="btn-accept" data-click="accept-file">Accept</span>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'reject'">
@@ -190,7 +190,7 @@
 					</div>
 				</div>
 				<div class="transmit-right">
-					<span class="btn-abort"></span>
+					<span class="btn-abort" data-click="abort-file"></span>
 				</div>
 			</xsl:when>
 		</xsl:choose>

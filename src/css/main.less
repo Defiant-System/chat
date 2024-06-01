@@ -647,6 +647,30 @@ content {
 
 							.file-transmit {
 								> div {
+									color: #eee;
+
+									&.transmit-query {
+										color: #fff;
+									}
+
+									&.transmit-options {
+										span {
+											filter: saturate(1.15);
+										}
+									}
+
+									&.transmit-rejected {
+										.icon-warning {
+											filter: grayscale(1) brightness(5);
+										}
+									}
+
+									&.transmit-received {
+										.icon-info {
+											filter: grayscale(1) brightness(5);
+										}
+									}
+
 									&.transmit-left {
 										.icon-folder {
 											background: url(/app/icons/generic-document.png) 50% 50%/contain no-repeat;
@@ -811,14 +835,6 @@ content {
 							padding: 3px 0 0;
 							font-size: 0;
 
-							&.file-query {
-								
-							}
-
-							&.file-done {
-								
-							}
-
 							> div {
 								position: relative;
 								vertical-align: top;
@@ -864,6 +880,7 @@ content {
 
 								&.transmit-rejected {
 									position: relative;
+									top: -1px;
 									padding-left: 17px;
 
 									.icon-warning {
@@ -876,6 +893,7 @@ content {
 
 								&.transmit-received {
 									position: relative;
+									top: -1px;
 									padding-left: 17px;
 
 									.icon-info {
@@ -883,6 +901,7 @@ content {
 										top: 0;
 										left: -5px;
 										filter: sepia(1) saturate(5) opacity(.5) hue-rotate(135deg);
+										background-size: 13px 13px;
 									}
 								}
 
@@ -904,7 +923,6 @@ content {
 								}
 
 								&.transmit-body {
-									// background: rgba(#000,.15);
 									width: 195px;
 
 									.transmit-info {
@@ -934,7 +952,6 @@ content {
 								}
 
 								&.transmit-right {
-									// background: rgba(#fff,.15);
 									width: 17px;
 
 									.btn-abort {
@@ -942,7 +959,7 @@ content {
 										display: inline-block;
 										position: relative;
 										top: 13px;
-										left: -3px;
+										left: -5px;
 										width: 18px;
 										height: 18px;
 										border-radius: 50%;

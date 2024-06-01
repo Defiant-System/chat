@@ -65,7 +65,6 @@
 				// focus
 				el.addClass("focused");
 				break;
-
 			case "receive-message":
 				// remove "typing" animations, if exist
 				Self.els.output.find(".message.typing").remove();
@@ -90,7 +89,6 @@
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
 				break;
-
 			case "log-message":
 				// create node entry
 				xnode = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
@@ -117,6 +115,15 @@
 					let timestamp = new karaqu.Moment(+i.getAttribute("cstamp"));
 					i.setAttribute("timestamp", timestamp.format("ddd D MMM HH:mm"));
 				});
+				break;
+			default:
+				let modEl = event.el.parents("[data-module]");
+				if (modEl.length) {
+					let name = modEl.data("module");
+					if (Mod[`/${name}`] && Mod[`/${name}`].dispatch) {
+						Mod[`/${name}`].dispatch(event);
+					}
+				}
 		}
 	}
 }
