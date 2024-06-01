@@ -11,6 +11,7 @@ const Transmit = {
 			case "reject-file":
 			case "accept-file":
 			case "abort-file":
+			case "cancel-send":
 				console.log(event);
 				break;
 		}

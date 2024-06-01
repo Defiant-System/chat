@@ -656,6 +656,15 @@ content {
 									&.transmit-options {
 										span {
 											filter: saturate(1.15);
+
+											&.btn-cancel {
+												display: initial;
+											}
+
+											&.btn-reject,
+											&.btn-accept {
+												display: none;
+											}
 										}
 									}
 
@@ -850,14 +859,14 @@ content {
 								}
 
 								&.transmit-options {
-									padding-right: 0;
-									padding-bottom: 1px;
+									padding: 0 0 1px;
 
 									span {
 										position: relative;
 										left: 4px;
 										color: #fff;
 										text-shadow: 0 1px 0 rgba(#000,.15);
+										box-shadow: 0 0 0 1px rgba(#fff,.35);
 										border-radius: 21px;
 										padding: 2px 7px;
 										margin: 1px 0 0 3px;
@@ -866,6 +875,11 @@ content {
 
 										&:hover {
 											filter: none;
+										}
+
+										&.btn-cancel {
+											display: none;
+											background: #c66;
 										}
 
 										&.btn-reject {
@@ -885,9 +899,9 @@ content {
 
 									.icon-warning {
 										position: absolute;
-										top: 0;
+										top: 1px;
 										left: -5px;
-										filter: sepia(1) saturate(5) opacity(0.75) hue-rotate(315deg) brightness(1.5);
+										filter: grayscale(1) opacity(.35);
 									}
 								}
 
@@ -898,9 +912,9 @@ content {
 
 									.icon-info {
 										position: absolute;
-										top: 0;
+										top: 1px;
 										left: -5px;
-										filter: sepia(1) saturate(5) opacity(.5) hue-rotate(135deg);
+										filter: grayscale(1) opacity(.35);
 										background-size: 13px 13px;
 									}
 								}

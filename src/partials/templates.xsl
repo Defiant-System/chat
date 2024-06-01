@@ -164,6 +164,7 @@
 				<div class="transmit-options">
 					<span class="btn-reject" data-click="reject-file">Reject</span>
 					<span class="btn-accept" data-click="accept-file">Accept</span>
+					<span class="btn-cancel" data-click="cancel-send">Cancel</span>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'reject'">
@@ -199,7 +200,7 @@
 
 <xsl:template name="msg-board">
 	<div class="board" data-module="board">
-		<canvas width="360" height="220"></canvas>
+		<canvas width="360" height="220" data-no-focus="1"></canvas>
 		<ul class="palette" data-click="select-color">
 			<li style="--color: #000;"></li>
 			<li style="--color: #f00;"></li>

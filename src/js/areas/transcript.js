@@ -11,6 +11,8 @@
 		};
 		// reference to root xml node
 		this.xTranscripts = window.bluePrint.selectSingleNode("//Transcripts");
+		// bind event handlers
+		this.els.output.on("mousedown", this.dispatch);
 	},
 	dispatch(event) {
 		let APP = chat,
@@ -20,9 +22,22 @@
 			xChannel,
 			xpath,
 			xnode,
+			modEl, name,
 			el;
 		// console.log(event);
 		switch (event.type) {
+			// native events
+			case "mousedown":
+				modEl = $(event.target).parents("[data-module]");
+				if (modEl.length) {
+					if (Mod[`/${name}`] && Mod[`/${name}`].dispatch) {
+						// prevent default behaviour
+						event.preventDefault();
+						// proxy event
+						return Mod[`/${name}`].dispatch(event);
+					}
+				}
+				break;
 			// custom events
 			case "render-thread":
 				// fix timestamps
@@ -52,11 +67,13 @@
 					}, 300);
 				break;
 			case "focus-message":
+				el = $(event.target);
+				if (el.data("no-focus")) return;
+
 				// remove previous focus
 				message = Self.els.root.find(".focused").removeClass("focused");
 
 				// focus clicked message
-				el = $(event.target);
 				if (!el.hasClass("message")) {
 					el = el.parents(".message");
 				}
@@ -117,9 +134,9 @@
 				});
 				break;
 			default:
-				let modEl = event.el.parents("[data-module]");
+				modEl = event.el.parents("[data-module]");
 				if (modEl.length) {
-					let name = modEl.data("module");
+					name = modEl.data("module");
 					if (Mod[`/${name}`] && Mod[`/${name}`].dispatch) {
 						Mod[`/${name}`].dispatch(event);
 					}
