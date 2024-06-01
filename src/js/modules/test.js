@@ -11,8 +11,10 @@ let Test = {
 		// }
 		
 		if (ME.username === "hbi") {
-			// setTimeout(() => APP.els.content.find(`.teams .team:nth(1)`).trigger("click"), 300);
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
+
+			return;
+			
 			setTimeout(() => {
 				// APP.transcript.dispatch({ type: "tmp-message-board" });
 				let output = APP.transcript.els.output;

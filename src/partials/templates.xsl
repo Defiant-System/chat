@@ -152,12 +152,31 @@
 	</xsl:for-each>
 </xsl:template>
 
-<xsl:template name="message-transmit">
-	<div class="message received">
-		<div class="msg-wrapper">
-			<div class="avatar" data-name="hb"></div>
-			<div class="date">Tue 21 Jun 12:14</div>
-			<div class="file-transmit">
+<xsl:template name="msg-transmit">
+	<xsl:variable name="file" select="./file"/>
+
+	<div class="file-transmit" data-module="transmit">
+		<xsl:choose>
+			<xsl:when test="$file/@status = 'query'">
+				<div class="transmit-query">
+					Sending file <i>some-file.txt</i>
+				</div>
+				<div class="transmit-options">
+					<span class="btn-reject">Reject</span>
+					<span class="btn-accept">Accept</span>
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'reject'">
+				<div class="transmit-rejected">
+					<i class="icon-warning"></i> File rejected
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'done'">
+				<div class="transmit-received">
+					<i class="icon-info"></i> File received <i>some-file.txt</i>
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'transfer'">
 				<div class="transmit-left">
 					<i class="icon-folder"></i>
 				</div>
@@ -167,38 +186,32 @@
 						<span style="width: 37%"></span>
 					</div>
 					<div class="transmit-details">
-						137 KB of 2.1 MB ~ 3 minutes
+						137 KB of 2.1 MB - 3 minutes
 					</div>
 				</div>
 				<div class="transmit-right">
 					<span class="btn-abort"></span>
 				</div>
-			</div>
-		</div>
+			</xsl:when>
+		</xsl:choose>
 	</div>
 </xsl:template>
 
-<xsl:template name="message-board">
-	<div class="message received">
-		<div class="msg-wrapper">
-			<div class="avatar" data-name="hb"></div>
-			<div class="date">Fri 31 May 19:40</div>
-			<div class="board">
-				<canvas width="360" height="220"></canvas>
-				<ul class="palette">
-					<li style="--color: #000;"></li>
-					<li style="--color: #f00;"></li>
-					<li style="--color: #0f0;" class="active"></li>
-					<li style="--color: #00f;"></li>
-					<li style="--color: #ff0;"></li>
-					<li style="--color: #f0f;"></li>
-					<li style="--color: #f90;"></li>
-					<li style="--color: #0ff;"></li>
-					<li style="--color: #369;"></li>
-					<li style="--color: #fff;"></li>
-				</ul>
-			</div>
-		</div>
+<xsl:template name="msg-board">
+	<div class="board" data-module="board">
+		<canvas width="360" height="220"></canvas>
+		<ul class="palette">
+			<li style="--color: #000;"></li>
+			<li style="--color: #f00;"></li>
+			<li style="--color: #0f0;" class="active"></li>
+			<li style="--color: #00f;"></li>
+			<li style="--color: #ff0;"></li>
+			<li style="--color: #f0f;"></li>
+			<li style="--color: #f90;"></li>
+			<li style="--color: #0ff;"></li>
+			<li style="--color: #369;"></li>
+			<li style="--color: #fff;"></li>
+		</ul>
 	</div>
 </xsl:template>
 
@@ -218,7 +231,15 @@
 				</xsl:attribute>
 			</div>
 			<div class="date"><xsl:value-of select="@timestamp"/></div>
-			<xsl:value-of select="." disable-output-escaping="yes"/>
+			<xsl:choose>
+				<xsl:when test="@type = 'board'">
+					<xsl:call-template name="msg-board"/>
+				</xsl:when>
+				<xsl:when test="@type = 'transmit'">
+					<xsl:call-template name="msg-transmit"/>
+				</xsl:when>
+				<xsl:otherwise><xsl:value-of select="." disable-output-escaping="yes"/></xsl:otherwise>
+			</xsl:choose>
 		</div>
 	</div>
 </xsl:template>
