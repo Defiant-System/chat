@@ -251,6 +251,24 @@
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
+
+				if (event.priority === 3 && ME.username !== event.from) {
+					// module message related info
+					let data = JSON.parse(event.message),
+						xnode = APP.transcript.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`),
+						// render message content
+						message = window.render({
+							template: "msg-transmit",
+							match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,
+							vdom: true,
+						});
+
+					// replace message content, if in view
+					el = APP.transcript.els.output.find(`div[data-id="${data.id}"]`);
+					if (el.length) return el.replace(message[0]);
+				}
+
+
 				let msgChannelTeam = event.channelId.split("-")[0],
 					appChannelTeam = APP.channel.id.split("-")[0];
 

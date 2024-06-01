@@ -22,6 +22,7 @@
 			xChannel,
 			xpath,
 			xnode,
+			data,
 			modEl, name,
 			el;
 		// console.log(event);
@@ -83,7 +84,10 @@
 				el.addClass("focused");
 				break;
 			case "receive-message":
-				if (ME.username === "linus") console.log(event);
+				// if (ME.username === "linus") console.log(event);
+
+				// this is an internal module notification originated from "this user".
+				if (ME.username === event.from && event.priority === 3) return;
 
 				// remove "typing" animations, if exist
 				Self.els.output.find(".message.typing").remove();
@@ -110,29 +114,41 @@
 				break;
 			
 			case "module-message-next":
-				// next = reject
-				// next = cancel
-				// console.log(event);
-				xpath = `.//*[@id="${event.el.data("id")}"]`;
-				xnode = Self.xTranscripts.selectSingleNode(xpath);
-				xnode.setAttribute("status", event.next);
+				data = { id: event.el.data("id"), state: event.next };
+				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
+				xnode.setAttribute("status", data.state);
 				// console.log(xnode);
 
-				xpath = `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`;
-				// console.log(xpath);
 				message = window.render({
 					template: "msg-transmit",
-					match: xpath,
+					match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,
 					vdom: true,
 				});
-
+				// replace message content
 				event.el.replace(message[0]);
+
+				// send state update to friend
+				APP.input.dispatch({
+					type: "silent-message",
+					from: ME.username,
+					to: APP.channel.username,
+					channelId: APP.channel.id,
+					message: JSON.stringify(data),
+				});
 				break;
 
 			case "log-message":
 				// create node entry
 				xnode = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
-				if (event.module) {
+				if (event.priority === 3) {
+					data = JSON.parse(event.message);
+					// internal module coms
+					xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
+					xnode.setAttribute("status", data.state);
+					xnode.parentNode.setAttribute("unread", 1);
+					// reset reference to node
+					xnode = null;
+				} else if (event.module) {
 					xnode.setAttribute("type", event.module.cmd.slice(1));
 					xnode.appendChild(event.module.node);
 				} else {
@@ -145,7 +161,7 @@
 					xChannel = Self.xTranscripts.appendChild($.nodeFromString(`<i id="${event.channelId}" />`));
 				}
 				// add message node to XML log
-				xChannel.append(xnode);
+				if (xnode) xChannel.append(xnode);
 
 				// fix timestamps
 				Self.dispatch({ type: "fix-timestamps", channelId: event.channelId });

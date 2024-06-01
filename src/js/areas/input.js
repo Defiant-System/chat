@@ -68,10 +68,21 @@
 				karaqu.shell(`user -i '${data.to}'`)
 					.then(check => {
 						if (check.result && check.result.online) {
-							// send to chat lobby
+							// send event
 							window.net.send({ priority: 1, ...data });
 						}
 					});
+				break;
+			case "silent-message":
+				data.stamp = Date.now();
+				data.priority = 3;
+				data.from = event.from;
+				data.to = event.to;
+				data.channelId = event.channelId;
+				data.message = event.message;
+
+				// send to chat lobby
+				window.net.send(data);
 				break;
 			case "send-message":
 				data.stamp = Date.now();
