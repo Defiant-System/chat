@@ -25,6 +25,7 @@
 			<i from="linus" cstamp="1595006835072" type="transmit">
 				<file name="some-file.txt" status="reject"/>
 			</i>
+
 			<i from="hbi" cstamp="1595006835171" type="transmit">
 				<file name="another-movie.mov" status="transfer" sent="401168" sizeB="1501068" timeS="2027"/>
 			</i>

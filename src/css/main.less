@@ -657,14 +657,14 @@ content {
 										span {
 											filter: saturate(1.15);
 
-											&.btn-cancel {
-												display: initial;
-											}
+											// &.btn-cancel {
+											// 	display: initial;
+											// }
 
-											&.btn-reject,
-											&.btn-accept {
-												display: none;
-											}
+											// &.btn-reject,
+											// &.btn-accept {
+											// 	display: none;
+											// }
 										}
 									}
 
@@ -878,7 +878,6 @@ content {
 										}
 
 										&.btn-cancel {
-											display: none;
 											background: #c66;
 										}
 
@@ -949,10 +948,10 @@ content {
 										display: inline-block;
 										position: relative;
 										width: 179px;
-										height: 9px;
+										height: 7px;
 										overflow: hidden;
 										border-radius: 9px;
-										margin: 2px 0 0;
+										margin: 4px 0 0;
 
 										span {
 											background: #fff;
@@ -1001,6 +1000,19 @@ content {
 											transform: rotate(-45deg);
 										}
 									}
+								}
+
+								// the tag U is reserved for file name
+								u {
+									position: relative;
+									// top: -1px;
+									display: inline-block;
+									background: rgba(#fff,.35);
+									box-shadow: 0 0 0 1px rgba(#000,.15);
+									padding: 1px 3px;
+									border-radius: 3px;
+									text-decoration: none;
+									line-height: 1;
 								}
 							}
 						}

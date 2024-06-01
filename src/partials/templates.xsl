@@ -154,27 +154,35 @@
 
 <xsl:template name="msg-transmit">
 	<xsl:variable name="file" select="./file"/>
+	<xsl:variable name="me" select="//Friends/*[@me = 'true']/@id"/>
 
 	<div class="file-transmit" data-module="transmit">
 		<xsl:choose>
-			<xsl:when test="$file/@status = 'query'">
+			<xsl:when test="$file/@status = 'query' and @from = $me">
 				<div class="transmit-query">
-					Sending file <i>some-file.txt</i>
+					Sending File <u>some-file.txt</u>
+				</div>
+				<div class="transmit-options">
+					<span class="btn-cancel" data-click="cancel-send">Cancel</span>
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'query' and @from != $me">
+				<div class="transmit-query">
+					Sending File <u>some-file.txt</u>
 				</div>
 				<div class="transmit-options">
 					<span class="btn-reject" data-click="reject-file">Reject</span>
 					<span class="btn-accept" data-click="accept-file">Accept</span>
-					<span class="btn-cancel" data-click="cancel-send">Cancel</span>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'reject'">
 				<div class="transmit-rejected">
-					<i class="icon-warning"></i> File rejected
+					<i class="icon-warning"></i> File Rejected
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'done'">
 				<div class="transmit-received">
-					<i class="icon-info"></i> File received <i>some-file.txt</i>
+					<i class="icon-info"></i> File Received <u>some-file.txt</u>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'transfer'">
@@ -182,7 +190,7 @@
 					<i class="icon-folder"></i>
 				</div>
 				<div class="transmit-body">
-					<div class="transmit-info">Transfering <i>some-file.txt</i></div>
+					<div class="transmit-info">Transfering <u>some-file.txt</u></div>
 					<div class="transmit-progress">
 						<span style="width: 37%"></span>
 					</div>
