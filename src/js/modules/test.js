@@ -18,6 +18,8 @@ let Test = {
 				// APP.input.els.input.html("/giphy high five");
 				APP.input.els.input.html("/file");
 				APP.input.dispatch({ type: "send-message" });
+
+				// setTimeout(() => APP.els.content.find(`.btn-cancel`).trigger("click"), 500);
 			}, 500);
 		}
 

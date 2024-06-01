@@ -649,7 +649,7 @@ content {
 								> div {
 									color: #eee;
 
-									&.transmit-query {
+									&.transmit-inquiry {
 										color: #fff;
 									}
 
@@ -846,7 +846,7 @@ content {
 
 						.file-transmit {
 							position: relative;
-							padding: 3px 0 0;
+							padding: 3px 0 1px;
 							font-size: 0;
 
 							> div {
@@ -859,7 +859,7 @@ content {
 								color: #999;
 								// height: 43px;
 
-								&.transmit-query {
+								&.transmit-inquiry {
 									color: #666;
 								}
 
@@ -1017,6 +1017,15 @@ content {
 									border-radius: 3px;
 									text-decoration: none;
 									line-height: 1;
+									vertical-align: middle;
+									max-width: 110px;
+									white-space: nowrap;
+									text-overflow: ellipsis;
+									overflow: hidden;
+								}
+
+								u + i {
+									vertical-align: middle;
 								}
 							}
 						}

@@ -108,6 +108,27 @@
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
 				break;
+			
+			case "module-message-next":
+				// next = reject
+				// next = cancel
+				// console.log(event);
+				xpath = `.//*[@id="${event.el.data("id")}"]`;
+				xnode = Self.xTranscripts.selectSingleNode(xpath);
+				xnode.setAttribute("status", event.next);
+				// console.log(xnode);
+
+				xpath = `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`;
+				// console.log(xpath);
+				message = window.render({
+					template: "msg-transmit",
+					match: xpath,
+					vdom: true,
+				});
+
+				event.el.replace(message[0]);
+				break;
+
 			case "log-message":
 				// create node entry
 				xnode = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);

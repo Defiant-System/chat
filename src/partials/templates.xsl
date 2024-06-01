@@ -156,23 +156,35 @@
 	<xsl:variable name="file" select="./file"/>
 	<xsl:variable name="me" select="//Friends/*[@me = 'true']/@id"/>
 
-	<div class="file-transmit" data-module="transmit">
+	<div class="file-transmit" data-module="file">
+		<xsl:attribute name="data-id"><xsl:value-of select="$file/@id"/></xsl:attribute>
 		<xsl:choose>
-			<xsl:when test="$file/@status = 'query' and @from = $me">
-				<div class="transmit-query">
+			<xsl:when test="$file/@status = 'inquiry' and @from = $me">
+				<div class="transmit-inquiry">
 					Sending File <u><xsl:value-of select="$file/@name"/></u>
+					<i><xsl:call-template name="sys:file-size">
+						<xsl:with-param name="bytes" select="$file/@size" />
+					</xsl:call-template></i>
 				</div>
 				<div class="transmit-options">
 					<span class="btn-cancel" data-click="cancel-send">Cancel</span>
 				</div>
 			</xsl:when>
-			<xsl:when test="$file/@status = 'query' and @from != $me">
-				<div class="transmit-query">
+			<xsl:when test="$file/@status = 'inquiry' and @from != $me">
+				<div class="transmit-inquiry">
 					Sending File <u><xsl:value-of select="$file/@name"/></u>
+					<i><xsl:call-template name="sys:file-size">
+						<xsl:with-param name="bytes" select="$file/@size" />
+					</xsl:call-template></i>
 				</div>
 				<div class="transmit-options">
 					<span class="btn-accept" data-click="accept-file">Accept</span>
 					<span class="btn-reject" data-click="reject-file">Reject</span>
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'cancel'">
+				<div class="transmit-canceled">
+					<i class="icon-warning"></i> File Canceled
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'reject'">
