@@ -38,5 +38,10 @@
 				<file name="some-file.txt" status="reject"/>
 			</i>
 		</i>
+
+		<i id="friends-bill-hbi">
+			<i from="bill" cstamp="1595006835174" type="board"/>
+			<i from="hbi" cstamp="1595006835174" type="board"/>
+		</i>
 	</Transcripts>
 </Data>

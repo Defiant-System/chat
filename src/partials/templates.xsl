@@ -200,7 +200,7 @@
 <xsl:template name="msg-board">
 	<div class="board" data-module="board">
 		<canvas width="360" height="220"></canvas>
-		<ul class="palette">
+		<ul class="palette" data-click="select-color">
 			<li style="--color: #000;"></li>
 			<li style="--color: #f00;"></li>
 			<li style="--color: #0f0;" class="active"></li>
