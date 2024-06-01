@@ -226,8 +226,7 @@
 							str = window.render({ template: "tiny-typing" });
 							el.append(str);
 							// remove potential "zombies"
-							setTimeout(() => el.find(".anim-typing")
-								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
+							setTimeout(() => el.find(".anim-typing").remove(), 10e3);
 						} else {
 							el.find(".anim-typing").remove();
 						}
