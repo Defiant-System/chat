@@ -160,7 +160,7 @@
 		<xsl:choose>
 			<xsl:when test="$file/@status = 'query' and @from = $me">
 				<div class="transmit-query">
-					Sending File <u>some-file.txt</u>
+					Sending File <u><xsl:value-of select="$file/@name"/></u>
 				</div>
 				<div class="transmit-options">
 					<span class="btn-cancel" data-click="cancel-send">Cancel</span>
@@ -168,11 +168,11 @@
 			</xsl:when>
 			<xsl:when test="$file/@status = 'query' and @from != $me">
 				<div class="transmit-query">
-					Sending File <u>some-file.txt</u>
+					Sending File <u><xsl:value-of select="$file/@name"/></u>
 				</div>
 				<div class="transmit-options">
-					<span class="btn-reject" data-click="reject-file">Reject</span>
 					<span class="btn-accept" data-click="accept-file">Accept</span>
+					<span class="btn-reject" data-click="reject-file">Reject</span>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'reject'">
@@ -182,7 +182,7 @@
 			</xsl:when>
 			<xsl:when test="$file/@status = 'done'">
 				<div class="transmit-received">
-					<i class="icon-info"></i> File Received <u>some-file.txt</u>
+					<i class="icon-info"></i> File Received <u><xsl:value-of select="$file/@name"/></u>
 				</div>
 			</xsl:when>
 			<xsl:when test="$file/@status = 'transfer'">
@@ -190,7 +190,7 @@
 					<i class="icon-folder"></i>
 				</div>
 				<div class="transmit-body">
-					<div class="transmit-info">Transfering <u>some-file.txt</u></div>
+					<div class="transmit-info">Transfering <u><xsl:value-of select="$file/@name"/></u></div>
 					<div class="transmit-progress">
 						<span style="width: 37%"></span>
 					</div>
@@ -244,7 +244,7 @@
 				<xsl:when test="@type = 'board'">
 					<xsl:call-template name="msg-board"/>
 				</xsl:when>
-				<xsl:when test="@type = 'transmit'">
+				<xsl:when test="@type = 'file'">
 					<xsl:call-template name="msg-transmit"/>
 				</xsl:when>
 				<xsl:otherwise><xsl:value-of select="." disable-output-escaping="yes"/></xsl:otherwise>

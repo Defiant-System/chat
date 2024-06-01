@@ -12,35 +12,35 @@
 	</Teams>
 	<Transcripts>
 		<!-- transcripts goes here -->
-		<i id="friends-hbi-linus">
-			<i from="linus" cstamp="1595006835071" type="transmit">
+		<i id="__friends-hbi-linus">
+			<i from="linus" cstamp="1595006835071" type="file">
 				<file name="some-file.txt" status="transfer" sent="14068" sizeB="50068" timeS="127"/>
 			</i>
-			<i from="linus" cstamp="1595006835072" type="transmit">
+			<i from="linus" cstamp="1595006835072" type="file">
 				<file name="some-file.txt" status="query"/>
 			</i>
-			<i from="linus" cstamp="1595006835072" type="transmit">
+			<i from="linus" cstamp="1595006835072" type="file">
 				<file name="some-file.txt" status="done"/>
 			</i>
-			<i from="linus" cstamp="1595006835072" type="transmit">
+			<i from="linus" cstamp="1595006835072" type="file">
 				<file name="some-file.txt" status="reject"/>
 			</i>
 
-			<i from="hbi" cstamp="1595006835171" type="transmit">
+			<i from="hbi" cstamp="1595006835171" type="file">
 				<file name="another-movie.mov" status="transfer" sent="401168" sizeB="1501068" timeS="2027"/>
 			</i>
-			<i from="hbi" cstamp="1595006835172" type="transmit">
+			<i from="hbi" cstamp="1595006835172" type="file">
 				<file name="some-file.txt" status="query"/>
 			</i>
-			<i from="hbi" cstamp="1595006835173" type="transmit">
+			<i from="hbi" cstamp="1595006835173" type="file">
 				<file name="some-file.txt" status="done"/>
 			</i>
-			<i from="hbi" cstamp="1595006835174" type="transmit">
+			<i from="hbi" cstamp="1595006835174" type="file">
 				<file name="some-file.txt" status="reject"/>
 			</i>
 		</i>
 
-		<i id="friends-bill-hbi">
+		<i id="__friends-bill-hbi">
 			<i from="bill" cstamp="1595006835174" type="board"/>
 			<i from="hbi" cstamp="1595006835174" type="board"/>
 		</i>

@@ -115,7 +115,7 @@
 				if (mod) {
 					let cmd = mod[0].trim(),
 						phrase = data.message.slice(cmd.length).trim();
-					Mod[cmd].action(phrase, data.message, stdOut => {
+					Mod[cmd].action(phrase, stdOut => {
 						data.message = stdOut;
 						// send message package
 						fnSend(data);

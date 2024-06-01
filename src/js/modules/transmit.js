@@ -1,7 +1,17 @@
 
 const Transmit = {
-	action(phrase, stdOut, callback) {
-		
+	action(phrase, callback) {
+		let data = {
+				id: "f"+ Date.now(),
+				name: "some-file.txt",
+				size: 123456,
+			};
+		callback(`/file ${JSON.stringify(data)}`);
+	},
+	translate(stdIn) {
+		let json = JSON.parse(stdIn),
+			stdOut = $.nodeFromString(`<file id="${json.id}" name="${json.name}" size="${json.size}" status="query"/>`);
+		return stdOut;
 	},
 	dispatch(event) {
 		let Self = Transmit,

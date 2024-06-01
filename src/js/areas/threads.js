@@ -237,6 +237,17 @@
 				// nothing to do - probably "silent" event
 				if (!event.message) return;
 
+				let mod = event.message.match(/^\/\w+/);
+				if (mod) {
+					let cmd = mod[0].trim(),
+						str = event.message.slice(cmd.length).trim(),
+						node = Mod[cmd] ? Mod[cmd].translate(str) : null;
+					if (node.constructor !== String) {
+						// adjust event object
+						event.module = { cmd, node };
+					}
+				}
+
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 

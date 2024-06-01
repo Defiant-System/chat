@@ -83,6 +83,8 @@
 				el.addClass("focused");
 				break;
 			case "receive-message":
+				if (ME.username === "linus") console.log(event);
+
 				// remove "typing" animations, if exist
 				Self.els.output.find(".message.typing").remove();
 				// render and append HTML to output
@@ -109,7 +111,12 @@
 			case "log-message":
 				// create node entry
 				xnode = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
-				xnode.appendChild($.cDataFromString(event.message.escapeHtml()));
+				if (event.module) {
+					xnode.setAttribute("type", event.module.cmd.slice(1));
+					xnode.appendChild(event.module.node);
+				} else {
+					xnode.appendChild($.cDataFromString(event.message.escapeHtml()));
+				}
 				// append node entry to room transcript
 				xpath = `i[@id="${event.channelId}"]`;
 				xChannel = Self.xTranscripts.selectSingleNode(xpath);

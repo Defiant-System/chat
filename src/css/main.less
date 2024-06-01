@@ -682,7 +682,7 @@ content {
 
 									&.transmit-left {
 										.icon-folder {
-											background: url(/app/icons/generic-document.png) 50% 50%/contain no-repeat;
+											// background: url(/app/icons/generic-document.png) 50% 50%/contain no-repeat;
 										}
 									}
 
@@ -703,6 +703,11 @@ content {
 												background: #eee;
 											}
 										}
+									}
+
+									u {
+										mix-blend-mode: overlay;
+										color: rgba(#000,.5);
 									}
 								}
 							}
@@ -919,17 +924,16 @@ content {
 								}
 
 								&.transmit-left {
-									// background: rgba(#fff,.15);
-									width: 47px;
+									width: 40px;
 
 									.icon-folder {
 										position: relative;
 										top: 1px;
-										left: 2px;
+										left: -3px;
 										display: inline-block;
 										width: 37px;
 										height: 37px;
-										background: url(/app/icons/generic-folder.png) 50% 50%/contain no-repeat;
+										background: url(/app/icons/generic-document.png) 50% 50%/contain no-repeat;
 										filter: none;
 										margin: initial;
 									}
@@ -971,10 +975,10 @@ content {
 										background: #bbb;
 										display: inline-block;
 										position: relative;
-										top: 13px;
+										top: 14px;
 										left: -5px;
-										width: 18px;
-										height: 18px;
+										width: 16px;
+										height: 16px;
 										border-radius: 50%;
 										cursor: pointer;
 										opacity: .5;
@@ -989,9 +993,9 @@ content {
 											background: #eee;
 											position: absolute;
 											top: 3px;
-											left: 8px;
+											left: 7px;
 											width: 2px;
-											height: 12px;
+											height: 10px;
 											transform-origin: 50% 50%;
 											transform: rotate(45deg);
 										}

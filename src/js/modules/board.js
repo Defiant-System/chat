@@ -1,7 +1,10 @@
 
 const Board = {
-	action(phrase, stdOut, callback) {
-		
+	action(phrase, callback) {
+		callback("canvas");
+	},
+	translate(stdIn) {
+		return JSON.parse(stdIn);
 	},
 	dispatch(event) {
 		let Self = Transmit,

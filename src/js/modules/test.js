@@ -14,10 +14,11 @@ let Test = {
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
 			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
 
-			// setTimeout(() => {
-			// 	APP.input.els.input.html("test");
-			// 	APP.input.dispatch({ type: "send-message" });
-			// }, 500);
+			setTimeout(() => {
+				// APP.input.els.input.html("/giphy high five");
+				APP.input.els.input.html("/file");
+				APP.input.dispatch({ type: "send-message" });
+			}, 500);
 		}
 
 	}

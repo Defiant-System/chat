@@ -7,7 +7,7 @@
 
 let Mod = {
 		"/board": Board,
-		"/transmit": Transmit,
+		"/file": Transmit,
 		"/giphy": Giphy,
 	};
 
