@@ -55,11 +55,11 @@
 				clearTimeout(Self.timeout);
 				Self.timeout = setTimeout(stopTimer, Self.typing.timer);
 				break;
-			// custom event
+			// proxy events
 			case "show-options":
 			case "show-smileys":
-			case "attach-file":
-				break;
+				return APP.popups.dispatch(event);
+			// custom event
 			case "emit-typing-info":
 				data.from = ME.username;
 				data.fromName = ME.name;

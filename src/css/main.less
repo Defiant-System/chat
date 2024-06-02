@@ -13,6 +13,17 @@ content {
 	font-size: 14px;
 	color: #333;
 
+	&.cover:before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: transparent;
+		z-index: 4;
+	}
+
 	&[data-theme="amber"] {
 		.teams {
 			background: #7d2c3c;
@@ -1220,13 +1231,11 @@ content {
 					&.icon-thunder { background-image: url(~/icons/icon-thunder.png); }
 					&.icon-paperplane { background-image: url(~/icons/icon-paperplane.png); }
 					&.icon-smiley { background-image: url(~/icons/icon-smiley.png); }
-					&.icon-paperclip { background-image: url(~/icons/icon-paperclip.png); }
 				}
 
 				&.options { left: 13px; }
-				&.send    { right: 73px; }
-				&.smiley  { right: 43px; }
-				&.attach  { right: 13px; }
+				&.send    { right: 43px; }
+				&.smiley  { right: 13px; }
 			}
 		}
 	}
