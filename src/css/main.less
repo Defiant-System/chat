@@ -1120,6 +1120,7 @@ content {
 		}
 
 		.input {
+			position: relative;
 			padding: 9px;
 
 			> div {
@@ -1128,7 +1129,8 @@ content {
 				border-radius: 5px;
 				box-shadow: 0 0 0 1px #bbb;
 				line-height: 1.35;
-				padding: 7px 9px;
+				padding: 8px 99px 6px 37px;
+				z-index: 1;
 
 				&:empty:before {
 					content: attr(placeholder);
@@ -1141,7 +1143,7 @@ content {
 					opacity: 1;
 				}
 
-				&:after {
+				&:after1 {
 					content: "";
 					background: url(~/icons/icon-return.png) 3px 50% no-repeat;
 					background-size: 17px 17px;
@@ -1153,6 +1155,78 @@ content {
 					border-radius: 3px;
 					opacity: .35;
 				}
+			}
+
+			.btn {
+				// background-color: rgba(#000,.1);
+				position: absolute;
+				top: 13px;
+				width: 25px;
+				height: 25px;
+				cursor: pointer;
+				border-radius: 3px;
+				z-index: 2;
+
+				&.disabled {
+					cursor: default;
+
+					i[class^="icon-"] {
+						opacity: .25;
+					}
+				}
+
+				&:not(.disabled):hover {
+					i[class^="icon-"] {
+						opacity: 1;
+					}
+				}
+
+				&:nth-of-type(1) {
+					&:after {
+						content: "";
+						position: absolute;
+						top: 2px;
+						bottom: 2px;
+						right: -3px;
+						width: 1px;
+						background: rgba(#000,.05);
+					}
+				}
+
+				&:nth-of-type(2) {
+					&:after {
+						content: "";
+						position: absolute;
+						top: 2px;
+						bottom: 2px;
+						left: -3px;
+						width: 1px;
+						background: rgba(#000,.05);
+					}
+				}
+
+				i[class^="icon-"] {
+					background-position: 50% 50%;
+					background-repeat: no-repeat;
+					background-size: 17px 17px;
+					position: absolute;
+					top: 4px;
+					left: 4px;
+					width: 17px;
+					height: 17px;
+					margin: 0;
+					opacity: .5;
+
+					&.icon-thunder { background-image: url(~/icons/icon-thunder.png); }
+					&.icon-paperplane { background-image: url(~/icons/icon-paperplane.png); }
+					&.icon-smiley { background-image: url(~/icons/icon-smiley.png); }
+					&.icon-paperclip { background-image: url(~/icons/icon-paperclip.png); }
+				}
+
+				&.options { left: 13px; }
+				&.send    { right: 73px; }
+				&.smiley  { right: 43px; }
+				&.attach  { right: 13px; }
 			}
 		}
 	}

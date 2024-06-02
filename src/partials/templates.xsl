@@ -206,7 +206,7 @@
 				<div class="transmit-left">
 					<i class="icon-folder"></i>
 				</div>
-				<div class="transmit-body" style="--perc: 37%; --sent: '137 KB'; --total: '2.1 MB'; --time: '2.3 minutes';">
+				<div class="transmit-body" styl1e="--perc: 37%; --sent: '137 KB'; --total: '2.1 MB'; --time: '2.3 minutes';">
 					<div class="transmit-info">
 						<xsl:if test="@from = $me">Sending</xsl:if>
 						<xsl:if test="@from != $me">Receiving</xsl:if>

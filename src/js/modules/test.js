@@ -13,6 +13,7 @@ let Test = {
 		if (ME.username === "hbi") {
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
 			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
+		return;
 
 			setTimeout(() => {
 				// APP.input.els.input.html("/giphy high five");

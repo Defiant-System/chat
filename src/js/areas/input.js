@@ -56,6 +56,10 @@
 				Self.timeout = setTimeout(stopTimer, Self.typing.timer);
 				break;
 			// custom event
+			case "show-options":
+			case "show-smileys":
+			case "attach-file":
+				break;
 			case "emit-typing-info":
 				data.from = ME.username;
 				data.fromName = ME.name;
