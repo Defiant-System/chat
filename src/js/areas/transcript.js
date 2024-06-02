@@ -144,6 +144,7 @@
 					data = JSON.parse(event.message);
 					// internal module coms
 					xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
+					if (!xnode) throw "sync error";
 					xnode.setAttribute("status", data.state);
 					xnode.parentNode.setAttribute("unread", 1);
 					// reset reference to node
