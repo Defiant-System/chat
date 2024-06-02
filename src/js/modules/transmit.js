@@ -3,7 +3,7 @@ const Transmit = {
 	action(phrase, callback) {
 		let data = {
 				id: "f"+ Date.now(),
-				name: "pretty-picture with longer name.png",
+				name: "pretty-picture.png",
 				size: 123456,
 			};
 		callback(`/file ${JSON.stringify(data)}`);
@@ -22,13 +22,11 @@ const Transmit = {
 		switch (event.type) {
 			case "reject-file":
 			case "cancel-send":
+			case "accept-file":
+			case "abort-file":
 				el = event.el.parents("div[data-module]");
 				next = event.type.split("-")[0];
 				APP.transcript.dispatch({ type: "module-message-next", next, el });
-				break;
-			case "accept-file":
-			case "abort-file":
-				console.log(event);
 				break;
 		}
 	}

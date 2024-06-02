@@ -552,7 +552,7 @@ content {
 							border-radius: 13px;
 							max-width: 73%;
 							min-width: 37px;
-							min-height: 29px;
+							min-height: 28px;
 							padding: 5px 11px;
 							display: inline-block;
 							text-align: left;
@@ -944,6 +944,10 @@ content {
 
 								&.transmit-body {
 									width: 195px;
+									--perc: 0;
+									--sent: '0 B';
+									--total: '0 B';
+									--time: '0 seconds';
 
 									.transmit-info {
 										color: #666;
@@ -967,6 +971,23 @@ content {
 											bottom: 0;
 											left: 0;
 											opacity: .75;
+											width: var( --perc );
+										}
+									}
+
+									.transmit-details {
+										.f-sent {
+											&:before { content: var( --sent ); }
+											&:after { content: " of "; }
+										}
+
+										.f-tot {
+											&:before { content: var( --total ); }
+											&:after { content: " ~ "; }
+										}
+
+										.f-time {
+											&:before { content: var( --time ); }
 										}
 									}
 								}

@@ -192,22 +192,34 @@
 					<i class="icon-warning"></i> File Rejected
 				</div>
 			</xsl:when>
+			<xsl:when test="$file/@status = 'abort'">
+				<div class="transmit-rejected">
+					<i class="icon-warning"></i> Transmission Aborted
+				</div>
+			</xsl:when>
 			<xsl:when test="$file/@status = 'done'">
 				<div class="transmit-received">
 					<i class="icon-info"></i> File Received <u><xsl:value-of select="$file/@name"/></u>
 				</div>
 			</xsl:when>
-			<xsl:when test="$file/@status = 'transfer'">
+			<xsl:when test="$file/@status = 'accept'">
 				<div class="transmit-left">
 					<i class="icon-folder"></i>
 				</div>
-				<div class="transmit-body">
-					<div class="transmit-info">Transfering <u><xsl:value-of select="$file/@name"/></u></div>
+				<div class="transmit-body" style="--perc: 37%; --sent: '137 KB'; --total: '2.1 MB'; --time: '2.3 minutes';">
+					<div class="transmit-info">
+						<xsl:if test="@from = $me">Sending</xsl:if>
+						<xsl:if test="@from != $me">Receiving</xsl:if>
+						<u><xsl:value-of select="$file/@name"/></u>
+					</div>
 					<div class="transmit-progress">
-						<span style="width: 37%"></span>
+						<span></span>
 					</div>
 					<div class="transmit-details">
-						137 KB of 2.1 MB - 3 minutes
+						<span class="f-sent"></span>
+						<span class="f-tot"></span>
+						<span class="f-time"></span>
+						<!-- 137 KB of 2.1 MB - 3 minutes -->
 					</div>
 				</div>
 				<div class="transmit-right">

@@ -84,8 +84,6 @@
 				el.addClass("focused");
 				break;
 			case "receive-message":
-				// if (ME.username === "linus") console.log(event);
-
 				// this is an internal module notification originated from "this user".
 				if (ME.username === event.from && event.priority === 3) return;
 
@@ -111,13 +109,20 @@
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
+
+				// temp
+				if (ME.username === "linus" && event.message.startsWith("/file ")) {
+					console.log(event);
+					
+					Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+				}
 				break;
 			
 			case "module-message-next":
 				data = { id: event.el.data("id"), state: event.next };
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
 				xnode.setAttribute("status", data.state);
-				// console.log(xnode);
+				// console.log(data);
 
 				message = window.render({
 					template: "msg-transmit",
