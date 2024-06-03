@@ -67,15 +67,20 @@
 
 			// custom events
 			case "insert-smiley":
-				str = $(event.target).data("str");
-				APP.input.els.input.append(str);
+				str = $(event.target).data("str") +"&#160;";
+				// APP.input.els.input.append(str);
+				document.execCommand("insertHTML", false, str);
+				// close popup
 				Self.dispatch({ type: "close-popup" });
 				break;
 			case "module-giphy":
 			case "module-board":
 			case "module-file":
-				str = event.type.split("-")[1];
-				console.log(str);
+				str = "/"+ event.type.split("-")[1] +"&#160;";
+				// APP.input.els.input.append(str);
+				document.execCommand("insertHTML", false, str);
+				// close popup
+				Self.dispatch({ type: "close-popup" });
 				break;
 		}
 	}

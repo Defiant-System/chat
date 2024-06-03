@@ -27,6 +27,7 @@
 		// receiver; connection
 		Self.fileConnection = connection;
 		Self.fileConnection.on("data", Self.receiveFile.bind(Self));
+		Self.fileConnection.on("chunk", len => console.log(len));
 	},
 	receiveFile(data) {
 		let Self = chat.peer,
@@ -38,6 +39,7 @@
 
 		// download received file
 		// window.download(file);
+		console.log(file);
 		
 		// temp
 		Transmit.dispatch({ type: "done-file", el: chat.transcript.els.output.find(`.transmit-progress`) });

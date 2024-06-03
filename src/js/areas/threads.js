@@ -271,7 +271,8 @@
 
 						// start transmitting file
 						if (data.state === "accept") {
-							let file = new File(["foo"], "foo.txt", { type: "text-plain" });
+							let str = [...Array(15e3)].map(e => "foo ").join(""),
+								file = new File([str], "foo.txt", { type: "text-plain" });
 							// prepare receiver
 							user = karaqu.user.friend(event.from);
 							user.uuid = data.uuid;
