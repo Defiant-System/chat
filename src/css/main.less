@@ -1,6 +1,7 @@
 
 
 background: transparent;
+overflow: visible;
 
 
 content {
@@ -9,20 +10,21 @@ content {
 	left: 0;
 	right: 0;
 	bottom: 0;
+	overflow: hidden;
 	display: flex;
 	font-size: 14px;
 	color: #333;
 
-	&.cover:before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: transparent;
-		z-index: 4;
-	}
+	// &.cover:before {
+	// 	content: "";
+	// 	position: absolute;
+	// 	top: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	bottom: 0;
+	// 	background: transparent;
+	// 	z-index: 4;
+	// }
 
 	&[data-theme="amber"] {
 		.teams {

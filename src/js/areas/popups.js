@@ -5,6 +5,7 @@
 	init() {
 		// fast references
 		this.els = {
+			doc: $(document),
 			root: window.find(".popups"),
 			popOptions: window.find(".popups .popup-options"),
 			popSmileys: window.find(".popups .popup-smileys"),
@@ -16,32 +17,65 @@
 			offset,
 			rect,
 			dim,
+			str,
 			el;
 		// console.log(event);
 		switch (event.type) {
-			// custom event
+			// native events
+			case "mouseup":
+				// if click inside popup element
+				if ($(event.target).parents(".popups").length) return;
+				Self.dispatch({ type: "close-popup" });
+				break;
+			
+			// popup events
 			case "show-options":
-				el = Self.els.popOptions;
-				rect = el[0].getBoundingClientRect();
+				Self.dispatch({ ...event, type: "open-popup", popEl: Self.els.popOptions });
+				break;
+			case "show-smileys":
+				Self.dispatch({ ...event, type: "open-popup", popEl: Self.els.popSmileys });
+				break;
+			case "open-popup":
+				rect = event.popEl[0].getBoundingClientRect();
 				offset = event.el.offset("content");
 				dim = {
 					top: offset.top - rect.height - 19,
 					left: offset.left + (offset.width >> 1) - (rect.width >> 1) - 7,
 				};
-				console.log(offset);
-				console.log(rect);
-				console.log(dim);
+				// pop-up bubble
+				event.popEl.css(dim).cssSequence("pop-show", "animationend", el => {
+					// anything to do?
+				});
 
-				el.addClass("show").css(dim);
-				// APP.els.content.addClass("cover");
-				// APP.input.els.input.removeAttr("contenteditable"); // force release of focus
-				break;
-			case "show-smileys":
-				console.log(event);
-				// APP.els.content.addClass("cover");
-				// APP.input.els.input.removeAttr("contenteditable"); // force release of focus
+				// save reference to popup
+				Self.popEl = event.popEl;
+
+				// force release of focus
+				// APP.input.els.input.removeAttr("contenteditable");
+
+				// capture next mouseup event
+				Self.els.doc.bind("mouseup", Self.dispatch);
 				break;
 			case "close-popup":
+				// hide with animation
+				Self.popEl.cssSequence("pop-hide", "animationend", el => el.removeClass("pop-show pop-hide"));
+				// reset reference
+				delete Self.popEl;
+				// unbind event handler
+				Self.els.doc.unbind("mouseup", Self.dispatch);
+				break;
+
+			// custom events
+			case "insert-smiley":
+				str = $(event.target).data("str");
+				APP.input.els.input.append(str);
+				Self.dispatch({ type: "close-popup" });
+				break;
+			case "module-giphy":
+			case "module-board":
+			case "module-file":
+				str = event.type.split("-")[1];
+				console.log(str);
 				break;
 		}
 	}

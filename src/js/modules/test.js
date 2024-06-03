@@ -3,7 +3,7 @@ let Test = {
 	init(APP) {
 		// return;
 
-		APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click");
+		setTimeout(() => APP.els.content.find(`.btn[data-click="show-smileys"] i`).trigger("click"), 500);
 		return;
 
 		// if (ME.username === "linus") {
