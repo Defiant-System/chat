@@ -13,24 +13,30 @@
 		let Self = chat.peer;
 		Self.fileConnection = Self.connection.connect(user.uuid);
 
-		// Self.fileConnection.send(file);
-		// Self.fileConnection.send({ strings: "test" });
-		Self.fileConnection.send("test 123");
+		Self.fileConnection.on("open", () => {
 
+			Self.fileConnection.send(file);
+			// Self.fileConnection.send({ strings: "test" });
+			// Self.fileConnection.send({ tmp: "test 123" });
+
+		});
+		// Self.fileConnection.on("data", Self.receiveFile.bind(Self));
 		// Self.fileConnection.on("close", Self.disconnect.bind(Self));
 	},
 	receiveConnection(connection) {
 		let Self = chat.peer;
 
 		Self.fileConnection = connection;
-		// console.log( 123, connection );
-		Self.fileConnection.on("open", Self.receiveFile.bind(Self));
+		console.log( 1, connection );
+		// console.log( 2, connection.serialization );
 		Self.fileConnection.on("data", Self.receiveFile.bind(Self));
-		Self.fileConnection.on("close", Self.receiveFile.bind(Self));
-		Self.fileConnection.on("error", Self.receiveFile.bind(Self));
 	},
-	receiveFile() {
-		console.log("receiveFile", arguments);
+	receiveFile(data) {
+		let Self = chat.peer;
+		
+		console.log("receiveFile", data);
+		
+		// Self.fileConnection.send({ b: "hellow 123" });
 	},
 	disconnect() {
 		let Self = chat.peer;
