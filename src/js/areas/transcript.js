@@ -112,17 +112,66 @@
 
 				// temp
 				if (ME.username === "linus" && event.message.startsWith("/file ")) {
-					console.log(event);
-					
-					Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+					// console.log(event);
+
+					/*
+					let curr = 0,
+						total = 100,
+						fnCount = () => {
+							if (curr++ < 100) setTimeout(fnCount, 20);
+
+							console.log(curr);
+
+							// send state update to friend
+							// APP.input.dispatch({
+							// 	type: "silent-message",
+							// 	from: ME.username,
+							// 	to: APP.channel.username,
+							// 	channelId: APP.channel.id,
+							// 	message: JSON.stringify(data),
+							// });
+						};
+					fnCount();
+					*/
+
+					// temp: auto-accept file
+					setTimeout(() => {
+						Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+					}, 500);
 				}
 				break;
 			
+			// module related events
+			case "module-user-status":
+				if (event.user.status != 1) {
+					// cancel all ongoing file transmits AND inquiries
+					channelId = APP.threads.idChannel(`friends-${ME.username}-${event.user.username}`);
+					xpath = `./i[@id = "${channelId}"]//file[@status = "accept" or @status = "inquiry"]`;
+					Self.xTranscripts.selectNodes(xpath).map(xFile => {
+						// auto "cancel" file
+						xFile.setAttribute("status", "cancel");
+						// update message if in UI
+						let mEl = Self.els.output.find(`.file-transmit[data-id="${xFile.getAttribute("id")}"]`);
+						if (mEl.length) {
+							let message = window.render({
+									template: "msg-transmit",
+									match: `//Transcripts//*[@cstamp="${xFile.parentNode.getAttribute("cstamp")}"]`,
+									vdom: true,
+							});
+							// replace message content
+							mEl.replace(message[0]);
+						}
+					});
+				}
+				break;
 			case "module-message-next":
 				data = { id: event.el.data("id"), state: event.next };
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
 				xnode.setAttribute("status", data.state);
 				// console.log(data);
+
+				// send peer-id if accepted
+				if (data.state === "accept") data.uuid = window.peer.id;
 
 				message = window.render({
 					template: "msg-transmit",
@@ -184,6 +233,7 @@
 				});
 				break;
 			default:
+				// if (!event.el) return;
 				modEl = event.el.parents("[data-module]");
 				if (modEl.length) {
 					name = modEl.data("module");

@@ -15,6 +15,40 @@
 		</Team>
 	</Teams>
 	<Transcripts>
+		<i id="friends-hbi-linus">
+			<i from="linus" cstamp="1595006835071" type="file">
+				<file name="some-file.txt" status="accept" sent="14068" sizeB="50068" timeS="127"/>
+			</i>
+			<i from="linus" cstamp="1595006835072" type="file">
+				<file name="some-file.txt" status="inquiry"/>
+			</i>
+			<i from="linus" cstamp="1595006835072" type="file">
+				<file name="some-file.txt" status="done"/>
+			</i>
+			<i from="linus" cstamp="1595006835072" type="file">
+				<file name="some-file.txt" status="reject"/>
+			</i>
+
+			<i from="hbi" cstamp="1595006835171" type="file">
+				<file name="another-movie.mov" status="accept" sent="401168" sizeB="1501068" timeS="2027"/>
+			</i>
+			<i from="hbi" cstamp="1595006835172" type="file">
+				<file name="some-file.txt" status="cancel"/>
+			</i>
+			<i from="hbi" cstamp="1595006835173" type="file">
+				<file name="some-file.txt" status="done"/>
+			</i>
+			<i from="hbi" cstamp="1595006835174" type="file">
+				<file name="some-file.txt" status="reject"/>
+			</i>
+		</i>
+		<i id="friends-bill-hbi">
+			<i from="bill" cstamp="1595006835174" type="board"/>
+			<i from="hbi" cstamp="1595006835174" type="board"/>
+		</i>
+
+
+
 		<i id="friends-hbi">
 			<i from="hbi" cstamp="1595006835076"><![CDATA[This is a message to self]]></i>
 			<i from="steve" cstamp="1595006816536"><![CDATA[I'm fine thanks...]]></i>

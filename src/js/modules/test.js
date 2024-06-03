@@ -14,9 +14,8 @@ let Test = {
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
 			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
 
-			console.log( APP.els.content.find(`.btn[data-click="show-options"]`) );
-			APP.els.content.find(`.btn[data-click="show-options"]`).trigger("click");
-		return;
+			// APP.els.content.find(`.btn[data-click="show-options"]`).trigger("click");
+			// return;
 
 			setTimeout(() => {
 				// APP.input.els.input.html("/giphy high five");

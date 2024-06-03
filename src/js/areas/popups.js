@@ -16,10 +16,12 @@
 		switch (event.type) {
 			// custom event
 			case "show-options":
+				console.log(event);
 				APP.els.content.addClass("cover");
 				// APP.input.els.input.removeAttr("contenteditable"); // force release of focus
 				break;
 			case "show-smileys":
+				console.log(event);
 				APP.els.content.addClass("cover");
 				// APP.input.els.input.removeAttr("contenteditable"); // force release of focus
 				break;

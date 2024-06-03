@@ -20,9 +20,9 @@ const Transmit = {
 			el;
 		// console.log(event);
 		switch (event.type) {
+			case "accept-file":
 			case "reject-file":
 			case "cancel-send":
-			case "accept-file":
 			case "abort-file":
 				el = event.el.parents("div[data-module]");
 				next = event.type.split("-")[0];

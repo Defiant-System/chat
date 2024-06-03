@@ -61,8 +61,6 @@ const chat = {
 				window.net.join({ room: Self.lobbyId });
 				break;
 			case "window.close":
-				// TODO: look in "bluePrint" and close "non-cancels" module processes
-
 				// save settings
 				window.settings.setItem("settings", Self.settings);
 				// leave chat lobby
@@ -136,6 +134,7 @@ const chat = {
 	transcript: @import "areas/transcript.js",
 	input:      @import "areas/input.js",
 	info:       @import "areas/info.js",
+	peer:       @import "areas/peer.js",
 	popups:     @import "areas/popups.js",
 };
 

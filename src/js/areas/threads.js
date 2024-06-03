@@ -54,6 +54,8 @@
 			case "friend-status":
 				el = Self.els.root.find(`.friend[data-username="${event.detail.username}"]`);
 				el.toggleClass("online", event.detail.status !== 1);
+				// adjust modules attached to user, if needed
+				APP.transcript.dispatch({ type: "module-user-status", user: event.detail });
 				// update "info", of user status (if it might be showing user info)
 				APP.info.dispatch({ ...event.detail, type: "update-user-status" });
 				break;
@@ -251,20 +253,41 @@
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
 
 
-				if (event.priority === 3 && ME.username !== event.from) {
-					// module message related info
-					let data = JSON.parse(event.message),
-						xnode = APP.transcript.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`),
-						// render message content
-						message = window.render({
-							template: "msg-transmit",
-							match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,
-							vdom: true,
-						});
+				if (event.priority === 3) {
+					if (ME.username !== event.from) {
+						// module message related info
+						let data = JSON.parse(event.message),
+							xnode = APP.transcript.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`),
+							// render message content
+							message = window.render({
+								template: "msg-transmit",
+								match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,
+								vdom: true,
+							});
 
-					// replace message content, if in view
-					el = APP.transcript.els.output.find(`div[data-id="${data.id}"]`);
-					if (el.length) return el.replace(message[0]);
+						// replace message content, if in view
+						el = APP.transcript.els.output.find(`div[data-id="${data.id}"]`);
+						if (el.length) el.replace(message[0]);
+
+						// start transmitting file
+						if (data.state === "accept") {
+							let file = new File(["foo"], "foo.txt", { type: "text-plain" });
+							// console.log( file );
+
+							user = karaqu.user.friend(event.from);
+							user.uuid = data.uuid;
+
+							APP.peer.connect();
+							APP.peer.send(user, file);
+						}
+
+						return;
+					}
+
+					if (ME.username === "linus") {
+						// console.log( "peer connect", event );
+						APP.peer.connect();
+					}
 				}
 
 
