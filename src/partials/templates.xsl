@@ -197,7 +197,12 @@
 					<i class="icon-warning"></i> Transmission Aborted
 				</div>
 			</xsl:when>
-			<xsl:when test="$file/@status = 'done'">
+			<xsl:when test="$file/@status = 'done' and @from = $me">
+				<div class="transmit-received">
+					<i class="icon-info"></i> File Sent <u><xsl:value-of select="$file/@name"/></u>
+				</div>
+			</xsl:when>
+			<xsl:when test="$file/@status = 'done' and @from != $me">
 				<div class="transmit-received">
 					<i class="icon-info"></i> File Received <u><xsl:value-of select="$file/@name"/></u>
 				</div>

@@ -20,6 +20,7 @@ const Transmit = {
 			el;
 		// console.log(event);
 		switch (event.type) {
+			case "done-file":
 			case "accept-file":
 			case "reject-file":
 			case "cancel-send":
