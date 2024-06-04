@@ -359,6 +359,10 @@
 						<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
 						<i class="icon-phone"></i>
 					</div>
+					<div class="action" data-click="send-user-file">
+						<xsl:if test="@online != 1"><xsl:attribute name="class">action</xsl:attribute></xsl:if>
+						<i class="icon-paperclip"></i>
+					</div>
 				</div>
 			</xsl:if>
 		</div>

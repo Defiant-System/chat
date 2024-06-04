@@ -47,6 +47,9 @@
 					Self.els.root.find(`.action-options .action`).toggleClass("disabled", event.status);
 				}
 				break;
+			case "send-user-file":
+				console.log(event);
+				break;
 			case "voice-call-user":
 			case "camera-call-user":
 				el = event.el.parents(".profile");

@@ -17,6 +17,7 @@ let Test = {
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
 			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
 
+			// setTimeout(() => window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click"), 300);
 			// return;
 
 			setTimeout(() => {

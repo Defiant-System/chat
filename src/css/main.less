@@ -174,6 +174,7 @@ content {
 		&.icon-date         { background-image: url(~/icons/icon-date.png); }
 		&.icon-phone        { background-image: url(~/icons/icon-phone.png); }
 		&.icon-camera       { background-image: url(~/icons/icon-camera.png); }
+		&.icon-paperclip    { background-image: url(~/icons/icon-paperclip.png); }
 		&.icon-arrow-right  { background-image: url(~/icons/icon-arrow-right.png); }
 		&.icon-arrow-left   { background-image: url(~/icons/icon-arrow-left.png); }
 		&.icon-users        { background-image: url(~/icons/icon-users.png); }
@@ -1356,6 +1357,14 @@ content {
 
 						&:hover:not(.disabled) {
 							background: #4a4;
+						}
+
+						&[data-click="send-user-file"] {
+							background: #8be;
+
+							&:hover:not(.disabled) {
+								background: #69c;
+							}
 						}
 
 						i[class^="icon-"] {
