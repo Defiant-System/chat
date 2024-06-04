@@ -8,7 +8,7 @@
 		// establish connection; on events
 		Self.connection = window.peer.connect({ connection });
 	},
-	sendFile(user, file) {
+	sendFile(user, file, uid) {
 		let Self = chat.peer,
 			item = {
 				buffer: file,
@@ -19,7 +19,8 @@
 			};
 		// send file item
 		Self.fileConnection = Self.connection.connect(user.uuid);
-		Self.fileConnection.on("open", () => Self.fileConnection.send(item));
+		Self.fileConnection.on("open", () => Self.fileConnection.send(file, null, uid));
+		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
 		Self.fileConnection.on("close", Self.disconnect.bind(Self));
 	},
 	receiveConnection(connection) {
@@ -27,7 +28,11 @@
 		// receiver; connection
 		Self.fileConnection = connection;
 		Self.fileConnection.on("data", Self.receiveFile.bind(Self));
-		Self.fileConnection.on("chunk", len => console.log(len));
+		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
+	},
+	receiveChunk(data) {
+		// pass data to transcript
+		chat.transcript.dispatch({ type: "module-peer-progress", data });
 	},
 	receiveFile(data) {
 		let Self = chat.peer,
@@ -39,7 +44,7 @@
 
 		// download received file
 		// window.download(file);
-		console.log(file);
+		// console.log(file);
 		
 		// temp
 		Transmit.dispatch({ type: "done-file", el: chat.transcript.els.output.find(`.transmit-progress`) });

@@ -278,7 +278,7 @@
 							user.uuid = data.uuid;
 							// establish p2p connection & send file
 							APP.peer.connect();
-							APP.peer.sendFile(user, file);
+							APP.peer.sendFile(user, file, data.id);
 						}
 
 						return;

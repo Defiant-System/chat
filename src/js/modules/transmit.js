@@ -2,7 +2,7 @@
 const Transmit = {
 	action(phrase, callback) {
 		let data = {
-				id: "f"+ Date.now(),
+				id: `u${Date.now()}`,
 				name: "pretty-picture.png",
 				size: 123456,
 			};

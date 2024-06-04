@@ -164,14 +164,34 @@
 					});
 				}
 				break;
+			case "module-peer-progress":
+				// xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);
+				// xnode.setAttribute("size", event.data.size);
+				// xnode.setAttribute("throughput", event.data.throughput);
+
+				let fsize = event.data.type === "send" ? event.data.bytesToSend : event.data.bytesToReceive,
+					perc = Math.round((event.data.size / fsize) * 100),
+					sent = karaqu.formatBytes(event.data.size),
+					total = karaqu.formatBytes(fsize),
+					time = `2.3 minutes`;
+				// xnode.setAttribute("perc", perc);
+
+				// UI update
+				Self.els.output
+					.find(`.file-transmit[data-id="${event.data.uid}"] .transmit-body`)
+					.css({ "--perc": `${perc}%`, "--sent": `'${sent}'`, "--total": `'${total}'`, "--time": `'${time}'` });
+				break;
 			case "module-message-next":
 				data = { id: event.el.data("id"), state: event.next };
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
 				xnode.setAttribute("status", data.state);
-				// console.log(data);
+				console.log(xnode);
 
 				// send peer-id if accepted
 				if (data.state === "accept") data.uuid = window.peer.id;
+
+				// temp
+				if (event.next === "done") return;
 
 				message = window.render({
 					template: "msg-transmit",
