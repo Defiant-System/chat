@@ -1,16 +1,27 @@
 
 const Transmit = {
 	action(phrase, callback) {
-		let data = {
-				id: `u${Date.now()}`,
-				name: "pretty-picture.png",
-				size: 123456,
-			};
-		callback(`/file ${JSON.stringify(data)}`);
+		let id = `u${Date.now()}`,
+			args = phrase.split("--").filter(e => e).map(e => e.trim()),
+			data = { id };
+		
+		// simple test setup
+		if (args[0] === "test") {
+			args.slice(1).map(a => {
+				let [key, value] = a.split("=");
+				if (key === "size") value = +value.match(/^\d[\d\.]+/)[0] * 1024 * 1024; // translate from MB to bytes
+				data[key] = value;
+			});
+		}
+
+		callback(`/file ${JSON.stringify(data)}`, true);
 	},
 	translate(stdIn) {
 		let json = JSON.parse(stdIn),
-			stdOut = $.nodeFromString(`<file id="${json.id}" name="${json.name}" size="${json.size}" status="inquiry"/>`);
+			str = json.name
+				? `name="${json.name}" size="${json.size}" status="inquiry"`
+				: `status="select-file"`,
+			stdOut = $.nodeFromString(`<file id="${json.id}" ${str}/>`);
 		return stdOut;
 	},
 	dispatch(event) {
@@ -20,6 +31,12 @@ const Transmit = {
 			el;
 		// console.log(event);
 		switch (event.type) {
+			case "select-file":
+				console.log(event);
+				break;
+			case "cancel-select":
+				event.el.parents(".message").cssSequence("vanish", "animationend", el => el.remove());
+				break;
 			case "done-file":
 			case "accept-file":
 			case "reject-file":

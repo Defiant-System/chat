@@ -159,6 +159,15 @@
 	<div class="file-transmit" data-module="file">
 		<xsl:attribute name="data-id"><xsl:value-of select="$file/@id"/></xsl:attribute>
 		<xsl:choose>
+			<xsl:when test="$file/@status = 'select-file'">
+				<div class="transmit-select-file">
+					<i class="icon-info"></i> Select File
+				</div>
+				<div class="transmit-options">
+					<span class="btn-select" data-click="select-file">Select</span>
+					<span class="btn-cancel" data-click="cancel-select">Cancel</span>
+				</div>
+			</xsl:when>
 			<xsl:when test="$file/@status = 'inquiry' and @from = $me">
 				<div class="transmit-inquiry">
 					Sending File <u><xsl:value-of select="$file/@name"/></u>

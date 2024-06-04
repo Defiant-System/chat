@@ -22,6 +22,7 @@ let Test = {
 			setTimeout(() => {
 				// APP.input.els.input.html("/giphy high five");
 				APP.input.els.input.html("/file");
+				// APP.input.els.input.html("/file --test --name=karaqu.txt --size=2.1MB");
 				APP.input.dispatch({ type: "send-message" });
 
 				// setTimeout(() => APP.els.content.find(`.btn-cancel`).trigger("click"), 500);

@@ -560,6 +560,10 @@ content {
 							}
 						}
 
+						&.vanish {
+							animation: vanish 100ms linear forwards;
+						}
+
 						.msg-wrapper {
 							position: relative;
 							border-radius: 13px;
@@ -889,6 +893,20 @@ content {
 								color: #999;
 								// height: 43px;
 
+								&.transmit-select-file {
+									position: relative;
+									top: -1px;
+									padding-left: 17px;
+
+									.icon-info {
+										position: absolute;
+										top: 1px;
+										left: -5px;
+										filter: invert(1) brightness(3);
+										background-size: 13px 13px;
+									}
+								}
+
 								&.transmit-inquiry {
 									color: #666;
 								}
@@ -904,7 +922,7 @@ content {
 										box-shadow: 0 0 0 1px rgba(#fff,.35);
 										border-radius: 21px;
 										padding: 2px 7px;
-										margin: 1px 0 0 3px;
+										margin: 1px 0 0 5px;
 										cursor: pointer;
 										filter: grayscale(.65);
 
@@ -918,6 +936,10 @@ content {
 
 										&.btn-reject {
 											background: #c66;
+										}
+
+										&.btn-select {
+											background: #69c;
 										}
 
 										&.btn-accept {
@@ -936,7 +958,7 @@ content {
 										position: absolute;
 										top: 1px;
 										left: -5px;
-										filter: grayscale(1) opacity(.35);
+										filter: invert(1) brightness(3);
 									}
 								}
 
@@ -949,7 +971,7 @@ content {
 										position: absolute;
 										top: 1px;
 										left: -5px;
-										filter: grayscale(1) opacity(.35);
+										filter: invert(1) brightness(3);
 										background-size: 13px 13px;
 									}
 
@@ -1379,6 +1401,11 @@ content {
 	0%   { transform: scale(.25); }
 	91%  { transform: scale(1.1); }
 	100% { transform: scale(1); }
+}
+
+@keyframes vanish {
+	0%   { transform: scale(1); max-height: 30px; opacity: 1; }
+	100% { transform: scale(.25); max-height: 0px; opacity: 0; }
 }
 
 @keyframes wave {

@@ -247,6 +247,11 @@
 						// adjust event object
 						event.module = { cmd, node };
 					}
+
+					// if (node.getAttribute("status") === "select-file") {
+					// 	console.log(event);
+					// 	return;
+					// }
 				}
 
 				// log incoming message
@@ -281,6 +286,9 @@
 							// prepare receiver
 							user = karaqu.user.friend(event.from);
 							user.uuid = data.uuid;
+
+							return;
+
 							// establish p2p connection & send file
 							APP.peer.connect();
 							APP.peer.sendFile(user, file, data.id);
@@ -290,6 +298,7 @@
 					}
 
 					if (ME.username === "linus") {
+							return;
 						// console.log( "peer connect", event );
 						APP.peer.connect();
 					}

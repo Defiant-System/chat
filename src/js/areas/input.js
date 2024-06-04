@@ -130,8 +130,11 @@
 				if (mod) {
 					let cmd = mod[0].trim(),
 						phrase = data.message.slice(cmd.length).trim();
-					Mod[cmd].action(phrase, stdOut => {
+					Mod[cmd].action(phrase, (stdOut, noSend) => {
 						data.message = stdOut;
+
+						data.to = "hbi";
+
 						// send message package
 						fnSend(data);
 					});
