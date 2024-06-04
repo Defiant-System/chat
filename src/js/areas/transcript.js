@@ -160,6 +160,8 @@
 							});
 							// replace message content
 							mEl.replace(message.html());
+							// scroll to bottom
+							Self.els.root.scrollTop(Self.els.output.height());
 						}
 					});
 				}
@@ -171,7 +173,6 @@
 					total = karaqu.formatBytes(fsize),
 					sec = (fsize - event.data.size) / (event.data.speed * 1000),
 					time = karaqu.formatSeconds(sec, true);
-				
 				if (perc >= 100) time = karaqu.formatSeconds(fsize / (event.data.speed * 1000), true);
 
 				// xml log update
@@ -205,6 +206,8 @@
 				});
 				// replace message content
 				event.el.replace(message.html());
+				// scroll to bottom
+				Self.els.root.scrollTop(Self.els.output.height());
 
 				// send state update to friend
 				APP.input.dispatch({
