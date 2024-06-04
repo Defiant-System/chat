@@ -165,16 +165,18 @@
 				}
 				break;
 			case "module-peer-progress":
-				// xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);
-				// xnode.setAttribute("size", event.data.size);
-				// xnode.setAttribute("throughput", event.data.throughput);
-
 				let fsize = event.data.type === "send" ? event.data.bytesToSend : event.data.bytesToReceive,
 					perc = Math.round((event.data.size / fsize) * 100),
 					sent = karaqu.formatBytes(event.data.size),
 					total = karaqu.formatBytes(fsize),
 					time = `2.3 minutes`;
-				// xnode.setAttribute("perc", perc);
+
+				// xml log update
+				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);
+				xnode.setAttribute("total", total);
+				xnode.setAttribute("sent", sent);
+				xnode.setAttribute("time", time);
+				xnode.setAttribute("perc", perc);
 
 				// UI update
 				Self.els.output

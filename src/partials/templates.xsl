@@ -212,6 +212,14 @@
 					<i class="icon-folder"></i>
 				</div>
 				<div class="transmit-body">
+					<xsl:if test="$file/@perc">
+						<xsl:attribute name="style">
+							--perc: <xsl:value-of select="$file/@perc"/>%;
+							--sent: '<xsl:value-of select="$file/@sent"/>';
+							--total: '<xsl:value-of select="$file/@total"/>';
+							--time: '<xsl:value-of select="$file/@time"/>';
+						</xsl:attribute>
+					</xsl:if>
 					<div class="transmit-info">
 						<xsl:if test="@from = $me">Sending</xsl:if>
 						<xsl:if test="@from != $me">Receiving</xsl:if>
