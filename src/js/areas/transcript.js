@@ -169,7 +169,10 @@
 					perc = Math.round((event.data.size / fsize) * 100),
 					sent = karaqu.formatBytes(event.data.size),
 					total = karaqu.formatBytes(fsize),
-					time = `2.3 minutes`;
+					sec = (fsize - event.data.size) / (event.data.speed * 1000),
+					time = karaqu.formatSeconds(sec, true);
+				
+				if (perc >= 100) time = karaqu.formatSeconds(fsize / (event.data.speed * 1000), true);
 
 				// xml log update
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);

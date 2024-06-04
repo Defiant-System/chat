@@ -962,6 +962,12 @@ content {
 									--total: '0 B';
 									--time: '0 seconds';
 
+									&[style^="100%"],
+									&[style*="100%"] {
+										.f-sent { display: none; }
+										// .f-tot:after { content: " - "; }
+									}
+
 									.transmit-info {
 										color: #666;
 									}

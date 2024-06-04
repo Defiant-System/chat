@@ -232,7 +232,6 @@
 						<span class="f-sent"></span>
 						<span class="f-tot"></span>
 						<span class="f-time"></span>
-						<!-- 137 KB of 2.1 MB - 3 minutes -->
 					</div>
 				</div>
 				<div class="transmit-right">
