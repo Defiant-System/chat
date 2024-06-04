@@ -267,11 +267,11 @@
 
 						// replace message content, if in view
 						el = APP.transcript.els.output.find(`div[data-id="${data.id}"]`);
-						if (el.length) el.replace(message[0]);
+						if (el.length) el.replace(message.html());
 
 						// start transmitting file
 						if (data.state === "accept") {
-							let str = [...Array(25e4)].map(e => "foo ").join(""),
+							let str = [...Array(95e4)].map(e => "foo ").join(""),
 								file = new File([str], "foo.txt", { type: "text-plain" });
 							// prepare receiver
 							user = karaqu.user.friend(event.from);

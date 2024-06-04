@@ -159,7 +159,7 @@
 									vdom: true,
 							});
 							// replace message content
-							mEl.replace(message[0]);
+							mEl.replace(message.html());
 						}
 					});
 				}
@@ -190,13 +190,13 @@
 				data = { id: event.el.data("id"), state: event.next };
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
 				xnode.setAttribute("status", data.state);
-				console.log(xnode);
+				// console.log(xnode);
 
 				// send peer-id if accepted
 				if (data.state === "accept") data.uuid = window.peer.id;
 
 				// temp
-				if (event.next === "done") return;
+				// if (event.next === "done") return;
 
 				message = window.render({
 					template: "msg-transmit",
@@ -204,7 +204,7 @@
 					vdom: true,
 				});
 				// replace message content
-				event.el.replace(message[0]);
+				event.el.replace(message.html());
 
 				// send state update to friend
 				APP.input.dispatch({

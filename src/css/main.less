@@ -726,7 +726,6 @@ content {
 									}
 								}
 							}
-
 						}
 
 						&.received {
@@ -804,6 +803,22 @@ content {
 							&.removing {
 								max-height: 0px;
 								overflow: hidden;
+							}
+						}
+
+						.transmit-details {
+							.f-sent {
+								&:before { content: var( --sent ); }
+								&:after { content: " of "; }
+							}
+
+							.f-tot {
+								&:before { content: var( --total ); }
+								&:after { content: " ~ "; }
+							}
+
+							.f-time {
+								&:before { content: var( --time ); }
 							}
 						}
 
@@ -937,6 +952,12 @@ content {
 										filter: grayscale(1) opacity(.35);
 										background-size: 13px 13px;
 									}
+
+									.transmit-details {
+										position: relative;
+										top: 3px;
+										opacity: .6;
+									}
 								}
 
 								&.transmit-left {
@@ -992,22 +1013,6 @@ content {
 											opacity: .75;
 											width: var( --perc );
 											mix-blend-mode: overlay;
-										}
-									}
-
-									.transmit-details {
-										.f-sent {
-											&:before { content: var( --sent ); }
-											&:after { content: " of "; }
-										}
-
-										.f-tot {
-											&:before { content: var( --total ); }
-											&:after { content: " ~ "; }
-										}
-
-										.f-time {
-											&:before { content: var( --time ); }
 										}
 									}
 								}
