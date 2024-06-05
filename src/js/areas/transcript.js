@@ -177,13 +177,19 @@
 			case "module-peer-progress":
 				let fsize = event.data.type === "send" ? event.data.bytesToSend : event.data.bytesToReceive;
 				if (!fsize) fsize = event.data.size;
-				
+				event.data.speed = (event.data.speed | 1) * 1000;
+
 				let perc = Math.round((event.data.size / fsize) * 100),
 					sent = karaqu.formatBytes(event.data.size),
 					total = karaqu.formatBytes(fsize),
-					sec = (fsize - event.data.size) / (event.data.speed),
+					// calculates remaining time
+					sec = (fsize - event.data.size) / event.data.speed,
 					time = karaqu.formatSeconds(sec, true);
-				if (perc >= 100) time = karaqu.formatSeconds(fsize / (event.data.speed), true);
+				
+				if (perc >= 100) {
+					// calculates how long it took
+					time = karaqu.formatSeconds(fsize / event.data.speed, true);
+				}
 
 				// xml log update
 				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);

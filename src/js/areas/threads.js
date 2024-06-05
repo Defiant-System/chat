@@ -215,10 +215,10 @@
 							el.append(str.replace(/placeholder/, user.short));
 							// remove potential "zombies"
 							setTimeout(() => el.find(".message.typing")
-								.cssSequence("removing", "transitionend", e => e.length ? e.remove() : null), 10e3);
+								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
 						} else {
 							el.find(".message.typing")
-								.cssSequence("removing", "transitionend", e => e.length ? e.remove() : null);
+								.cssSequence("removing", "transitionend", e => e.remove());
 						}
 					} else {
 						if (event.typing && event.from !== ME.username) {
@@ -228,7 +228,7 @@
 							str = window.render({ template: "tiny-typing" });
 							el.append(str);
 							// remove potential "zombies"
-							setTimeout(() => el.find(".anim-typing").remove(), 10e3);
+							setTimeout(() => el.find(".anim-typing").length ? el.find(".anim-typing").remove() : null, 10e3);
 						} else {
 							el.find(".anim-typing").remove();
 						}

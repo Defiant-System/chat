@@ -10,18 +10,19 @@
 	},
 	sendFile(user, file, uid) {
 		let Self = chat.peer,
+			start = Date.now(),
 			item = {
 				buffer: file,
 				name: file.name,
 				type: file.type,
 				size: file.size,
-				start: Date.now(),
 				lastModified: file.lastModified,
+				start,
 				uid,
 			};
 		// send file item
 		Self.fileConnection = Self.connection.connect(user.uuid);
-		Self.fileConnection.on("open", () => Self.fileConnection.send(item, null, uid));
+		Self.fileConnection.on("open", () => Self.fileConnection.send(item, null, { uid, start }));
 		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
 		Self.fileConnection.on("close", Self.disconnect.bind(Self));
 	},
@@ -44,15 +45,12 @@
 			},
 			file = new File([data.buffer], data.name, info);
 
-		if (!data.speed) {
-			data.speed = data.size / ((Date.now() - data.start) / 1000);
-		}
-
 		// download received file
 		// window.download(file);
 		// console.log("receiveFile", data);
 
-		// // final done call (to update xml log)
+		// final done call (to update xml log)
+		console.log(data);
 		chat.transcript.dispatch({ type: "module-peer-done", data });
 		
 		// complete message element
