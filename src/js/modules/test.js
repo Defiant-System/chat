@@ -3,9 +3,6 @@ let Test = {
 	init(APP) {
 		// return;
 
-		// setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 500);
-		// return;
-
 		// if (ME.username === "linus") {
 		// 	setTimeout(() => {
 		// 		APP.els.content.find(`.teams .team:nth(1)`).trigger("click");
@@ -16,6 +13,11 @@ let Test = {
 		if (ME.username === "hbi") {
 			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
 			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
+
+			setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
+
+			setTimeout(() => window.find(`.popup-options .row`).get(5).trigger("click"), 350);
+			return;
 
 			// setTimeout(() => window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click"), 300);
 			// return;

@@ -73,6 +73,14 @@
 				// close popup
 				Self.dispatch({ type: "close-popup" });
 				break;
+			case "module-test-file":
+				str = event.el.data("str");
+				document.execCommand("insertHTML", false, str);
+				// send message
+				APP.input.dispatch({ type: "send-message" });
+				// close popup
+				Self.dispatch({ type: "close-popup" });
+				break;
 			case "module-giphy":
 			case "module-board":
 			case "module-file":

@@ -33,7 +33,6 @@
 		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
 	},
 	receiveChunk(data) {
-		console.log(data);
 		// pass data to transcript
 		chat.transcript.dispatch({ type: "module-peer-progress", data });
 	},
@@ -51,7 +50,7 @@
 
 		// download received file
 		// window.download(file);
-		console.log("receiveFile", data);
+		// console.log("receiveFile", data);
 
 		// // final done call (to update xml log)
 		chat.transcript.dispatch({ type: "module-peer-done", data });
