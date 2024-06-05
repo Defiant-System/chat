@@ -130,10 +130,11 @@
 				if (mod) {
 					let cmd = mod[0].trim(),
 						phrase = data.message.slice(cmd.length).trim();
-					Mod[cmd].action(phrase, (stdOut, noSend) => {
+					Mod[cmd].action(phrase, (stdOut, only) => {
 						data.message = stdOut;
 
-						data.to = "hbi";
+						// do not send but add bubble to "my" output
+						if (only) data.to = only.to;
 
 						// send message package
 						fnSend(data);

@@ -161,6 +161,7 @@
 		<xsl:choose>
 			<xsl:when test="$file/@status = 'select-file'">
 				<div class="transmit-select-file">
+					<input type="file" name="transmit-file" data-no-focus="1" data-change="transmit-file-selected"/>
 					<i class="icon-info"></i> Select File
 				</div>
 				<div class="transmit-options">
@@ -360,7 +361,7 @@
 						<i class="icon-phone"></i>
 					</div>
 					<div class="action" data-click="send-user-file">
-						<xsl:if test="@online != 1"><xsl:attribute name="class">action</xsl:attribute></xsl:if>
+						<xsl:if test="@online != 1"><xsl:attribute name="class">action disabled</xsl:attribute></xsl:if>
 						<i class="icon-paperclip"></i>
 					</div>
 				</div>

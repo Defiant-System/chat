@@ -109,35 +109,12 @@
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
-
-				// temp
-				if (ME.username === "linus" && event.message.startsWith("/file ")) {
-					// console.log(event);
-
-					/*
-					let curr = 0,
-						total = 100,
-						fnCount = () => {
-							if (curr++ < 100) setTimeout(fnCount, 20);
-
-							console.log(curr);
-
-							// send state update to friend
-							// APP.input.dispatch({
-							// 	type: "silent-message",
-							// 	from: ME.username,
-							// 	to: APP.channel.username,
-							// 	channelId: APP.channel.id,
-							// 	message: JSON.stringify(data),
-							// });
-						};
-					fnCount();
-					*/
-
-					// temp: auto-accept file
-					// setTimeout(() => {
-					// 	Self.els.output.find(".transmit-options .btn-accept").trigger("click");
-					// }, 500);
+				break;
+			case "transmit-file-attempt":
+				if (event.file) {
+					let file = event.el[0].files[0],
+						str = `/file --name='${file.name}' --size='${file.size}'`;
+					console.log(str);
 				}
 				break;
 			
@@ -196,9 +173,7 @@
 				// send peer-id if accepted
 				if (data.state === "accept") data.uuid = window.peer.id;
 
-				// temp
-				// if (event.next === "done") return;
-
+				// re-render message content
 				message = window.render({
 					template: "msg-transmit",
 					match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,

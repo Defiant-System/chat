@@ -48,7 +48,10 @@
 				}
 				break;
 			case "send-user-file":
-				console.log(event);
+				el = event.el.parents(".profile");
+				if (el.hasClass("online")) {
+					APP.input.dispatch({ type: "send-message", message: "/file" });
+				}
 				break;
 			case "voice-call-user":
 			case "camera-call-user":

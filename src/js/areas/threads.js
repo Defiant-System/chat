@@ -282,12 +282,10 @@
 						// start transmitting file
 						if (data.state === "accept") {
 							let str = new Array(110 * 1024).fill("this is test string. ").join(""),
-								file = new File([str], "fo1o.txt", { type: "text-plain" });
+								file = new File([str], "foo.txt", { type: "text-plain" });
 							// prepare receiver
 							user = karaqu.user.friend(event.from);
 							user.uuid = data.uuid;
-
-							return;
 
 							// establish p2p connection & send file
 							APP.peer.connect();
