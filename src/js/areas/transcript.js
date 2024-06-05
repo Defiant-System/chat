@@ -131,12 +131,12 @@
 				Self.els.root.scrollTop(Self.els.output.height());
 
 				// temp
-				if (ME.username === "linus" && event.message.startsWith("/file ")) {
-					// temp: auto-accept file
-					setTimeout(() => {
-						Self.els.output.find(".transmit-options .btn-accept").trigger("click");
-					}, 500);
-				}
+				// if (ME.username === "linus" && event.message.startsWith("/file ")) {
+				// 	// temp: auto-accept file
+				// 	setTimeout(() => {
+				// 		Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+				// 	}, 500);
+				// }
 				break;
 			case "transmit-file-attempt":
 				if (event.file) {
