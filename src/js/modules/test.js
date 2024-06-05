@@ -16,7 +16,7 @@ let Test = {
 
 			setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
 
-			setTimeout(() => window.find(`.popup-options .row`).get(3).trigger("click"), 350);
+			setTimeout(() => window.find(`.popup-options .row`).get(2).trigger("click"), 350);
 			return;
 
 			// setTimeout(() => window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click"), 300);

@@ -50,7 +50,7 @@
 		// console.log("receiveFile", data);
 
 		// final done call (to update xml log)
-		console.log(data);
+		data.size = file.size;
 		chat.transcript.dispatch({ type: "module-peer-done", data });
 		
 		// complete message element

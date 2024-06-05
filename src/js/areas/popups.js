@@ -73,7 +73,7 @@
 				// close popup
 				Self.dispatch({ type: "close-popup" });
 				break;
-			case "module-test-file":
+			case "module-file":
 				str = event.el.data("str");
 				document.execCommand("insertHTML", false, str);
 				// send message
@@ -83,7 +83,6 @@
 				break;
 			case "module-giphy":
 			case "module-board":
-			case "module-file":
 				str = "/"+ event.type.split("-")[1] +"&#160;";
 				// APP.input.els.input.append(str);
 				document.execCommand("insertHTML", false, str);

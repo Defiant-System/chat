@@ -144,6 +144,12 @@
 					Self._file[event.id] = event.file;
 					// create message string
 					message = `/file --id='${event.id}' --name='${event.file.name}' --size='${event.file.size}'`;
+					// update node
+					xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.id}"]`);
+					xnode.setAttribute("name", event.file.name);
+					xnode.setAttribute("name", event.file.name);
+					xnode.setAttribute("status", "inquiry");
+					// send message
 					APP.input.dispatch({ type: "send-message", message });
 				}
 				break;
@@ -185,18 +191,22 @@
 					// calculates remaining time
 					sec = (fsize - event.data.size) / event.data.speed,
 					time = karaqu.formatSeconds(sec, true);
+
+				// xml log update
+				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);
 				
 				if (perc >= 100) {
 					// calculates how long it took
 					time = karaqu.formatSeconds(fsize / event.data.speed, true);
+					// change node status to done
+					xnode.setAttribute("status", "done");
 				}
 
 				// xml log update
-				xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${event.data.uid}"]`);
 				xnode.setAttribute("total", total);
 				xnode.setAttribute("sent", sent);
 				xnode.setAttribute("time", time);
-				xnode.setAttribute("perc", perc);
+				xnode.setAttribute("perc", Math.min(perc, 100));
 
 				// UI update
 				Self.els.output
@@ -246,8 +256,14 @@
 					// reset reference to node
 					xnode = null;
 				} else if (event.module) {
-					xnode.setAttribute("type", event.module.cmd.slice(1));
-					xnode.appendChild(event.module.node);
+					let xCheck = Self.xTranscripts.selectSingleNode(`.//file[@id="${event.module.node.getAttribute("id")}"]`);
+					if (xCheck) {
+						xnode = null;
+						xCheck.parentNode.replaceChild(event.module.node, xCheck);
+					} else {
+						xnode.setAttribute("type", event.module.cmd.slice(1));
+						xnode.appendChild(event.module.node);
+					}
 				} else {
 					xnode.appendChild($.cDataFromString(event.message.escapeHtml()));
 				}
