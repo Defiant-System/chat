@@ -9,6 +9,8 @@
 			output: window.find(".output-body"),
 			input: window.find(".input > div"),
 		};
+		// reference to FS files
+		this._file = {};
 		// reference to root xml node
 		this.xTranscripts = window.bluePrint.selectSingleNode("//Transcripts");
 		// bind event handlers
@@ -89,17 +91,35 @@
 
 				// remove "typing" animations, if exist
 				Self.els.output.find(".message.typing").remove();
-				// render and append HTML to output
-				xpath = `//Transcripts/i[@id="${event.channelId}"]`;
-				el = window.render({
-						template: "message",
-						match: `${xpath}/*[last()]`,
-						append: Self.els.output,
-						markup: true,
-					}).addClass("new-message");
+				if (event.module && event.module.node) {
+					// check if this is a "follow up" for select transmit
+					el = Self.els.output.find(`.file-transmit[data-id="${event.module.node.getAttribute("id")}"]`);
+					// not follow up yet
+					if (!el.length) delete event.module;
+				}
+				if (event.module && el) {
+					// this was a message for choosing file before sending inquiry
+					let cstamp = event.module.node.parentNode.getAttribute("cstamp"),
+						message = window.render({
+							template: "msg-transmit",
+							match: `//Transcripts//*[@cstamp="${cstamp}"]`,
+							vdom: true,
+						});
+					// replace message content
+					el.replace(message.html());
+				} else {
+					// render and append HTML to output
+					xpath = `//Transcripts/i[@id="${event.channelId}"]`;
+					el = window.render({
+							template: "message",
+							match: `${xpath}/*[last()]`,
+							append: Self.els.output,
+							markup: true,
+						}).addClass("new-message");
 
-				// bubble-pop animation
-				setTimeout(() => el.cssSequence("appear", "transitionend", el => el.removeClass("appear bubble-pop new-message")), 1);
+					// bubble-pop animation
+					setTimeout(() => el.cssSequence("appear", "transitionend", el => el.removeClass("appear bubble-pop new-message")), 1);
+				}
 
 				// remove unread flags
 				Self.xTranscripts.selectNodes(`./i[@id="${event.channelId}"]/*[@unread="1"]`)
@@ -109,12 +129,22 @@
 				Self.els.output.find(".initial-message").remove();
 				// scroll to bottom
 				Self.els.root.scrollTop(Self.els.output.height());
+
+				// temp
+				if (ME.username === "linus" && event.message.startsWith("/file ")) {
+					// temp: auto-accept file
+					// setTimeout(() => {
+					// 	Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+					// }, 500);
+				}
 				break;
 			case "transmit-file-attempt":
 				if (event.file) {
-					let file = event.el[0].files[0],
-						str = `/file --name='${file.name}' --size='${file.size}'`;
-					console.log(str);
+					// save refernce to file
+					Self._file[event.id] = event.file;
+					// create message string
+					message = `/file --id='${event.id}' --name='${event.file.name}' --size='${event.file.size}'`;
+					APP.input.dispatch({ type: "send-message", message });
 				}
 				break;
 			
@@ -143,9 +173,12 @@
 					});
 				}
 				break;
+			case "module-peer-done":
 			case "module-peer-progress":
-				let fsize = event.data.type === "send" ? event.data.bytesToSend : event.data.bytesToReceive,
-					perc = Math.round((event.data.size / fsize) * 100),
+				let fsize = event.data.type === "send" ? event.data.bytesToSend : event.data.bytesToReceive;
+				if (!fsize) fsize = event.data.size;
+				
+				let perc = Math.round((event.data.size / fsize) * 100),
 					sent = karaqu.formatBytes(event.data.size),
 					total = karaqu.formatBytes(fsize),
 					sec = (fsize - event.data.size) / (event.data.speed * 1000),

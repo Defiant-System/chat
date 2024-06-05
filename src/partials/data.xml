@@ -12,10 +12,5 @@
 	</Teams>
 	<Transcripts>
 		<!-- transcripts goes here -->
-		<!-- <i id="friends-hbi-linus">
-			<i from="linus" cstamp="1595006835071" type="file">
-				<file name="some-file.txt" status="inquiry"/>
-			</i>
-		</i> -->
 	</Transcripts>
 </Data>

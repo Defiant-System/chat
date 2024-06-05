@@ -1,29 +1,47 @@
 
 const Transmit = {
 	action(phrase, callback) {
-		let id = `u${Date.now()}`,
+		let APP = chat,
+			id = `u${Date.now()}`,
 			args = phrase.split("--").filter(e => e).map(e => e.trim()),
 			data = { id },
 			only;
 		
+		args.map((item, index) => {
+			if (!item.includes("=")) {
+				args[index-1] += "--"+ item;
+				args[index] = false;
+			}
+		});
+
 		// simple test setup
 		if (args[0] === "test") {
-			args.slice(1).map(a => {
-				let [key, value] = a.split("=");
-				// remove quotes
-				value = value.slice(1, -1);
-				// translate MB to bytes
-				if (key === "size" && value.endsWith("MB")) {
-					value = +value.match(/^[\d\.]+/)[0] * 1024 * 1024 | 1; // translate from MB to bytes
-				}
-				data[key] = value;
-			});
+			args = args.slice(1);
 		}
 
+		// loop args, if any
+		args.filter(i => !!i).map(a => {
+			let [key, value] = a.split("=");
+			// remove quotes
+			value = value.slice(1, -1);
+			// translate MB to bytes
+			if (key === "size" && value.endsWith("MB")) {
+				value = +value.match(/^[\d\.]+/)[0] * 1024 * 1024 | 1; // translate from MB to bytes
+			}
+			data[key] = value;
+		});
+
+		// create temp file, if test mode
+		if (phrase.includes("--test")) {
+			let str = new Array(data.size).fill("x").join(""),
+				file = new File([str], "foo.txt", { type: "text-plain" });
+			APP.transcript._file[data.id] = file;
+		}
+
+		// shows "select-file" message for "me"
 		if (!data.name) {
 			only = { to: ME.username };
 		}
-		// console.log(data);
 
 		callback(`/file ${JSON.stringify(data)}`, only);
 	},
@@ -46,6 +64,7 @@ const Transmit = {
 				// forward event
 				APP.transcript.dispatch({
 					type: "transmit-file-attempt",
+					id: event.el.parents(".file-transmit").data("id"),
 					file: event.el[0].files[0],
 					el: event.el,
 				});

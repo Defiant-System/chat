@@ -31,7 +31,7 @@
 			Self = APP.threads,
 			xParent, xNode,
 			user, online,
-			num, str,
+			num, str, file,
 			id,
 			el;
 		// console.log(event);
@@ -247,11 +247,6 @@
 						// adjust event object
 						event.module = { cmd, node };
 					}
-
-					// if (node.getAttribute("status") === "select-file") {
-					// 	console.log(event);
-					// 	return;
-					// }
 				}
 
 				// log incoming message
@@ -269,7 +264,6 @@
 								match: `//Transcripts//*[@cstamp="${xnode.parentNode.getAttribute("cstamp")}"]`,
 								vdom: true,
 							});
-
 						// replace message content, if in view
 						el = APP.transcript.els.output.find(`div[data-id="${data.id}"]`);
 						if (el.length) {
@@ -281,22 +275,19 @@
 
 						// start transmitting file
 						if (data.state === "accept") {
-							let str = new Array(110 * 1024).fill("this is test string. ").join(""),
-								file = new File([str], "foo.txt", { type: "text-plain" });
+							// get file to send by reference id
+							file = APP.transcript._file[data.id];
 							// prepare receiver
 							user = karaqu.user.friend(event.from);
 							user.uuid = data.uuid;
-
 							// establish p2p connection & send file
 							APP.peer.connect();
 							APP.peer.sendFile(user, file, data.id);
 						}
-
 						return;
 					}
 
-					if (ME.username === "linus") {
-							return;
+					if (ME.username === event.from) {
 						// console.log( "peer connect", event );
 						APP.peer.connect();
 					}

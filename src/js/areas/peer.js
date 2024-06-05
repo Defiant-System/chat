@@ -15,11 +15,13 @@
 				name: file.name,
 				type: file.type,
 				size: file.size,
+				start: performance.now(),
 				lastModified: file.lastModified,
+				uid,
 			};
 		// send file item
 		Self.fileConnection = Self.connection.connect(user.uuid);
-		Self.fileConnection.on("open", () => Self.fileConnection.send(file, null, uid));
+		Self.fileConnection.on("open", () => Self.fileConnection.send(item, null, uid));
 		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
 		Self.fileConnection.on("close", Self.disconnect.bind(Self));
 	},
@@ -42,12 +44,20 @@
 			},
 			file = new File([data.buffer], data.name, info);
 
+		if (!data.speed) {
+			data.speed = data.size / ((performance.now() - data.start) / 1000);
+		}
+
 		// download received file
 		// window.download(file);
-		// console.log(file);
+		console.log("receiveFile", data);
+
+		// // final done call (to update xml log)
+		// chat.transcript.dispatch({ type: "module-peer-done", data });
 		
-		// temp
-		Transmit.dispatch({ type: "done-file", el: chat.transcript.els.output.find(`.transmit-progress`) });
+		// complete message element
+		let el = chat.transcript.els.output.find(`.file-transmit[data-id="${data.uid}"] .transmit-progress`);
+		Transmit.dispatch({ type: "done-file", el });
 
 		// close p2p connection
 		Self.disconnect();

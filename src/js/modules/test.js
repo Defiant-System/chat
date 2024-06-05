@@ -23,16 +23,17 @@ let Test = {
 			setTimeout(() => {
 				// APP.input.els.input.html("/giphy high five");
 				APP.input.els.input.html("/file");
-				// APP.input.els.input.html("/file --test --name='karaqu.txt' --size='2.1MB'")
+				// APP.input.els.input.html("/file --test --name='karaqu.txt' --size='0.1MB'")
 				APP.input.dispatch({ type: "send-message" });
 
 				return;
 
 				setTimeout(() => {
-					let str = new Array(110 * 1024).fill("this is test string. ").join(""),
+					let str = new Array(1024 * 1024).fill("t").join(""),
 						file = new File([str], "foo.txt", { type: "text-plain" }),
-						el = APP.els.content.find(`input[name="transmit-file"]`);
-					APP.transcript.dispatch({ type: "transmit-file-attempt", file, el });
+						el = APP.els.content.find(`input[name="transmit-file"]`),
+						id = el.parents(".file-transmit").data("id");
+					APP.transcript.dispatch({ type: "transmit-file-attempt", file, el, id });
 				}, 700);
 			}, 500);
 		}
