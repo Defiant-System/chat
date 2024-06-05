@@ -22,8 +22,8 @@ let Test = {
 
 			setTimeout(() => {
 				// APP.input.els.input.html("/giphy high five");
-				APP.input.els.input.html("/file");
-				// APP.input.els.input.html("/file --test --name='karaqu.txt' --size='0.1MB'")
+				// APP.input.els.input.html("/file");
+				APP.input.els.input.html("/file --test --name='karaqu.txt' --size='1.1MB'")
 				APP.input.dispatch({ type: "send-message" });
 
 				return;

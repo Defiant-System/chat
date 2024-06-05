@@ -33,6 +33,7 @@
 		Self.fileConnection.on("chunk", Self.receiveChunk.bind(Self));
 	},
 	receiveChunk(data) {
+		console.log(data);
 		// pass data to transcript
 		chat.transcript.dispatch({ type: "module-peer-progress", data });
 	},
@@ -53,7 +54,7 @@
 		console.log("receiveFile", data);
 
 		// // final done call (to update xml log)
-		// chat.transcript.dispatch({ type: "module-peer-done", data });
+		chat.transcript.dispatch({ type: "module-peer-done", data });
 		
 		// complete message element
 		let el = chat.transcript.els.output.find(`.file-transmit[data-id="${data.uid}"] .transmit-progress`);

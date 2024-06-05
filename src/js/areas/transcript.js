@@ -133,9 +133,9 @@
 				// temp
 				if (ME.username === "linus" && event.message.startsWith("/file ")) {
 					// temp: auto-accept file
-					// setTimeout(() => {
-					// 	Self.els.output.find(".transmit-options .btn-accept").trigger("click");
-					// }, 500);
+					setTimeout(() => {
+						Self.els.output.find(".transmit-options .btn-accept").trigger("click");
+					}, 500);
 				}
 				break;
 			case "transmit-file-attempt":
