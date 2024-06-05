@@ -68,6 +68,9 @@
 		if (Self.fileConnection) {
 			Self.fileConnection.close();
 		}
-		// console.log("closed connection");
+		// destroy connection
+		Self.connection.destroy();
+		// reset "this"
+		delete Self.connection;
 	}
 }

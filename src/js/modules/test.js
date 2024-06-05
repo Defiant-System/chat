@@ -16,28 +16,28 @@ let Test = {
 
 			setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
 
-			setTimeout(() => window.find(`.popup-options .row`).get(5).trigger("click"), 350);
+			setTimeout(() => window.find(`.popup-options .row`).get(4).trigger("click"), 350);
 			return;
 
 			// setTimeout(() => window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click"), 300);
 			// return;
 
-			setTimeout(() => {
-				// APP.input.els.input.html("/giphy high five");
-				// APP.input.els.input.html("/file");
-				APP.input.els.input.html("/file --test --name='karaqu.txt' --size='1.1MB'")
-				APP.input.dispatch({ type: "send-message" });
+			// setTimeout(() => {
+			// 	// APP.input.els.input.html("/giphy high five");
+			// 	// APP.input.els.input.html("/file");
+			// 	APP.input.els.input.html("/file --test --name='karaqu.txt' --size='1.1MB'")
+			// 	APP.input.dispatch({ type: "send-message" });
 
-				return;
+			// 	return;
 
-				setTimeout(() => {
-					let str = new Array(1024 * 1024).fill("t").join(""),
-						file = new File([str], "foo.txt", { type: "text-plain" }),
-						el = APP.els.content.find(`input[name="transmit-file"]`),
-						id = el.parents(".file-transmit").data("id");
-					APP.transcript.dispatch({ type: "transmit-file-attempt", file, el, id });
-				}, 700);
-			}, 500);
+			// 	setTimeout(() => {
+			// 		let str = new Array(1024 * 1024).fill("t").join(""),
+			// 			file = new File([str], "foo.txt", { type: "text-plain" }),
+			// 			el = APP.els.content.find(`input[name="transmit-file"]`),
+			// 			id = el.parents(".file-transmit").data("id");
+			// 		APP.transcript.dispatch({ type: "transmit-file-attempt", file, el, id });
+			// 	}, 700);
+			// }, 500);
 		}
 
 	}

@@ -215,10 +215,10 @@
 							el.append(str.replace(/placeholder/, user.short));
 							// remove potential "zombies"
 							setTimeout(() => el.find(".message.typing")
-								.cssSequence("removing", "transitionend", e => e.remove()), 10e3);
+								.cssSequence("removing", "transitionend", e => e.length ? e.remove() : null), 10e3);
 						} else {
 							el.find(".message.typing")
-								.cssSequence("removing", "transitionend", e => e.remove());
+								.cssSequence("removing", "transitionend", e => e.length ? e.remove() : null);
 						}
 					} else {
 						if (event.typing && event.from !== ME.username) {
@@ -254,6 +254,7 @@
 
 
 				if (event.priority === 3) {
+					// will SEND file
 					if (ME.username !== event.from) {
 						// module message related info
 						let data = JSON.parse(event.message),
@@ -286,9 +287,8 @@
 						}
 						return;
 					}
-
-					if (ME.username === event.from) {
-						// console.log( "peer connect", event );
+					// will RECEIVE file
+					if (ME.username === event.from && !APP.peer.connection) {
 						APP.peer.connect();
 					}
 				}
