@@ -15,7 +15,7 @@
 				name: file.name,
 				type: file.type,
 				size: file.size,
-				start: performance.now(),
+				start: Date.now(),
 				lastModified: file.lastModified,
 				uid,
 			};
@@ -45,7 +45,7 @@
 			file = new File([data.buffer], data.name, info);
 
 		if (!data.speed) {
-			data.speed = data.size / ((performance.now() - data.start) / 1000);
+			data.speed = data.size / ((Date.now() - data.start) / 1000);
 		}
 
 		// download received file

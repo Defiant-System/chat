@@ -829,6 +829,10 @@ content {
 						}
 
 						.transmit-details {
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+
 							.f-sent {
 								&:before { content: var( --sent ); }
 								&:after { content: " of "; }
