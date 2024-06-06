@@ -113,10 +113,18 @@ const chat = {
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
 				break;
+			
 			// forward events
 			case "net.receive":
 				Self.threads.dispatch({ ...event, type: "receive-message" });
 				break;
+			
+			// from menu
+			case "clear-history":
+			case "send-test-file":
+				// proxy event to threads
+				return Self.transcript.dispatch(event);
+
 			// custom events
 			default:
 				el = event.el;

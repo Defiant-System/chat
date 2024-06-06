@@ -1,10 +1,14 @@
 
 const Board = {
 	action(phrase, user, callback) {
-		callback("canvas");
+		let id = `u${Date.now()}`,
+			data = { id };
+		callback(`/board  ${JSON.stringify(data)}`);
 	},
 	translate(stdIn) {
-		return JSON.parse(stdIn);
+		let json = JSON.parse(stdIn);
+		let stdOut = $.nodeFromString(`<board id="${json.id}"/>`);
+		return stdOut;
 	},
 	dispatch(event) {
 		let Self = Transmit,
