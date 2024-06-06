@@ -1,4 +1,5 @@
 
+
 const Board = {
 	action(phrase, user, callback) {
 		let id = `u${Date.now()}`,
@@ -33,14 +34,29 @@ const Board = {
 					click = {
 						x: event.clientX - event.offsetX,
 						y: event.clientY - event.offsetY,
+					},
+					size = parseInt(pEl.cssProp("--size"), 10) * 2,
+					// Bresenham's line algorithm
+					line = (x0, y0, x1, y1, cb) => {
+						let dx = Math.abs(x1 - x0),
+							dy = Math.abs(y1 - y0),
+							sx = (x0 < x1) ? 1 : -1,
+							sy = (y0 < y1) ? 1 : -1,
+							err = dx - dy;
+						while(true) {
+							if (cb) cb(x0, y0);
+							if (x0 === x1 && y0 === y1) break;
+							let e2 = 2 * err;
+							if (e2 > -dy) { err -= dy; x0 += sx; }
+							if (e2 < dx) { err += dx; y0 += sy; }
+						}
 					};
 
 				// set brush properties
-				ctx.strokeStyle = pEl.cssProp("--color");
-				ctx.lineWidth = parseInt(pEl.cssProp("--size"), 10);
+				ctx.fillStyle = pEl.cssProp("--color");
 
 				// drag object
-				Self.drag = { el, doc, cvs, ctx, click };
+				Self.drag = { el, doc, cvs, ctx, click, size, line };
 				// cover app body
 				APP.els.content.addClass("cover hide-cursor");
 				// bind events
@@ -53,11 +69,7 @@ const Board = {
 					cy = Drag.current ? Drag.current.y : y;
 				
 				// draw on canvas
-				Drag.ctx.beginPath();
-				Drag.ctx.moveTo(cx, cy);
-				Drag.ctx.lineTo(x, y);
-				Drag.ctx.stroke();
-				Drag.ctx.closePath();
+				Drag.line(x, y, cx, cy, (x, y) => Drag.ctx.fillRect(x, y, Drag.size, Drag.size));
 
 				// save coords
 				Drag.current = { x, y };
