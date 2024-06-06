@@ -119,8 +119,12 @@ const chat = {
 				break;
 			// custom events
 			default:
-				if (event.el) {
-					pEl = event.el.parents("div[data-area]");
+				el = event.el;
+				// if event is from menu
+				if (!el && event.origin && event.origin.el) el = event.origin.el;
+				
+				if (el) {
+					pEl = el.parents("?div[data-area]");
 					name = pEl.attr("data-area");
 					if (pEl.length && Self[name] && Self[name].dispatch) {
 						return Self[name].dispatch(event);

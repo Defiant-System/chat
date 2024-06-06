@@ -21,6 +21,7 @@
 			Self = APP.input,
 			fnSend,
 			data = {},
+			user,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -69,13 +70,11 @@
 				if (!data.to) return;
 
 				// exit if user is not online
-				karaqu.shell(`user -i '${data.to}'`)
-					.then(check => {
-						if (check.result && check.result.online) {
-							// send event
-							window.net.send({ priority: 1, ...data });
-						}
-					});
+				user = karaqu.user.friend(data.to);
+				if (user && user.online) {
+					// send event
+					window.net.send({ priority: 1, ...data });
+				}
 				break;
 			case "silent-message":
 				data.stamp = Date.now();
@@ -96,6 +95,8 @@
 				data.to = APP.channel.username;
 				data.channelId = APP.channel.id;
 				data.message = event.message || Self.els.input.text();
+				// user details
+				user = data.to ? karaqu.user.friend(data.to) : null;
 
 				if (APP.room.id === "friends") {
 					data.options = [
@@ -130,7 +131,7 @@
 				if (mod) {
 					let cmd = mod[0].trim(),
 						phrase = data.message.slice(cmd.length).trim();
-					Mod[cmd].action(phrase, (stdOut, only) => {
+					Mod[cmd].action(phrase, user, (stdOut, only) => {
 						data.message = stdOut;
 
 						// do not send but add bubble to "my" output

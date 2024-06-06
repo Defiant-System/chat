@@ -159,6 +159,11 @@
 	<div class="file-transmit" data-module="file">
 		<xsl:attribute name="data-id"><xsl:value-of select="$file/@id"/></xsl:attribute>
 		<xsl:choose>
+			<xsl:when test="$file/@status = 'not-online'">
+				<div class="transmit-not-online">
+					<i class="icon-warning"></i> A file can be sent to a *friend* who is _online_.
+				</div>
+			</xsl:when>
 			<xsl:when test="$file/@status = 'select-file'">
 				<div class="transmit-select-file">
 					<input type="file" name="transmit-file" data-no-focus="1" data-change="transmit-file-selected"/>

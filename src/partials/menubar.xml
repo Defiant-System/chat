@@ -6,10 +6,22 @@
 		<Menu type="divider"/>
 		<Menu name="Quit Chat" shell="win -c"/>
 	</Menu>
+	<Menu name="View">
+		<Menu name="Transcript&#8230;" invoke="transcript"/>
+	</Menu>
 	<Menu name="Help">
 		<Menu name="Help" click="open-help"/>
 		<Menu type="divider"/>
 		<Menu name="License" shell="win -al"/>
+	</Menu>
+
+	<Menu for="transcript">
+		<Menu name="Clear Chat History" click="clear-history"/>
+		<Menu type="divider"/>
+		<Menu name="Test File (10.2 KB)" click="send-test-file" arg="/file --test --name='karaqu.txt' --size='0.01MB'"/>
+		<Menu name="Test File (1 MB)" click="send-test-file" arg="/file --test --name='karaqu.txt' --size='1MB'"/>
+		<Menu name="Test File (2 MB)" click="send-test-file" arg="/file --test --name='karaqu.txt' --size='2MB'"/>
+		<Menu name="Test File (3 MB)" click="send-test-file" arg="/file --test --name='karaqu.txt' --size='3MB'"/>
 	</Menu>
 
 	<Menu for="settings">

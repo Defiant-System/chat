@@ -11,13 +11,12 @@ let Test = {
 		// }
 		
 		if (ME.username === "hbi") {
-			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
-			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
+			// setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
+			setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
 
+			// setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
+			// setTimeout(() => window.find(`.popup-options .row`).get(2).trigger("click"), 350);
 			return;
-			setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
-
-			setTimeout(() => window.find(`.popup-options .row`).get(2).trigger("click"), 350);
 
 			// setTimeout(() => window.find(`.toolbar-tool_[data-click="toggle-info"]`).trigger("click"), 300);
 			// return;

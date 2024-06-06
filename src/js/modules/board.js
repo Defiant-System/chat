@@ -1,6 +1,6 @@
 
 const Board = {
-	action(phrase, callback) {
+	action(phrase, user, callback) {
 		callback("canvas");
 	},
 	translate(stdIn) {

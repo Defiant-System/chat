@@ -1,6 +1,6 @@
 
 const Transmit = {
-	action(phrase, callback) {
+	action(phrase, user, callback) {
 		let APP = chat,
 			id = `u${Date.now()}`,
 			args = phrase.split("--").filter(e => e).map(e => e.trim()),
@@ -42,6 +42,10 @@ const Transmit = {
 		if (!data.name) {
 			only = { to: ME.username };
 		}
+		// forward offline info
+		if (!user || !user.online) {
+			data.offline = true;
+		}
 
 		callback(`/file ${JSON.stringify(data)}`, only);
 	},
@@ -49,8 +53,11 @@ const Transmit = {
 		let json = JSON.parse(stdIn),
 			str = json.name
 				? `name="${json.name}" size="${json.size}" status="inquiry"`
-				: `status="select-file"`,
-			stdOut = $.nodeFromString(`<file id="${json.id}" ${str}/>`);
+				: `status="select-file"`;
+
+		if (json.offline) str = `status="not-online"`;
+
+		let stdOut = $.nodeFromString(`<file id="${json.id}" ${str}/>`);
 		return stdOut;
 	},
 	dispatch(event) {

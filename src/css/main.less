@@ -974,6 +974,7 @@ content {
 									}
 								}
 
+								&.transmit-not-online,
 								&.transmit-canceled,
 								&.transmit-rejected {
 									position: relative;
@@ -986,6 +987,10 @@ content {
 										left: -5px;
 										filter: invert(1) brightness(3);
 									}
+								}
+
+								&.transmit-not-online {
+									font-size: 12px;
 								}
 
 								&.transmit-received {

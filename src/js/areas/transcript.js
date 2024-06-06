@@ -41,6 +41,23 @@
 					}
 				}
 				break;
+
+			// from menu
+			case "clear-history":
+				// UI clear
+				Self.els.output.html("");
+				// log clear
+				Self.xTranscripts.selectNodes(`./i[@id="${APP.channel.id}"]/*`).map(x => x.parentNode.removeChild(x));
+				break;
+			case "send-test-file":
+				// make sure, input has focus
+				Self.els.input.focus();
+				// paste in arg as message
+				document.execCommand("insertHTML", false, event.arg);
+				// send message
+				APP.input.dispatch({ type: "send-message" });
+				break;
+
 			// custom events
 			case "render-thread":
 				// fix timestamps
@@ -71,7 +88,7 @@
 				break;
 			case "focus-message":
 				el = $(event.target);
-				if (el.data("no-focus")) return;
+				if (el.data("no-focus") || event.button === 2) return;
 
 				// remove previous focus
 				message = Self.els.root.find(".focused").removeClass("focused");
