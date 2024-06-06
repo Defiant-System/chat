@@ -16,41 +16,26 @@
 		filter: drop-shadow(0 2px 7px rgba(#000,.4));
 		transform-origin: 50% 100%;
 
-		&.popup-options {
-			// top: 499px;
-			// left: 249px;
+		&:after {
+			content: "";
+			position: absolute;
+			top: 100%;
+			left: 50%;
+			margin-left: -9px;
+			width: 0;
+			height: 0;
+			border-top: 9px solid #f2f2f2;
+			border-left: 10px solid transparent;
+			border-right: 10px solid transparent;
+		}
 
-			&:after {
-				content: "";
-				position: absolute;
-				top: 100%;
-				left: 50%;
-				margin-left: -9px;
-				width: 0;
-				height: 0;
-				border-top: 9px solid #f2f2f2;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-			}
+		&.popup-options {
+			// nothing here
+			// menus are declared below
 		}
 
 		&.popup-smileys {
-			// top: 486px;
-			// left: 810px;
 			padding: 3px 0;
-
-			&:after {
-				content: "";
-				position: absolute;
-				top: 100%;
-				left: 50%;
-				margin-left: -9px;
-				width: 0;
-				height: 0;
-				border-top: 9px solid #f2f2f2;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-			}
 
 			.menu {
 				font-size: 0;

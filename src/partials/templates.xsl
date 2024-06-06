@@ -274,8 +274,11 @@
 </xsl:template>
 
 <xsl:template name="msg-board">
-	<div class="board" data-module="board">
-		<canvas width="360" height="220" data-no-focus="1"></canvas>
+	<xsl:variable name="board" select="./board"/>
+	
+	<div class="board" data-module="board" data-no-focus="1">
+		<xsl:attribute name="data-id"><xsl:value-of select="$board/@id"/></xsl:attribute>
+		<canvas width="360" height="220"></canvas>
 		<ul class="palette" data-click="select-color">
 			<li style="--color: #fff;"></li>
 			<li style="--color: #000;" class="active"></li>
@@ -284,6 +287,11 @@
 			<li style="--color: #00f;"></li>
 			<li style="--color: #f0f;"></li>
 			<li style="--color: #f90;"></li>
+			<li class="pencil">
+				<div class="popup">
+					<div class="knob" data-value="22" data-change="set-brush-size"></div>
+				</div>
+			</li>
 		</ul>
 	</div>
 </xsl:template>
