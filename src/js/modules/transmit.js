@@ -91,6 +91,9 @@ const Transmit = {
 				next = event.type.split("-")[0];
 				APP.transcript.dispatch({ type: "module-message-next", next, el });
 				break;
+			case "reset-module":
+				// user clicked away
+				break;
 		}
 	}
 };

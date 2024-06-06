@@ -78,7 +78,7 @@
 				break;
 			case "silent-message":
 				data.stamp = Date.now();
-				data.priority = 3;
+				data.priority = event.priority || 3;
 				data.from = event.from;
 				data.to = event.to;
 				data.channelId = event.channelId;

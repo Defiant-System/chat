@@ -1,6 +1,24 @@
 
+const Misc = {
+	bresenhamLine(x0, y0, x1, y1, cb) {
+		let dx = Math.abs(x1 - x0),
+			dy = Math.abs(y1 - y0),
+			sx = (x0 < x1) ? 1 : -1,
+			sy = (y0 < y1) ? 1 : -1,
+			err = dx - dy;
+		while(true) {
+			if (cb) cb(x0, y0);
+			if (x0 === x1 && y0 === y1) break;
+			let e2 = 2 * err;
+			if (e2 > -dy) { err -= dy; x0 += sx; }
+			if (e2 < dx) { err += dx; y0 += sy; }
+		}
+	}
+};
+
 
 const Board = {
+	contexts: {},
 	action(phrase, user, callback) {
 		let id = `u${Date.now()}`,
 			data = { id };
@@ -10,6 +28,24 @@ const Board = {
 		let json = JSON.parse(stdIn);
 		let stdOut = $.nodeFromString(`<board id="${json.id}"/>`);
 		return stdOut;
+	},
+	drawing(data) {
+		let ctx = this.contexts[data.id];
+		// try to find it
+		if (!ctx) {
+			let cvs = chat.transcript.els.output.find(`.board[data-id="${data.id}"] canvas`);
+			if (cvs[0]) {
+				ctx = cvs[0].getContext("2d");
+				// save reference for faster next time
+				Board.contexts[data.id] = ctx;
+			}
+		}
+		// if there still is no context, just ignore
+		if (!ctx) return;
+		// obey color
+		ctx.fillStyle = data.color;
+		// Bresenham's line algorithm
+		Misc.bresenhamLine(data.x, data.y, data.cx, data.cy, (x, y) => ctx.fillRect(x, y, data.size, data.size));
 	},
 	dispatch(event) {
 		let APP = chat,
@@ -36,27 +72,14 @@ const Board = {
 						y: event.clientY - event.offsetY,
 					},
 					size = parseInt(pEl.cssProp("--size"), 10) * 2,
+					color = pEl.cssProp("--color"),
+					id = pEl.data("id"),
 					// Bresenham's line algorithm
-					line = (x0, y0, x1, y1, cb) => {
-						let dx = Math.abs(x1 - x0),
-							dy = Math.abs(y1 - y0),
-							sx = (x0 < x1) ? 1 : -1,
-							sy = (y0 < y1) ? 1 : -1,
-							err = dx - dy;
-						while(true) {
-							if (cb) cb(x0, y0);
-							if (x0 === x1 && y0 === y1) break;
-							let e2 = 2 * err;
-							if (e2 > -dy) { err -= dy; x0 += sx; }
-							if (e2 < dx) { err += dx; y0 += sy; }
-						}
-					};
-
+					line = Misc.bresenhamLine;
 				// set brush properties
-				ctx.fillStyle = pEl.cssProp("--color");
-
+				ctx.fillStyle = color;
 				// drag object
-				Self.drag = { el, doc, cvs, ctx, click, size, line };
+				Self.drag = { el, doc, cvs, ctx, click, id, size, color, line };
 				// cover app body
 				APP.els.content.addClass("cover hide-cursor");
 				// bind events
@@ -66,11 +89,19 @@ const Board = {
 				let x = event.clientX - Drag.click.x,
 					y = event.clientY - Drag.click.y,
 					cx = Drag.current ? Drag.current.x : x,
-					cy = Drag.current ? Drag.current.y : y;
-				
+					cy = Drag.current ? Drag.current.y : y,
+					data = { x, y, cx, cy, id: Drag.id, size: Drag.size, color: Drag.color };
 				// draw on canvas
 				Drag.line(x, y, cx, cy, (x, y) => Drag.ctx.fillRect(x, y, Drag.size, Drag.size));
-
+				// send state update to friend
+				APP.input.dispatch({
+					priority: 4, // implicit for "board" module
+					type: "silent-message",
+					from: ME.username,
+					to: APP.channel.username,
+					channelId: APP.channel.id,
+					message: JSON.stringify(data),
+				});
 				// save coords
 				Drag.current = { x, y };
 				break;
@@ -81,7 +112,11 @@ const Board = {
 				Self.drag.doc.off("mousemove mouseup", Self.dispatch);
 				break;
 
-			// custome events
+			// custom events
+			case "reset-module":
+				// user clicked away
+				Self.contexts = {};
+				break;
 			case "select-color":
 				el = $(event.target);
 				if (!el.attr("style")) return;

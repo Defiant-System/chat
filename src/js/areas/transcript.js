@@ -105,7 +105,7 @@
 				break;
 			case "receive-message":
 				// this is an internal module notification originated from "this user".
-				if (ME.username === event.from && event.priority === 3) return;
+				if (ME.username === event.from && [3].includes(event.priority)) return;
 
 				// remove "typing" animations, if exist
 				Self.els.output.find(".message.typing").remove();
@@ -264,7 +264,13 @@
 			case "log-message":
 				// create node entry
 				xnode = $.nodeFromString(`<i from="${event.from}" cstamp="${event.stamp}" unread="1"/>`);
-				if (event.priority === 3) {
+				if (event.priority === 4) {
+					data = JSON.parse(event.message);
+					console.log( 111, data );
+					// reset reference to node
+					xnode = null;
+					return;
+				} else if (event.priority === 3) {
 					data = JSON.parse(event.message);
 					// internal module coms
 					xnode = Self.xTranscripts.selectSingleNode(`.//*[@id="${data.id}"]`);
@@ -274,7 +280,8 @@
 					// reset reference to node
 					xnode = null;
 				} else if (event.module) {
-					let xCheck = Self.xTranscripts.selectSingleNode(`.//file[@id="${event.module.node.getAttribute("id")}"]`);
+					let xId = event.module.node.getAttribute("id"),
+						xCheck = Self.xTranscripts.selectSingleNode(`.//file[@id="${xId}"]`);
 					if (xCheck) {
 						xnode = null;
 						xCheck.parentNode.replaceChild(event.module.node, xCheck);

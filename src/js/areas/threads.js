@@ -175,6 +175,9 @@
 				APP.transcript.dispatch({ type: "render-thread" });
 				// forward event to threads column
 				APP.info.dispatch({ type: "render-user", username: APP.channel.username });
+
+				// reset modules
+				Object.keys(Mod).map(n => Mod[n].dispatch({ type: "reset-module" }));
 				break;
 			case "render-threads":
 				// render channels
@@ -249,9 +252,16 @@
 					}
 				}
 
+				if (event.priority === 4) {
+					if (ME.username !== event.from) {
+						let data = JSON.parse(event.message);
+						Board.drawing(data);
+					}
+					return;
+				}
+
 				// log incoming message
 				num = APP.transcript.dispatch({ ...event, type: "log-message" });
-
 
 				if (event.priority === 3) {
 					// will SEND file

@@ -1,7 +1,7 @@
 
 let Test = {
 	init(APP) {
-		// return;
+		return;
 
 		// if (ME.username === "linus") {
 		// 	setTimeout(() => {
@@ -11,8 +11,8 @@ let Test = {
 		// }
 		
 		if (ME.username === "hbi") {
-			// setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
-			setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
+			setTimeout(() => APP.els.content.find(`.friend[data-username="linus"]`).trigger("click"), 300);
+			// setTimeout(() => APP.els.content.find(`.friend[data-username="bill"]`).trigger("click"), 300);
 
 			setTimeout(() => APP.els.content.find(`.btn[data-click="show-options"] i`).trigger("click"), 320);
 			setTimeout(() => window.find(`.popup-options .row`).get(1).trigger("click"), 350);

@@ -13,5 +13,8 @@ const Giphy = {
 	},
 	translate(stdIn) {
 		return stdIn;
+	},
+	dispatch(event) {
+		// anything to do?
 	}
 };
