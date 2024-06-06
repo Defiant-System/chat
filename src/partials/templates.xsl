@@ -277,16 +277,13 @@
 	<div class="board" data-module="board">
 		<canvas width="360" height="220" data-no-focus="1"></canvas>
 		<ul class="palette" data-click="select-color">
-			<li style="--color: #000;"></li>
+			<li style="--color: #fff;"></li>
+			<li style="--color: #000;" class="active"></li>
 			<li style="--color: #f00;"></li>
-			<li style="--color: #0f0;" class="active"></li>
+			<li style="--color: #0f0;"></li>
 			<li style="--color: #00f;"></li>
-			<li style="--color: #ff0;"></li>
 			<li style="--color: #f0f;"></li>
 			<li style="--color: #f90;"></li>
-			<li style="--color: #0ff;"></li>
-			<li style="--color: #369;"></li>
-			<li style="--color: #fff;"></li>
 		</ul>
 	</div>
 </xsl:template>

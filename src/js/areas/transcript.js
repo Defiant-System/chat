@@ -33,6 +33,7 @@
 			case "mousedown":
 				modEl = $(event.target).parents("[data-module]");
 				if (modEl.length) {
+					name = modEl.data("module");
 					if (Mod[`/${name}`] && Mod[`/${name}`].dispatch) {
 						// prevent default behaviour
 						event.preventDefault();
